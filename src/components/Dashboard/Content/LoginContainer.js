@@ -1,12 +1,12 @@
 import {connect} from 'react-redux';
 import Login from './Login/';
-import {AUTH} from '../../../middlewares/auth.js';
+import {LOGIN_REQUEST} from '../../../store/actions.js';
 
 const mapStateToProps = (state) => ({});
 const mapActionsToProps = {
   onSubmit: (body) => ({
-    type: AUTH,
-    AUTH: { body },
+    type: LOGIN_REQUEST,
+    payload: { body },
   })
 };
 
