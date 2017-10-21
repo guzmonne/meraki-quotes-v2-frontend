@@ -50,7 +50,7 @@ class Login extends React.Component {
             onChange={this.onChange('password')}
           />
 
-          <Button type="submit">
+          <Button type="submit" loading={this.props.submitting}>
             Aceptar
           </Button>
 
@@ -63,6 +63,7 @@ class Login extends React.Component {
 
 Login.propTypes = {
   onSubmit: T.func.isRequired,
+  submitting: T.bool,
 }
 
 export default Login
