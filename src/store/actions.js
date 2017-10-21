@@ -1,10 +1,10 @@
 export const ERROR = 'ERROR';
 export const RESET_ERROR_MESSAGE = 'RESET_ERROR_MESSAGE';
 
+export const UPDATE_FLAGS = 'UPDATE_FLAGS';
+
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
-export const IS_TOKEN_ACTIVE = 'IS_TOKEN_ACTIVE';
-export const TOKEN_IS_ACTIVE = 'TOKEN_IS_ACTIVE';
-export const TOKEN_EXPIRED = 'TOKEN_EXPIRED';
+export const VALIDATE_TOKEN = 'VALIDATE_TOKEN';

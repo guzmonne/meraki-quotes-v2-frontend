@@ -2,14 +2,17 @@ import get from 'lodash/get';
 import {Observable} from 'rxjs/Observable'
 import 'rxjs/add/observable/dom/ajax';
 import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/concatMap';
 import {
   ERROR,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
-  LOGIN_FAILURE
+  LOGIN_FAILURE,
+  UPDATE_FLAGS,
 } from '../store/actions';
 
 const API_ROOT = process.env.REACT_APP_API_ROOT;
@@ -28,10 +31,15 @@ export default action$ => (
       payload.body, {
       'Content-Type': 'application/json'
     })
-    .map(({response}) => ({
+    .concatMap(({response}) => Observable.from([{
       type: LOGIN_SUCCESS,
       payload: response.token,
-    }))
+    }, {
+      type: UPDATE_FLAGS,
+      payload: {
+        isAuthenticated: true,
+      }
+    }]))
     .catch(error => {
       if (KNOWN_ERRORS.indexOf(get(error, 'response.name')) > -1)
         return Observable.of({
@@ -44,4 +52,4 @@ export default action$ => (
       });
     })
   ))
-);
+)

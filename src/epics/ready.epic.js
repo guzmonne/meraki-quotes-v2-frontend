@@ -5,26 +5,34 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/switchMap';
 import {
-  IS_TOKEN_ACTIVE,
-  TOKEN_IS_ACTIVE,
-  TOKEN_EXPIRED,
+  VALIDATE_TOKEN,
+  UPDATE_FLAGS,
 } from '../store/actions';
 
 const API_ROOT = process.env.REACT_APP_API_ROOT;
 
 export default action$ => (
   action$
-  .ofType(IS_TOKEN_ACTIVE)
+  .ofType(VALIDATE_TOKEN)
   .switchMap(() => (
     Observable.ajax.getJSON(
       `${API_ROOT}/users/active`, {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('TOKEN')}`
     })
     .map(() => ({
-      type: TOKEN_IS_ACTIVE
+      type: UPDATE_FLAGS,
+      payload: {
+        ready: true,
+        isAuthenticated: true,
+      }
     }))
     .catch(error => Observable.of({
-      type: TOKEN_EXPIRED,
+      type: UPDATE_FLAGS,
+      payload: {
+        ready: true,
+        isAuthenticated: false,
+      }
     }))
   ))
 );

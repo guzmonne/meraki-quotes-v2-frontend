@@ -5,7 +5,7 @@ import {Route} from 'react-router';
 import {connect} from 'react-redux';
 import Dashboard from '../Dashboard/';
 import Spinner from '../common/Spinner/';
-import {IS_TOKEN_ACTIVE} from '../../store/actions.js';
+import {VALIDATE_TOKEN} from '../../store/actions.js';
 
 class App extends React.Component {
   componentDidMount() {
@@ -31,12 +31,12 @@ App.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  ready: state.ui.ready,
+  ready: state.flags.ready,
 });
 
 const mapActionsToProps = {
   isReady: () => ({
-    type: IS_TOKEN_ACTIVE
+    type: VALIDATE_TOKEN
   })
 };
 

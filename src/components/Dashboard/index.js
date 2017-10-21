@@ -1,7 +1,7 @@
 import './styles.css';
 import React from 'react'
 import Header from './Header/';
-import Content from './Content/';
+import Content from './ContentContainer.js';
 import Sidebar from './Sidebar/';
 import Footer from './Footer/';
 
