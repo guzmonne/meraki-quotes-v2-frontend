@@ -13,6 +13,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   UPDATE_FLAGS,
+  LOGOUT,
 } from '../store/actions';
 
 const API_ROOT = process.env.REACT_APP_API_ROOT;
@@ -22,16 +23,14 @@ const KNOWN_ERRORS = [
   'IncorrectPassword',
 ];
 
-export default action$ => (
-  action$
-  .ofType(LOGIN_REQUEST)
-  .switchMap(({payload}) => (
-    Observable.ajax.post(
-      `${API_ROOT}/users/login`,
-      payload.body, {
-      'Content-Type': 'application/json'
-    })
-    .concatMap(({response}) => Observable.from([{
+const loginRequest$ = ({type, payload}) => (
+  Observable.ajax.post(
+    `${API_ROOT}/users/login`,
+    get(payload, 'body'), {
+    'Content-Type': 'application/json'
+  })
+  .concatMap(({response}) => (
+    Observable.from([{
       type: LOGIN_SUCCESS,
       payload: response.token,
     }, {
@@ -39,17 +38,37 @@ export default action$ => (
       payload: {
         isAuthenticated: true,
       }
-    }]))
-    .catch(error => {
-      if (KNOWN_ERRORS.indexOf(get(error, 'response.name')) > -1)
-        return Observable.of({
-          type: LOGIN_FAILURE,
-          payload: get(error, 'response'),
-        });
-      return Observable.of({
-        type: ERROR,
-        payload: error,
-      });
-    })
+    }])
   ))
+);
+
+const logout$ = () => (
+  Observable.of({
+    type: UPDATE_FLAGS,
+    payload: {
+      isAuthenticated: false,
+    }
+  })
+);
+
+export default action$ => (
+  action$
+  .ofType(LOGIN_REQUEST, LOGOUT)
+  .switchMap((action) => {
+    if (action.type === LOGIN_REQUEST)
+      return loginRequest$(action)
+    else if (action.type === LOGOUT)
+      return logout$(action)
+  })
+  .catch(error => {
+    if (KNOWN_ERRORS.indexOf(get(error, 'response.name')) > -1)
+      return Observable.of({
+        type: LOGIN_FAILURE,
+        payload: get(error, 'response'),
+      });
+    return Observable.of({
+      type: ERROR,
+      payload: error,
+    });
+  })
 )

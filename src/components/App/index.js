@@ -15,11 +15,11 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-      {this.props.ready === false
+      {this.props.ready === true
         ?
-        <Spinner color="black" size="xl"/>
-        :
         <Route path="/" component={Dashboard}/>
+        :
+        <Spinner color="black" size="xl"/>
       }
       </div>
     );

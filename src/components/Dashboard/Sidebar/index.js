@@ -1,6 +1,6 @@
 import './styles.css';
 import React from 'react';
-import UserInfo from './UserInfo/';
+import UserInfo from './UserInfoContainer.js';
 import logo from './logo.png';
 
 const Sidebar = () => (

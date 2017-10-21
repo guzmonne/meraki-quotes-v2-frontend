@@ -26,12 +26,16 @@ export default action$ => (
     .concatMap(() => Observable.from([{
       type: UPDATE_FLAGS,
       payload: {
-        ready: true,
         isAuthenticated: true,
       }
     }, {
       type: LOGIN_SUCCESS,
       payload: localStorage.getItem('TOKEN'),
+    }, {
+      type: UPDATE_FLAGS,
+      payload: {
+        ready: true,
+      }
     }]))
     .catch(error => Observable.of({
       type: UPDATE_FLAGS,

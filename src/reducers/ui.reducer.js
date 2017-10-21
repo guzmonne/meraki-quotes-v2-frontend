@@ -2,13 +2,17 @@ import merge from 'lodash/merge';
 import camelCase from 'lodash/camelCase';
 import * as ActionTypes from '../store/actions.js';
 
-const defaultState = {
-  ready: false,
-}
+const defaultState = {}
 
 export default (state=defaultState, {type, payload}) => {
 
   switch (type) {
+    case ActionTypes.LOGOUT:
+      localStorage.removeItem('TOKEN');
+      return {
+        ...state,
+        user: undefined,
+      }
     case ActionTypes.LOGIN_SUCCESS:
       localStorage.setItem('TOKEN', payload);
       try {

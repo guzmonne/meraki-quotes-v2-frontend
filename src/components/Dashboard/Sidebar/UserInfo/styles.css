@@ -17,6 +17,11 @@
   align-items: center;
 }
 
+.UserInfo:hover .content {
+  border: 1px solid black;
+  color: black;
+}
+
 .UserInfo .content span {
   margin-left: 0.4em;
 }
