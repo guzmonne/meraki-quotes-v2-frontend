@@ -1,7 +1,7 @@
 import * as ActionTypes from '../store/actions.js';
 import {combineReducers} from 'redux';
 import merge from 'lodash/merge.js';
-import auth from './auth.reducer.js';
+import ui from './ui.reducer.js';
 import flags from './flags.reducer.js';
 
 const defaultEntitiesState = {
@@ -34,7 +34,7 @@ const errorMessage = (state = null, action) => {
 }
 
 const rootReducer = combineReducers({
-  auth,
+  ui,
   entities,
   errorMessage,
   flags,
