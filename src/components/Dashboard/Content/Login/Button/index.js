@@ -1,7 +1,7 @@
 import './styles.css';
 import React from 'react';
 import T from 'prop-types';
-import Spinner from './Spinner/';
+import Spinner from '../../../../common/Spinner/';
 
 const Button = ({loading, children, ...props}) => (
   loading === true
