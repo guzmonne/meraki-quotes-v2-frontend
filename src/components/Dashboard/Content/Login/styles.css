@@ -1,0 +1,7 @@
+.Login .ControlInput:not(:last-child) {
+  margin-bottom: 2.5em;
+}
+
+.Login legend {
+  text-align: center;
+}

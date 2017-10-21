@@ -1,0 +1,42 @@
+*, ::after, ::before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+* {
+  outline: none !important;
+}
+
+body {
+  margin: 0;
+}
+
+body {
+  font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #292b2c;
+  background-color: #fff;
+}
+
+body {
+  background: #fafafa;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+  font-size: 15px;
+}
+
+a {
+  text-decoration: none;
+  color: #67a8e4;
+}
+
+.App {
+  min-height: 100vh; 
+}
+
+/** Text */
+.text-red {
+  color: red;
+}

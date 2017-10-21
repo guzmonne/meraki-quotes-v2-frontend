@@ -1,0 +1,25 @@
+.Dashboard {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 100vh; 
+}
+
+.Dashboard .body {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
+.Dashboard .body .inner-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.Dashboard .body .inner-body .main-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 20px 40px;
+}

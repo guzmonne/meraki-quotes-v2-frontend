@@ -1,0 +1,22 @@
+.UserInfo {
+  color: #707070;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.UserInfo:hover {
+  opacity: 1;
+}
+
+.UserInfo .content {
+  padding: 3px 10px;
+  border: 1px solid rgba(34, 34, 34, 0.27);
+  border-radius: 20px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.UserInfo .content span {
+  margin-left: 0.4em;
+}
