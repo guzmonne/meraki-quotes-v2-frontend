@@ -1,3 +1,7 @@
+.Login{
+  min-width: 300px;
+}
+
 .Login .ControlInput:not(:last-child) {
   margin-bottom: 2.5em;
 }

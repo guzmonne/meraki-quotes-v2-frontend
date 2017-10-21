@@ -9,7 +9,6 @@ const Sidebar = () => (
       <img src={logo} alt="Conatel logo" className="logo"/>
     </div>
     <UserInfo />
-    <b>Inicie sesión para más opciones.</b>
   </div>
 );
 
