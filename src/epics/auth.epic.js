@@ -4,9 +4,7 @@ import 'rxjs/add/observable/dom/ajax';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/delay';
 import {
   ERROR,
   LOGIN_REQUEST,
@@ -21,7 +19,7 @@ const KNOWN_ERRORS = [
   'IncorrectPassword',
 ];
 
-const pingEpic = action$ => (
+export default action$ => (
   action$
   .ofType(LOGIN_REQUEST)
   .switchMap(({payload}) => (
@@ -47,5 +45,3 @@ const pingEpic = action$ => (
     })
   ))
 );
-
-export default pingEpic;

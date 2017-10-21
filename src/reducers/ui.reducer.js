@@ -2,13 +2,31 @@ import merge from 'lodash/merge';
 import camelCase from 'lodash/camelCase';
 import * as ActionTypes from '../store/actions.js';
 
-export default (state={}, action) => {
-  
-  if (action.type === ActionTypes.LOGIN_SUCCESS) {
-    localStorage.setItem('TOKEN', action.payload);
-    return state;
-  }
+const defaultState = {
+  ready: false,
+}
 
+export default (state=defaultState, action) => {
+
+  switch (action.type) {
+    case ActionTypes.TOKEN_EXPIRED:
+      localStorage.removeItem('TOKEN');
+      return {
+        ...state,
+        ready: true,
+      };
+    case ActionTypes.TOKEN_IS_ACTIVE:
+      return {
+        ...state,
+        ready: true,
+      }
+    case ActionTypes.LOGIN_SUCCESS:
+      localStorage.setItem('TOKEN', action.payload);
+      return state;
+    default:
+      return state;
+  }
+  
   if (action.type.indexOf('_REQUEST') > -1) {
     return Object.assign({}, state, {
       [camelCase(action.type.split('_REQUEST')[0])]: {
