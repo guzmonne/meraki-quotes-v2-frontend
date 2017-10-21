@@ -1,6 +1,6 @@
 import './styles.css';
 import React from 'react'
-import Header from './Header/';
+import Header from './HeaderContainer.js';
 import Content from './ContentContainer.js';
 import Sidebar from './SidebarContainer.js';
 import Footer from './Footer/';

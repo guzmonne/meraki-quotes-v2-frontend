@@ -2,7 +2,11 @@ import merge from 'lodash/merge';
 import camelCase from 'lodash/camelCase';
 import * as ActionTypes from '../store/actions.js';
 
-const defaultState = {}
+const defaultState = {
+  menu: {
+    item: 'home',
+  }
+}
 
 export default (state=defaultState, {type, payload}) => {
 

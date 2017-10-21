@@ -6,6 +6,14 @@ import classnames from 'classnames';
 const Menu = ({item, subItem, navigateToItem, navigateToSubItem}) => (
   <div className="Menu">
     <ul>
+      <li className={classnames({
+        'active nav-active': item === 'home',
+      })}>
+        <a href="#" className="circles" 
+          onClick={() => navigateToItem('home')}>
+          <span>Home</span>
+        </a>
+      </li>
       <li className={classnames('has_sub', {
         'active nav-active': item === 'quotes',
       })}>
@@ -102,6 +110,14 @@ const Menu = ({item, subItem, navigateToItem, navigateToSubItem}) => (
           </li>
         </ul>
       </li>
+    <li className={classnames({
+      'active nav-active': item === 'account',
+    })}>
+      <a href="#" className="circles" 
+        onClick={() => navigateToItem('account')}>
+        <span>Cuenta</span>
+      </a>
+    </li>
     </ul>
   </div>
 );
@@ -111,13 +127,6 @@ Menu.propTypes = {
   subItem: T.string,
   navigateToItem: T.func,
   navigateToSubItem: T.func,
-};
-
-Menu.defaultProps = {
-  item: 'quotes',
-  subItem: 'list',
-  navigateToItem: () => {},
-  navigateToSubItem: () => {},
 };
 
 export default Menu;
