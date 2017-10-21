@@ -1,12 +1,12 @@
 import './styles.css';
 import React from 'react';
 import T from 'prop-types';
-import UserPicture from './UserPicture/'
+import GravatarPicture from './GravatarPictureContainer.js'
 
 const Header = ({isAuthenticated}) => (
   <div className="Header">
     <h3>Meraki Quotes</h3>
-    {isAuthenticated === true && <UserPicture />}
+    {isAuthenticated === true && <GravatarPicture />}
   </div>
 );
 

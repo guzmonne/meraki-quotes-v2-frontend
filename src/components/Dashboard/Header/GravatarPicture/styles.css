@@ -1,8 +1,8 @@
-.UserPicture {
+.GravatarPicture {
   padding: 0.5em;
 }
 
-.UserPicture img {
+.GravatarPicture img {
   border-radius: 50%;
   width: 3em;
 }
