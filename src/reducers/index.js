@@ -2,6 +2,7 @@ import * as ActionTypes from '../store/actions.js';
 import {combineReducers} from 'redux';
 import merge from 'lodash/merge.js';
 import auth from './auth.reducer.js';
+import flags from './flags.reducer.js';
 
 const defaultEntitiesState = {
   users: {},
@@ -36,6 +37,7 @@ const rootReducer = combineReducers({
   auth,
   entities,
   errorMessage,
+  flags,
 });
 
 export default rootReducer;
