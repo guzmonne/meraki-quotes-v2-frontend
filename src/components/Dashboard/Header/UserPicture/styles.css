@@ -1,0 +1,8 @@
+.UserPicture {
+  padding: 0.5em;
+}
+
+.UserPicture img {
+  border-radius: 50%;
+  width: 3em;
+}

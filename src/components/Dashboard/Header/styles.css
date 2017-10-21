@@ -1,7 +1,8 @@
 .Header {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   min-height: 4em;
   background-color: #f0f1f4;
   border: none;
