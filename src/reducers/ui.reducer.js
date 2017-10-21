@@ -6,27 +6,35 @@ const defaultState = {
   ready: false,
 }
 
-export default (state=defaultState, action) => {
+export default (state=defaultState, {type, payload}) => {
 
-  switch (action.type) {
+  switch (type) {
     case ActionTypes.LOGIN_SUCCESS:
-      localStorage.setItem('TOKEN', action.payload);
-      return state;
+      localStorage.setItem('TOKEN', payload);
+      try {
+        return {
+          ...state,
+          user: JSON.parse(atob(payload.split('.')[1])),
+        }
+      } catch (error) {
+        console.log(error);
+        return state;
+      }
     default:
   }
 
-  if (action.type.indexOf('_REQUEST') > -1) {
+  if (type.indexOf('_REQUEST') > -1) {
     return Object.assign({}, state, {
-      [camelCase(action.type.split('_REQUEST')[0])]: {
+      [camelCase(type.split('_REQUEST')[0])]: {
         error: undefined, 
       }
     })
   }
 
-  if (action.type.indexOf('_FAILURE') > -1) {
+  if (type.indexOf('_FAILURE') > -1) {
     return merge({}, state, {
-      [camelCase(action.type.split('_FAILURE')[0])]: {
-        error: action.payload, 
+      [camelCase(type.split('_FAILURE')[0])]: {
+        error: payload, 
       }
     })
   }
