@@ -36,6 +36,18 @@ a {
   color: #67a8e4;
 }
 
+[role=button], a, area, button, input, label, select, summary, textarea {
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+}
+
+a {
+  color: #0275d8;
+  text-decoration: none;
+  background-color: transparent;
+  -webkit-text-decoration-skip: objects;
+}
+
 .App {
   min-height: 100vh;
   display: flex;

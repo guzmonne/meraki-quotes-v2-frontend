@@ -24,6 +24,8 @@ export default (state=defaultState, {type, payload}) => {
         console.log(error);
         return state;
       }
+    case ActionTypes.UPDATE_UI:
+      return merge({}, state, payload);
     default:
   }
 

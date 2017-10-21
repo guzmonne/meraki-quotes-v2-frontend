@@ -2,7 +2,7 @@ import './styles.css';
 import React from 'react'
 import Header from './Header/';
 import Content from './ContentContainer.js';
-import Sidebar from './Sidebar/';
+import Sidebar from './SidebarContainer.js';
 import Footer from './Footer/';
 
 class Dashboard extends React.Component {

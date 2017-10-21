@@ -1,0 +1,134 @@
+.Menu, .Menu ul, .Menu li, .Menu a {
+  border: 0;
+  font-weight: normal;
+  line-height: 1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  text-decoration: none; }
+
+.Menu {
+  margin-top: 2em;
+  background-color: #f0f1f4;
+  padding-bottom: 50px;
+  width: 100%; }
+  .Menu .badge {
+    margin-top: 4px; }
+  .Menu ul ul {
+    display: none; }
+    .Menu ul ul li {
+      border-top: 0; }
+    .Menu ul ul li a {
+      background-color: transparent;}
+    .Menu ul ul li.active a {
+      color: #67a8e4; }
+    .Menu ul ul a {
+      color: rgba(29, 30, 58, 0.8);
+      display: block;
+      padding: 12px 25px 12px 60px; }
+      .Menu ul ul a:hover {
+        color: #1d1e3a; }
+      .Menu ul ul a i {
+        margin-right: 5px; }
+    .Menu ul ul ul a {
+      padding-left: 80px; }
+
+.Menu > ul > li > a {
+  color: #707070;
+  display: block;
+  padding: 17px 25px;
+  background-color: #f0f1f4; }
+  .Menu > ul > li > a:hover {
+    color: #1d1e3a;
+    text-decoration: none; }
+  .Menu > ul > li > a span i {
+    font-size: 18px;
+    line-height: 22px; }
+
+.Menu > ul > li.nav-active > a {
+  background-color: #e1e3e9; }
+
+.Menu > ul > li > a > span {
+  vertical-align: middle; }
+
+.Menu > ul > li > a > i {
+  display: inline-block;
+  font-size: 18px;
+  line-height: 17px;
+  margin-left: 3px;
+  margin-right: 10px;
+  text-align: center;
+  vertical-align: middle;
+  width: 20px; }
+
+.Menu > ul > li > a > i.i-right {
+  float: right;
+  margin: 3px 0 0 0; }
+
+.Menu > ul > li > a.active {
+  background-color: rgba(236, 240, 241, 1);
+  color: #1d1e3a; }
+  .Menu > ul > li > a.active i {
+    color: #1d1e3a; }
+
+.Menu > ul > li.nav-active > ul {
+  display: block; }
+
+a.circles {
+  font-size: 1em;
+  position: relative;
+  display: block;
+  padding: 0;
+  overflow: hidden;
+  border-width: 0;
+  outline: none;
+  background-color: rgba(236, 240, 241, .2);
+  color: #ecf0f1;
+  transition: background-color .3s;
+}
+
+a.circles:disabled {
+  opacity: 0.8;
+}
+
+a.circles:hover, a.circles:focus {
+  background-color: transparent;
+}
+
+a.circles > * {
+  position: relative;
+}
+
+a.circles span {
+  display: block;
+  padding: 0.2em 1.2em;
+}
+
+a.circles:before {
+  content: "";
+  
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  
+  display: block;
+  width: 0;
+  padding-top: 0;
+    
+  border-radius: 100%;
+  
+  background-color: rgba(236, 240, 241, .3);
+  
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+a.circles:not([disabled]):active:before {
+  width: 120%;
+  padding-top: 120%;
+  transition: width .2s ease-out, padding-top .2s ease-out;
+}

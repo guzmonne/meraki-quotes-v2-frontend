@@ -2,6 +2,7 @@ export const ERROR = 'ERROR';
 export const RESET_ERROR_MESSAGE = 'RESET_ERROR_MESSAGE';
 
 export const UPDATE_FLAGS = 'UPDATE_FLAGS';
+export const UPDATE_UI = 'UPDATE_UI';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
