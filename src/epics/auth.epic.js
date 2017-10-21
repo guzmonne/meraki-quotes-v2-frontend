@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/delay';
 import {
   ERROR,
   LOGIN_REQUEST,
@@ -29,7 +30,6 @@ const pingEpic = action$ => (
       payload.body, {
       'Content-Type': 'application/json'
     })
-    .do(x => console.log(x))
     .map(({response}) => ({
       type: LOGIN_SUCCESS,
       payload: response.token,
