@@ -47,6 +47,15 @@
   .sk-wave.sk-wave-black .sk-rect {
     background-color: black;
   }
+
+  .sk-wave.sk-wave-red .sk-rect {
+    background-color: red;
+  }
+
+  .sk-wave.sk-wave-grey .sk-rect {
+    background-color: rgba(34, 34, 34, 0.27);
+  }
+
 @-webkit-keyframes sk-waveStretchDelay {
   0%, 40%, 100% {
     -webkit-transform: scaleY(0.4);

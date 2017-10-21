@@ -1,16 +1,17 @@
 import get from 'lodash/get';
 import {connect} from 'react-redux';
 import UserInfo from './UserInfo/';
-import {LOGOUT} from '../../../store/actions.js';
+import {LOGOUT_REQUEST} from '../../../store/actions.js';
 
 const mapStateToProps = (state) => ({
+  isLoggingOut: get(state, 'flags.logout'),
   isAuthenticated: get(state, 'flags.isAuthenticated'),
   username: get(state, 'ui.user.username'),
 });
 
 const mapActionsToProps = {
   onClick: () => ({
-    type: LOGOUT
+    type: LOGOUT_REQUEST
   })
 };
 

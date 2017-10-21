@@ -3,7 +3,7 @@ import React from 'react';
 import T from 'prop-types';
 import classnames from 'classnames';
 
-const COLORS = ['black'];
+const COLORS = ['black', 'red', 'grey'];
 
 const SIZES = ['xl'];
 

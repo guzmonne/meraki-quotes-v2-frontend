@@ -7,7 +7,7 @@ const defaultState = {}
 export default (state=defaultState, {type, payload}) => {
 
   switch (type) {
-    case ActionTypes.LOGOUT:
+    case ActionTypes.LOGOUT_SUCCESS:
       localStorage.removeItem('TOKEN');
       return {
         ...state,
