@@ -3,6 +3,7 @@ import React from 'react';
 import T from 'prop-types';
 import {Route, Switch} from '../../../ListeningRouter/';
 import Login from './LoginContainer.js';
+import Users from './Users/';
 import Account from './Account/';
 
 const Welcome = () => <h1>Welcome!</h1>
@@ -15,7 +16,8 @@ const Content = ({isAuthenticated}) => (
   ?
     <Switch>
       <Route exact path="/" component={Welcome}/>
-      <Route exact path="/account" component={Account}/>        
+      <Route path="/users" component={Users}/>
+      <Route path="/account" component={Account}/>        
       <Route component={NotFound}/>
     </Switch>
   :
