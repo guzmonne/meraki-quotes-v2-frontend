@@ -4,105 +4,80 @@ import T from 'prop-types';
 import {Link} from 'react-router-dom'
 import classnames from 'classnames';
 
-const Menu = ({item, subItem, pathname, navigateToItem, navigateToSubItem}) => (
+const menu = [{
+  label: 'Home',
+  path: '/'
+}, {
+  label: 'Quotes',
+  path: '/quotes',
+  items: [{
+    label: 'Nuevo',
+    path: '/quotes/new',
+  }, {
+    label: 'Compartidos',
+    path: '/quotes/shared',
+  }]
+}, {
+  label: 'Equipos',
+  path: '/devices',
+  items: [{
+    label: 'Nuevo',
+    path: '/devices/new',
+  }]
+}, {
+  label: 'Usuarios',
+  path: '/users',
+  items: [{
+    label: 'Nuevo',
+    path: '/users/new',
+  }, {
+    label: 'Permisos',
+    path: '/users/permissions'
+  }]
+}, {
+  label: 'Cuenta',
+  path: '/account',
+}]
+
+const SubItem = ({path, label, pathname}) => (
+  <li className={classnames({
+    'active': pathname === path
+  })}>
+    <Link to={path} className="circles">{label}</Link>
+  </li>
+);
+
+const Item = ({path, label, items, pathname}) => (
+  <li className={classnames({
+      'active nav-active': path === '/' 
+        ? path === pathname
+        : pathname.indexOf(path) > -1
+    })}>
+    <Link to={path} className="circles">
+      <span>{label}</span>
+    </Link>
+    {items && items.length > 0 && 
+      <ul className="list-unstyled">
+      {items.map((item) => (
+        <SubItem key={item.path} {...item} pathname={pathname} />
+      ))}
+      </ul>
+    }
+  </li>
+);
+
+const Menu = ({pathname}) => (
   <div className="Menu">
     <ul>
-      <li className={classnames({
-        'active nav-active': pathname === '/',
-      })}>
-        <Link to="/" className="circles"><span>Home</span></Link>
-      </li>
-      <li className={classnames('has_sub', {
-        'active nav-active': (
-          item === 'quotes' || pathname.indexOf('quotes') > -1
-        ),
-      })}>
-        <a className="circles" 
-          onClick={() => navigateToItem('quotes')}>
-          <span>Quotes</span>
-        </a>
-        <ul className="list-unstyled">
-          <li className={classnames({
-            'active': pathname === '/quotes'
-          })}>
-            <Link to="/quotes" className="circles">Lista</Link>
-          </li>
-          <li className={classnames({
-            'active': pathname === '/quotes/new'
-          })}>
-            <Link to="/quotes/new" className="circles">Nuevo</Link>
-          </li>
-          <li className={classnames({
-            'active': '/quotes/shared'
-          })}>
-            <Link to="/quotes/shared"className="circles">Compartidos</Link>
-          </li>
-        </ul>
-      </li>
-      <li className={classnames('has_sub', {
-        'active nav-active': (
-          item === 'devices' || pathname.indexOf('devices') > -1
-        ),
-      })}>
-        <a className="circles" 
-          onClick={() => navigateToItem('devices')}>
-          <span>Equipos</span>
-        </a>
-        <ul className="list-unstyled">
-          <li className={classnames({
-            'active': pathname === '/devices'
-          })}>
-            <Link to="/devices" className="circles">Lista</Link>
-          </li>
-          <li className={classnames({
-            'active': pathname === '/devices/new'
-          })}>
-            <Link to="/devices/new" className="circles">Nuevo</Link>
-          </li>
-        </ul>
-      </li>
-      <li className={classnames('has_sub', {
-        'active nav-active': (
-          item === 'users' || pathname.indexOf('users') > -1 
-        ),
-      })}>
-        <a className="circles" 
-          onClick={() => navigateToItem('users')}>
-          <span>Usuarios</span>
-        </a>
-        <ul className="list-unstyled">
-          <li className={classnames({
-            'active': pathname === '/users'
-          })}>
-            <Link to="/users" className="circles">Lista</Link>
-          </li>
-          <li className={classnames({
-            'active': pathname === '/users/new'
-          })}>
-            <Link to="/users/new" className="circles">Nuevo</Link>
-          </li>
-          <li className={classnames({
-            'active': pathname === '/users/permissions'
-          })}>
-            <Link to="/users/permissions">Permisos</Link>
-          </li>
-        </ul>
-      </li>
-    <li className={classnames({
-      'active nav-active': pathname === '/account',
-    })}>
-      <Link to="/account" className="circles"><span>Cuenta</span></Link>
-    </li>
+    {menu.map((item) => (
+      <Item key={item.path} {...item} pathname={pathname}/>
+    ))}
     </ul>
   </div>
 );
 
 Menu.propTypes = {
   pathname: T.string,
-  item: T.string,
-  subItem: T.string,
-  navigateToItem: T.func,
-  navigateToSubItem: T.func,
 };
 
 export default Menu;
