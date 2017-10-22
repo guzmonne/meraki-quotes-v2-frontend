@@ -1,9 +1,11 @@
 import {connect} from 'react-redux';
+import get from 'lodash/get';
 import Login from './Login/';
 import {LOGIN_REQUEST} from '../../../store/actions.js';
 
 const mapStateToProps = (state) => ({
   submitting: state.flags.login,
+  errors: get(state, 'ui.login.error'),
 });
 
 const mapActionsToProps = {

@@ -1,6 +1,7 @@
 import './styles.css';
 import React from 'react';
 import T from 'prop-types';
+import get from 'lodash/get';
 import Card from '../Card/';
 import ControlInput from '../../../../common/ControlInput/';
 import Button from '../../../../common/Button/';
@@ -27,6 +28,8 @@ class Login extends React.Component {
   }
 
   render() {
+    const {errors} = this.props;
+
     return (
       <Card>
 
@@ -40,6 +43,8 @@ class Login extends React.Component {
             value={this.state.email}
             label="Email"
             type="text"
+            error={get(errors, 'details.0.path.0') === 'email'}
+            errorMessage='No existe una cuenta con este correo.'
             onChange={this.onChange('email')}
           />
 
@@ -47,6 +52,8 @@ class Login extends React.Component {
             value={this.state.password}
             label="Contraseña"
             type="password"
+            error={get(errors, 'details.0.path.0') === 'password'}
+            errorMessage='Contraseña incorrecta.'
             onChange={this.onChange('password')}
           />
 
@@ -64,6 +71,7 @@ class Login extends React.Component {
 Login.propTypes = {
   onSubmit: T.func.isRequired,
   submitting: T.bool,
+  errors: T.object,
 }
 
 export default Login
