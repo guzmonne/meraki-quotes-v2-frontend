@@ -1,15 +1,9 @@
 import {Observable} from 'rxjs/Observable'
-import 'rxjs/add/observable/dom/ajax';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/observable/from';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/concatMap';
 import {
   VALIDATE_TOKEN,
   UPDATE_FLAGS,
-  LOGIN_SUCCESS
+  LOGIN_SUCCESS,
+  REDIRECT
 } from '../store/actions';
 
 const API_ROOT = process.env.REACT_APP_API_ROOT;
@@ -37,12 +31,17 @@ export default action$ => (
         ready: true,
       }
     }]))
-    .catch(error => Observable.of({
-      type: UPDATE_FLAGS,
-      payload: {
-        ready: true,
-        isAuthenticated: false,
-      }
-    }))
+    .catch(error => (
+      Observable.from([{
+        type: UPDATE_FLAGS,
+        payload: {
+          ready: true,
+          isAuthenticated: false,
+        }
+      }, {
+        type: REDIRECT,
+        payload: '/'
+      }])
+    ))
   ))
 );

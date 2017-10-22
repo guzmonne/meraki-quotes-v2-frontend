@@ -49,7 +49,7 @@ export default (state=defaultState, {type, payload}) => {
     })
   }
 
-  if (type === ActionTypes.REDIRECT) {
+  if (type === ActionTypes.REDIRECT && window.location.pathname !== payload) {
     window.location.href = payload;
   }
 
