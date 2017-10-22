@@ -3,9 +3,9 @@ import React from 'react';
 import T from 'prop-types';
 import {Route} from 'react-router';
 import {connect} from 'react-redux';
-import Dashboard from '../Dashboard/';
+import Dashboard from './Dashboard/';
 import Spinner from '../common/Spinner/';
-import {VALIDATE_TOKEN} from '../../store/actions.js';
+import {VALIDATE_TOKEN} from '../store/actions.js';
 
 class App extends React.Component {
   componentDidMount() {
