@@ -1,128 +1,104 @@
 import './styles.css';
 import React from 'react';
 import T from 'prop-types';
+import {Link} from 'react-router-dom'
 import classnames from 'classnames';
 
-const Menu = ({item, subItem, navigateToItem, navigateToSubItem}) => (
+const Menu = ({item, subItem, pathname, navigateToItem, navigateToSubItem}) => (
   <div className="Menu">
     <ul>
       <li className={classnames({
-        'active nav-active': item === 'home',
+        'active nav-active': pathname === '/',
       })}>
-        <a href="#" className="circles" 
-          onClick={() => navigateToItem('home')}>
-          <span>Home</span>
-        </a>
+        <Link to="/" className="circles"><span>Home</span></Link>
       </li>
       <li className={classnames('has_sub', {
-        'active nav-active': item === 'quotes',
+        'active nav-active': (
+          item === 'quotes' || pathname.indexOf('quotes') > -1
+        ),
       })}>
-        <a href="#" className="circles" 
+        <a className="circles" 
           onClick={() => navigateToItem('quotes')}>
           <span>Quotes</span>
         </a>
         <ul className="list-unstyled">
           <li className={classnames({
-            'active': subItem === 'new' && item === 'quotes'
+            'active': pathname === '/quotes'
           })}>
-            <a href="#" className="circles" 
-              onClick={() => navigateToSubItem('new')}>
-              Nuevo
-            </a>
+            <Link to="/quotes" className="circles">Lista</Link>
           </li>
           <li className={classnames({
-            'active': subItem === 'list' && item === 'quotes'
+            'active': pathname === '/quotes/new'
           })}>
-            <a href="#" className="circles" 
-              onClick={() => navigateToSubItem('list')}>
-              Lista
-            </a>
+            <Link to="/quotes/new" className="circles">Nuevo</Link>
           </li>
           <li className={classnames({
-            'active': subItem === 'shared' && item === 'quotes'
+            'active': '/quotes/shared'
           })}>
-            <a href="#" 
-              className="circles" 
-              onClick={() => navigateToSubItem('shared')}>
-              Compartidos
-            </a>
+            <Link to="/quotes/shared"className="circles">Compartidos</Link>
           </li>
         </ul>
       </li>
       <li className={classnames('has_sub', {
-        'active nav-active': item === 'devices',
+        'active nav-active': (
+          item === 'devices' || pathname.indexOf('devices') > -1
+        ),
       })}>
-        <a href="#" className="circles" 
+        <a className="circles" 
           onClick={() => navigateToItem('devices')}>
           <span>Equipos</span>
         </a>
         <ul className="list-unstyled">
           <li className={classnames({
-            'active': subItem === 'new' && item === 'devices'
+            'active': pathname === '/devices'
           })}>
-            <a href="#" className="circles" 
-              onClick={() => navigateToSubItem('new')}>
-              Nuevo
-            </a>
+            <Link to="/devices" className="circles">Lista</Link>
           </li>
           <li className={classnames({
-            'active': subItem === 'list' && item === 'devices'
+            'active': pathname === '/devices/new'
           })}>
-            <a href="#" className="circles" 
-              onClick={() => navigateToSubItem('list')}>
-              Lista
-            </a>
+            <Link to="/devices/new" className="circles">Nuevo</Link>
           </li>
         </ul>
       </li>
       <li className={classnames('has_sub', {
-        'active nav-active': item === 'users',
+        'active nav-active': (
+          item === 'users' || pathname.indexOf('users') > -1 
+        ),
       })}>
-        <a href="#" className="circles" 
+        <a className="circles" 
           onClick={() => navigateToItem('users')}>
           <span>Usuarios</span>
         </a>
         <ul className="list-unstyled">
           <li className={classnames({
-            'active': subItem === 'new' && item === 'users'
+            'active': pathname === '/users'
           })}>
-            <a href="#" className="circles" 
-              onClick={() => navigateToSubItem('new')}>
-              Nuevo
-            </a>
+            <Link to="/users" className="circles">Lista</Link>
           </li>
           <li className={classnames({
-            'active': subItem === 'list' && item === 'users'
+            'active': pathname === '/users/new'
           })}>
-            <a href="#" className="circles" 
-              onClick={() => navigateToSubItem('list')}>
-              Lista
-            </a>
+            <Link to="/users/new" className="circles">Nuevo</Link>
           </li>
           <li className={classnames({
-            'active': subItem === 'permissions' && item === 'users'
+            'active': pathname === '/users/permissions'
           })}>
-            <a href="#" 
-              className="circles"
-              onClick={() => navigateToSubItem('permissions')}>
-              Permisos
-            </a>
+            <Link to="/users/permissions">Permisos</Link>
           </li>
         </ul>
       </li>
     <li className={classnames({
-      'active nav-active': item === 'account',
+      'active nav-active': pathname === '/account',
     })}>
-      <a href="#" className="circles" 
-        onClick={() => navigateToItem('account')}>
-        <span>Cuenta</span>
-      </a>
+      <Link to="/account" className="circles"><span>Cuenta</span></Link>
     </li>
     </ul>
   </div>
 );
 
 Menu.propTypes = {
+  pathname: T.string,
   item: T.string,
   subItem: T.string,
   navigateToItem: T.func,

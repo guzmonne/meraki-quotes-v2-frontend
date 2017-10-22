@@ -6,6 +6,7 @@ import {UPDATE_UI} from '../../../store/actions.js';
 const mapStateToProps = (state) => ({
   isAuthenticated: get(state, 'flags.isAuthenticated'),
   item: get(state, 'ui.menu.item'),
+  pathname: get(state, 'location.pathname'),
   subItem: get(state, 'ui.menu.subItem'),
 });
 

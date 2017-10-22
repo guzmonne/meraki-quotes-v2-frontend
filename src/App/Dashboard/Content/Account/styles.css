@@ -1,0 +1,10 @@
+.Account {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.Account dd,
+.Account dt {
+  margin-top: 0.3em;
+}

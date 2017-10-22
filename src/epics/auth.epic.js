@@ -9,6 +9,7 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/concatMap';
 import {
   ERROR,
+  REDIRECT,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
@@ -65,10 +66,8 @@ const logout$ = () => (
     Observable.from([{
       type: LOGOUT_SUCCESS
     }, {
-      type: UPDATE_FLAGS,
-      payload: {
-        isAuthenticated: false,
-      }
+      type: REDIRECT,
+      payload: '/'
     }])
   ))
   .catch(error => ( 

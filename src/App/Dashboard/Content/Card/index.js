@@ -3,7 +3,7 @@ import React from 'react';
 import T from 'prop-types';
 
 const Card = ({children, size}) => (
-  <div className="Card" style={{width: `${size}%`}}>
+  <div className="Card" style={{minWidth: `${+size - 0.3}%`}}>
     {children}
   </div>
 );

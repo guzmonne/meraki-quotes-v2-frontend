@@ -1,7 +1,7 @@
 import './styles.css';
 import React from 'react';
 import T from 'prop-types';
-import Card from './Card/';
+import Card from '../Card/';
 import ControlInput from './ControlInput/';
 import Button from './Button/';
 

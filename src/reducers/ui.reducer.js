@@ -49,5 +49,9 @@ export default (state=defaultState, {type, payload}) => {
     })
   }
 
+  if (type === ActionTypes.REDIRECT) {
+    window.location.href = payload;
+  }
+
   return state;
 }

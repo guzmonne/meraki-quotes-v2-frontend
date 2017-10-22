@@ -3,6 +3,7 @@ import {combineReducers} from 'redux';
 import merge from 'lodash/merge.js';
 import ui from './ui.reducer.js';
 import flags from './flags.reducer.js';
+import {routeReducer} from '../ListeningRouter/';
 
 const defaultEntitiesState = {
   users: {},
@@ -38,6 +39,7 @@ const rootReducer = combineReducers({
   entities,
   errorMessage,
   flags,
+  location: routeReducer,
 });
 
 export default rootReducer;

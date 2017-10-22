@@ -1,7 +1,7 @@
 import './styles.css';
 import React from 'react';
 import T from 'prop-types';
-import {Route} from 'react-router';
+import {Route} from '../ListeningRouter/';
 import {connect} from 'react-redux';
 import Dashboard from './Dashboard/';
 import Spinner from '../common/Spinner/';

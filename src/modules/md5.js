@@ -1,3 +1,5 @@
+/* eslint no-mixed-operators: 0 */
+
 /*
  * JavaScript MD5
  * https://github.com/blueimp/JavaScript-MD5
