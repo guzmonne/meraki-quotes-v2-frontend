@@ -2,8 +2,8 @@ import './styles.css';
 import React from 'react';
 import T from 'prop-types';
 import Card from '../Card/';
-import ControlInput from './ControlInput/';
-import Button from './Button/';
+import ControlInput from '../../../../common/ControlInput/';
+import Button from '../../../../common/Button/';
 
 class Login extends React.Component {
   constructor() {

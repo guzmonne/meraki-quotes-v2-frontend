@@ -1,10 +1,20 @@
 .Account {
-  display: flex;
   width: 100%;
-  justify-content: space-between;
+  column-count: 2;
+  column-gap: 1em;
+}
+
+.Account .Card {
+  display: inline-block;
+  margin: 0 0 1em;
+  width: 100%;
 }
 
 .Account dd,
 .Account dt {
   margin-top: 0.3em;
+}
+
+.Account .ControlInput {
+  margin-top: 2.5em;
 }
