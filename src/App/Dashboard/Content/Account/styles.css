@@ -10,11 +10,7 @@
   width: 100%;
 }
 
-.Account dd,
-.Account dt {
-  margin-top: 0.3em;
-}
-
-.Account .ControlInput {
-  margin-top: 2.5em;
+.Account h2 {
+  margin: 0;
+  margin-bottom: 1em;
 }

@@ -1,20 +1,17 @@
 import './styles.css';
 import React from 'react';
 import T from 'prop-types';
+import classnames from 'classnames';
 
-const Card = ({children, size}) => (
-  <div className="Card">
+const Card = ({className, children}) => (
+  <div className={classnames('Card', className)}>
     {children}
   </div>
 );
 
 Card.propTypes = {
   children: T.node,
-  size: T.oneOfType([T.string, T.number]),
+  className: T.string,
 };
-
-Card.defaultProps = {
-  size: 50,
-}
 
 export default Card;

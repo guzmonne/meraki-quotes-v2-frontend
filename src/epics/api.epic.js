@@ -1,3 +1,4 @@
+import get from 'lodash/get';
 import {Observable} from 'rxjs/Observable'
 import {
   ERROR,
@@ -37,10 +38,17 @@ export default action$ => (
       type: toAction(endpoint) + '_SUCCESS',
       payload: response,
     }))
-    .catch((error) => Observable.of({
-      type: toAction(endpoint) + '_FAILURE',
-      payload: error,
-    }))
+    .catch((error) => {
+      const name = get(error, 'response.name');
+
+      if (name === 'ValidationError')
+        return Observable.of({
+          type: toAction(endpoint) + '_FAILURE',
+          payload: error.response,
+        })
+
+      throw error;
+    })
     
     return Observable.concat(loading, request);
   })

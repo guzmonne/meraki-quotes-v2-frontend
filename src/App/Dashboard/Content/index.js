@@ -3,7 +3,7 @@ import React from 'react';
 import T from 'prop-types';
 import {Route, Switch} from '../../../ListeningRouter/';
 import Login from './LoginContainer.js';
-import Account from './AccountContainer.js';
+import Account from './Account/';
 
 const Welcome = () => <h1>Welcome!</h1>
 
