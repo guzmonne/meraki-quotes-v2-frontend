@@ -15,6 +15,11 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
 
 export const API_CALL = 'API_CALL';
+export const API_INDEX = 'API_INDEX';
+export const API_CREATE = 'API_CREATE';
+export const API_SHOW = 'API_SHOW';
+export const API_UPDATE = 'API_UPDATE';
+export const API_DESTROY = 'API_DESTROY';
 
 export const DISPATCH_MULTIPLE_ACTIONS = 'DISPATCH_MULTIPLE_ACTIONS';
 

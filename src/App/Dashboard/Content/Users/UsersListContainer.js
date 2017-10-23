@@ -2,7 +2,7 @@ import {connect} from 'react-redux';
 import get from 'lodash/get';
 import UsersList from './UsersList/';
 import {
-  API_CALL,
+  API_INDEX,
   UPDATE_UI,
   DISPATCH_MULTIPLE_ACTIONS
 } from '../../../../store/actions.js';
@@ -45,19 +45,17 @@ const updateUI = (page, offset) => ({
 });
 
 const fetchUsers = (page=10, offset) => {
-  let endpoint = `/users?limit=${page * 2}`
+  let endpoint = `/users?limit=${page * 3}`
   
   if (offset)
     endpoint += `&offset=${offset}`
 
   return {
-    type: API_CALL,
+    type: API_INDEX,
     payload: {
       endpoint,
-      method: 'GET',
       schema: [user],
       target: 'users',
-      flag: 'index',
     },
   }
 }

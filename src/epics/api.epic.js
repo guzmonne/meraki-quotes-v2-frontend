@@ -3,74 +3,47 @@ import {normalize} from 'normalizr';
 import {Observable} from 'rxjs/Observable'
 import {
   ERROR,
-  API_CALL,
+  API_INDEX,
+  API_CREATE,
+  API_SHOW,
+  API_UPDATE,
+  API_DESTROY,
 } from '../store/actions';
 
 const API_ROOT = process.env.REACT_APP_API_ROOT;
 
-const headers = () => ({
-  'Content-Type': 'application/json',
-  'Authorization': `Bearer ${localStorage.getItem('TOKEN')}`
-});
-
 export default (action$, store) => (
   action$
-  .ofType(API_CALL)
-  .switchMap(({payload: {
-    endpoint,
-    method,
-    body,
-    schema,
-    target,
-    flag
-  }}) => {
-    const loading = Observable.of({
-      type: `${target.toUpperCase()}_${flag.toUpperCase()}_REQUEST`
-    });
-    
-    const ajaxMethod = Observable.ajax[method.toLowerCase()];
+  .ofType(
+    API_INDEX,
+    API_CREATE,
+    API_SHOW,
+    API_UPDATE,
+    API_DESTROY
+  )
+  .switchMap(({type, payload}) => {
+    let request$
 
-    if (!ajaxMethod) throw new Error('Method does not exist');
+    switch (type) {
+      case API_SHOW:      
+      case API_INDEX:
+        request$ = get$;
+        break;
+      case API_CREATE:
+        request$ = create$;
+        break;
+      case API_UPDATE:
+        request$ = update$;
+        break;
+      case API_DESTROY:
+        request$ = destroy$;
+        break
+    }
 
-    const request = (
-      body !== undefined 
-      ? ajaxMethod(`${API_ROOT}${endpoint}`, body, headers())
-      : ajaxMethod(`${API_ROOT}${endpoint}`, headers())
-    ).map(({response}) => {
-      if (schema) {
-        return {
-          type: `${target.toUpperCase()}_${flag.toUpperCase()}_SUCCESS`,
-          payload: Object.assign(normalize(response, schema), {target}),
-        };
-      }
-
-      return {
-        type: `${target.toUpperCase()}_${flag.toUpperCase()}_SUCCESS`,
-        payload: response,
-      }
-    })
-    .catch((error) => {
-      const name = get(error, 'response.name');
-
-      console.error(error);
-
-      if (name === 'ValidationError')
-        return Observable.of({
-          type: `${target.toUpperCase()}_${flag.toUpperCase()}_FAILURE`,
-          payload: error.response,
-        })
-
-      return Observable.of({
-        type: ERROR,
-        payload: {
-          name: error.name,
-          message: error.message,
-          stack: error.stack || (new Error()).stack
-        },
-      })
-    })
-    
-    return Observable.concat(loading, request);
+    return Observable.concat(
+      loading$(type, payload),
+      request$(type, payload)
+    );
   })
   .catch(error => ( 
     Observable.of({
@@ -83,3 +56,95 @@ export default (action$, store) => (
     })
   ))
 )
+
+function headers () {
+  return {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${localStorage.getItem('TOKEN')}`
+  }
+};
+
+function actionPrefix(type, {target}) {
+  return `${target.toUpperCase()}_${type}`
+}
+
+function loading$ (type, payload) {
+  return Observable.of({
+    type: `${actionPrefix(type, payload)}_REQUEST`
+  })
+}
+
+function get$(type, payload) {
+  const {endpoint, schema, target} = payload
+  return Observable.ajax.get(`${API_ROOT}${endpoint}`, headers())
+    .map(({response}) => {
+      return {
+        type: `${actionPrefix(type, payload)}_SUCCESS`,
+        payload: Object.assign(normalize(response, schema), {target}),
+      };
+    })
+    .catch(validationErrorHandler.bind(null, type, payload))
+}
+
+function create$(type, payload) {
+  const {endpoint, schema, body, target} = payload
+  return Observable.ajax.post(`${API_ROOT}${endpoint}`, body, headers())
+    .map(({response}) => {
+      return {
+        type: `${actionPrefix(type, payload)}_SUCCESS`,
+        payload: Object.assign(normalize(response, schema), {target}),
+      };
+    })
+    .catch(validationErrorHandler.bind(null, type, payload))
+}
+
+function update$(type, payload) {
+  const {endpoint, schema, body, target} = payload
+  return Observable.ajax.put(`${API_ROOT}${endpoint}`, body, headers())
+    .map(({response}) => {
+      return {
+        type: `${actionPrefix(type, payload)}_SUCCESS`,
+        payload: Object.assign(normalize(response, schema), {target}),
+      };
+    })
+    .catch(validationErrorHandler.bind(null, type, payload))
+}
+
+function destroy$(type, payload) {
+  const {endpoint, schema, target} = payload
+  return Observable.ajax.delete(`${API_ROOT}${endpoint}`, headers())
+    .map(({response}) => {
+      return {
+        type: `${actionPrefix(type, payload)}_SUCCESS`,
+        payload: Object.assign(normalize(response, schema), {target}),
+      };
+    })
+    .catch(validationErrorHandler.bind(null, type, payload))
+}
+
+function error$(type, payload, error) {
+  return Observable.of({
+    type: `${actionPrefix(type, payload)}_FAILUIRE`,
+    payload: {
+      name: error.name,
+      message: error.message,
+      stack: error.stack || (new Error()).stack
+    },
+  });
+}
+
+function validationError$(type, payload, error) {
+  return Observable.of({
+    type: `${actionPrefix(type, payload)}_FAILURE`,
+    payload: error.response,
+  });
+}
+
+function validationErrorHandler(type, payload, error) {
+  const name = get(error, 'response.name');
+
+  if (name === 'ValidationError')
+    return validationError$(type, payload, error);
+
+  return error$(type, payload, error)
+}

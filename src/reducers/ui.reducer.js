@@ -35,23 +35,18 @@ export default (state=defaultState, {type, payload}) => {
     default:
   }
 
-  if (type.indexOf('_REQUEST') > -1) {
-    return Object.assign({}, state, {
-      [camelCase(type.split('_REQUEST')[0])]: {
-        error: undefined, 
+  if (
+    type.indexOf('API_INDEX_SUCCESS') > -1 && 
+    payload && 
+    payload.result && 
+    payload.target
+  ) {
+    const {target, result} = payload;
+    return merge(state, {
+      [target]: {
+        ids: union(state[target].ids, result),
       }
     })
-  }
-
-  if (
-    type.indexOf('_SUCCESS') > -1 && payload && payload.result && payload.target
-  ) {
-    let {target, result} = payload;
-    let newState = Object.assign({}, state);
-
-    newState[target].ids = union(state[target].ids, result);
-
-    return newState;
   }
 
   if (type.indexOf('_FAILURE') > -1) {
