@@ -1,4 +1,5 @@
 .btn {
+  cursor: pointer;
   font-size: 1em;
   position: relative;
   display: block;
@@ -12,6 +13,22 @@
   background-color: #3F51B5;
   color: #ecf0f1;
   transition: background-color .3s;
+}
+
+.btn.btn-red {
+  background-color: rgb(181, 63, 63);
+}
+
+.btn.btn-red:hover, .btn.btn-red:focus {
+  background-color: rgb(159, 48, 48);
+}
+
+.btn.btn-grey {
+  background-color: rgb(143, 146, 175);
+}
+
+.btn.btn-grey:hover, .btn.btn-grey:focus {
+  background-color: rgb(113, 113, 138);
 }
 
 .btn:disabled {

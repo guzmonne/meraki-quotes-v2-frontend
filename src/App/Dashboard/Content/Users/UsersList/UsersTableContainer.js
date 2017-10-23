@@ -1,8 +1,7 @@
 import {connect} from 'react-redux';
 import get from 'lodash/get';
 import UsersTable from './UsersTable/';
-import {API_CALL} from '../../../../../store/actions.js';
-import {user} from '../../../../../store/schemas.js';
+import {UPDATE_UI} from '../../../../../store/actions.js';
 
 const mapStateToProps = (state) => {
   const offset = get(state, 'ui.users.offset');
@@ -20,7 +19,17 @@ const mapStateToProps = (state) => {
   }
 };
 
-const mapActionsToProps = {};
+const mapActionsToProps = {
+  displayDestroyModal: ({email}) => ({
+    type: UPDATE_UI,
+    payload: {
+      users: {
+        showDestroyModal: true,
+        userSelectedForDestructionKey: btoa(JSON.stringify({email})),
+      }
+    }
+  })
+};
 
 const UsersTableContainer = (
   connect(mapStateToProps, mapActionsToProps)(UsersTable)

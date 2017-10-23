@@ -2,8 +2,8 @@ import './styles.css';
 import React from 'react';
 import T from 'prop-types';
 import Spinner from '../../../../common/Spinner/';
-import UserSvg from './UserSvg.js';
-import TimesSvg from './TimesSvg.js';
+import UserSvg from '../../../../common/Icons/UserSvg.js';
+import TimesSvg from '../../../../common/Icons/TimesSvg.js';
 
 class UserInfo extends React.Component {
   state = {

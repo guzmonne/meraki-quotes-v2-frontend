@@ -1,16 +1,21 @@
 import './styles.css';
 import React from 'react';
 import T from 'prop-types';
+import classnames from 'classnames';
 import Spinner from '../Spinner/';
 
-const Button = ({loading, children, ...props}) => (
+const COLORS = ['red', 'grey'];
+
+const Button = ({loading, children, color, ...props}) => (
   loading === true
   ? 
   <button className="btn" disabled>
     <span><Spinner /></span>
   </button>
   : 
-  <button className="btn" {...props}>
+  <button className={classnames('btn', {
+    [`btn-${color}`]: COLORS.indexOf(color) > -1,
+  })} {...props}>
     <span>{children}</span>
   </button>
 );
@@ -18,6 +23,7 @@ const Button = ({loading, children, ...props}) => (
 Button.propTypes = {
   loading: T.bool,
   children: T.node,
+  color: T.string,
 };
 
 export default Button;

@@ -1,4 +1,3 @@
-import get from 'lodash/get';
 import {Observable} from 'rxjs/Observable'
 import {
   DISPATCH_MULTIPLE_ACTIONS

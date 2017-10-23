@@ -36,6 +36,7 @@ const mapStateToProps = (state) => {
     prevItemKey,
     numberOfUsers: get(state, 'ui.users.ids', []).length,    
     fetching: get(state, 'flags.usersIndex'),
+    showDestroyModal: get(state, 'ui.users.showDestroyModal'),
   }
 };
 

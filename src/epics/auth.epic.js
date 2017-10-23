@@ -17,6 +17,7 @@ const API_ROOT = process.env.REACT_APP_API_ROOT;
 const KNOWN_ERRORS = [
   'ValidationError',
   'IncorrectPassword',
+  'UserDoesNotExists'
 ];
 
 const loginRequest$ = ({type, payload}) => (

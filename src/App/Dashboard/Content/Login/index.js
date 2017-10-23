@@ -28,7 +28,7 @@ class Login extends React.Component {
   }
 
   render() {
-    const {errors} = this.props;
+    const {error} = this.props;
 
     return (
       <Card>
@@ -43,7 +43,10 @@ class Login extends React.Component {
             value={this.state.email}
             label="Email"
             type="text"
-            error={get(errors, 'details.0.path.0') === 'email'}
+            error={
+              get(error, 'name') === 'UserDoesNotExists' ||
+              get(error, 'details.0.path.0') === 'email'
+            }
             errorMessage='No existe una cuenta con este correo.'
             onChange={this.onChange('email')}
           />
@@ -52,7 +55,7 @@ class Login extends React.Component {
             value={this.state.password}
             label="Contraseña"
             type="password"
-            error={get(errors, 'details.0.path.0') === 'password'}
+            error={get(error, 'details.0.path.0') === 'password'}
             errorMessage='Contraseña incorrecta.'
             onChange={this.onChange('password')}
           />
@@ -71,7 +74,7 @@ class Login extends React.Component {
 Login.propTypes = {
   onSubmit: T.func.isRequired,
   submitting: T.bool,
-  errors: T.object,
+  error: T.object,
 }
 
 export default Login

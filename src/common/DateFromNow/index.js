@@ -7,7 +7,7 @@ const DateFromNow = ({children}) => (
 );
 
 DateFromNow.propTypes = {
-  children: T.string,
+  children: T.oneOfType([T.string, T.number]),
 };
 
 
