@@ -13,21 +13,15 @@ const mapStateToProps = (state) => {
   const page = get(state, 'ui.users.page');
   const ids = get(state, 'ui.users.ids', []);
   
-  let prevItemID = (
+  let prevItemKey = (
     (offset - 1) * page <= 0 ? ids[0] : ids[(offset - 1) * page]
   );
-  let prevItemKey = btoa(JSON.stringify({
-    email: get(state, `entities.users.${prevItemID}.email`, {})
-  }));
   
-  let nextItemID = (
+  let nextItemKey = (
     offset * page + page - 1 >= ids.length 
     ? ids[ids.length - 1] 
     : ids[offset * page + page - 1]
   );
-  let nextItemKey = btoa(JSON.stringify({
-    email: get(state, `entities.users.${nextItemID}.email`, {})
-  }));
 
   return {
     offset,

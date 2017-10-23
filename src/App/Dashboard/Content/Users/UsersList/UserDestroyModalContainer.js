@@ -7,7 +7,7 @@ import {
 } from '../../../../../store/actions.js';
 
 const mapStateToProps = (state) => ({
-  key: (
+  id: (
     get(state, 'ui.users.userSelectedForDestructionKey')
   ),
 });

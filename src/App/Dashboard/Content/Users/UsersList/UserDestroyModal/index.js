@@ -4,12 +4,12 @@ import T from 'prop-types';
 import Modal from '../../../../../../common/Modal/';
 import Button from '../../../../../../common/Button/';
 
-const UserDestroyModal = ({key, destroyUser, closeModal}) => (
+const UserDestroyModal = ({id, destroyUser, closeModal}) => (
   <Modal title="Eliminar Usuario" type="danger" closeModal={closeModal}>
     <div className="UserDestroyModal">
       <h3>¿Esta seguro que desea eliminar al usuario?</h3>
       <div className="button-bar">
-        <Button type="button" color="red" onClick={() => destroyUser(key)}>
+        <Button type="button" color="red" onClick={() => destroyUser(id)}>
           Si, deseo eliminarlo
         </Button>
         <Button type="button" color="grey" onClick={closeModal}>
@@ -21,8 +21,9 @@ const UserDestroyModal = ({key, destroyUser, closeModal}) => (
 );
 
 UserDestroyModal.propTypes = {
-  deleteUser: T.func.isRequired,
+  destroyUser: T.func.isRequired,
   closeModal: T.func.isRequired,
+  key: T.string,
 };
 
 export default UserDestroyModal;
