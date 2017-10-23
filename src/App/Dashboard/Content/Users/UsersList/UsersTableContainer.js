@@ -8,7 +8,6 @@ const mapStateToProps = (state) => {
   const page = get(state, 'ui.users.page');
   
   return {
-    submitting: state.flags.login,
     users: (
       get(state, 'ui.users.ids', [])
       .slice(offset * page, offset * page + page)

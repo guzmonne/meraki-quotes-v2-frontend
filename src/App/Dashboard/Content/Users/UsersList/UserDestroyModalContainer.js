@@ -3,7 +3,8 @@ import get from 'lodash/get';
 import UserDestroyModal from './UserDestroyModal/';
 import {
   UPDATE_UI,
-  REMOVE_ITEM_ID,
+  API_DESTROY,
+  DISPATCH_MULTIPLE_ACTIONS
 } from '../../../../../store/actions.js';
 
 const mapStateToProps = (state) => ({
@@ -12,22 +13,28 @@ const mapStateToProps = (state) => ({
   ),
 });
 
+const closeModal = () => ({
+  type: UPDATE_UI,
+  payload: {
+    users: {
+      showDestroyModal: false,
+      userSelectedForDestructionKey: undefined,
+    }
+  }
+})
+
 const mapActionsToProps = {
-  closeModal: () => ({
-    type: UPDATE_UI,
-    payload: {
-      users: {
-        showDestroyModal: false,
-        userSelectedForDestructionKey: undefined,
-      }
-    }
-  }),
-  destroyUser: (key) => ({
-    type: REMOVE_ITEM_ID,
-    payload: {
-      target: 'users',
-      key: key,
-    }
+  closeModal,
+  destroyUser: (id) => ({
+    type: DISPATCH_MULTIPLE_ACTIONS,
+    payload: [{
+      type: API_DESTROY,
+      payload: {
+        endpoint: `/users`,
+        target: 'users',
+        id: id,
+      },
+    }, closeModal()]
   })
 };
 

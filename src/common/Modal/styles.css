@@ -50,7 +50,7 @@ Source https://codepen.io/michelmarrache/pen/bDudG?page=1&
 }
 
 .modal.modal-danger > h1 {
-  background-color: #c00;
+  background-color: rgba(255, 0, 0, 0.836);
 }
 
 .modal > .modal-close {

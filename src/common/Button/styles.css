@@ -16,19 +16,19 @@
 }
 
 .btn.btn-red {
-  background-color: rgb(181, 63, 63);
+  background-color: rgba(200, 0, 0, 0.8);
 }
 
 .btn.btn-red:hover, .btn.btn-red:focus {
-  background-color: rgb(159, 48, 48);
+  background-color: rgba(200, 0, 0, 1);
 }
 
 .btn.btn-grey {
-  background-color: rgb(143, 146, 175);
+  background-color: rgba(105, 106, 116, 0.8);
 }
 
 .btn.btn-grey:hover, .btn.btn-grey:focus {
-  background-color: rgb(113, 113, 138);
+  background-color: rgba(105, 106, 116, 1);
 }
 
 .btn:disabled {

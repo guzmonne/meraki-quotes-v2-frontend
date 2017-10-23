@@ -1,5 +1,6 @@
 import merge from 'lodash/merge';
 import union from 'lodash/union';
+import indexOf from 'lodash/indexOf';
 import camelCase from 'lodash/camelCase';
 import * as ActionTypes from '../store/actions.js';
 
@@ -35,18 +36,55 @@ export default (state=defaultState, {type, payload}) => {
     default:
   }
 
-  if (
-    type.indexOf('API_INDEX_SUCCESS') > -1 && 
-    payload && 
-    payload.result && 
-    payload.target
-  ) {
-    const {target, result} = payload;
-    return merge(state, {
-      [target]: {
-        ids: union(state[target].ids, result),
-      }
-    })
+  if (type.indexOf('API_INDEX_SUCCESS') > -1) {
+    try {
+      const {target, result} = payload;
+      return merge(state, {
+        [target]: {
+          ids: union(state[target].ids, result),
+        }
+      })
+    } catch (error) {
+      console.error(error);
+      return state;
+    }
+  }
+
+  if (type.indexOf('API_DESTROY_REQUEST') > -1) {
+    console.log('request');
+    try {
+      const {target, id} = payload;
+      const ids = state[target].ids;
+      return merge(state, {
+        [target]: {
+          destroyedIds: {
+            [id]: indexOf(ids, id),
+          },
+          ids: state[target].ids.filter((_id) => _id !== id),
+        }
+      })
+    } catch (error) {
+      console.error(error);
+      return state;
+    }
+  }
+
+  if (type.indexOf('API_DESTROY_FAILURE') > -1) {
+    console.log('destroy');
+    try {
+      const {target, id} = payload;
+      const ids = state[target].ids;
+      const index = state[target].destroyedIds[id];
+      return merge(state, {
+        [target]: {
+          error: `An error occurred while destroying the target`,
+          ids: [...ids.slice(0, index), id, ...ids.slice(index, ids.length)]
+        }
+      })
+    } catch (error) {
+      console.error(error);
+      return state;
+    }
   }
 
   if (type.indexOf('_FAILURE') > -1) {

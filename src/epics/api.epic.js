@@ -21,7 +21,7 @@ export default (action$, store) => (
     API_UPDATE,
     API_DESTROY
   )
-  .switchMap(({type, payload}) => {
+  .mergeMap(({type, payload}) => {
     let request$
 
     switch (type) {
@@ -70,7 +70,8 @@ function actionPrefix(type, {target}) {
 
 function loading$ (type, payload) {
   return Observable.of({
-    type: `${actionPrefix(type, payload)}_REQUEST`
+    type: `${actionPrefix(type, payload)}_REQUEST`,
+    payload
   })
 }
 
@@ -111,29 +112,43 @@ function update$(type, payload) {
 }
 
 function destroy$(type, payload) {
-  const {endpoint, schema, target} = payload
-  return Observable.ajax.delete(`${API_ROOT}${endpoint}`, headers())
+  const {endpoint, target, id} = payload
+  return Observable.ajax.delete(`${API_ROOT}${endpoint}/${id}`, headers())
     .map(({response}) => {
       return {
         type: `${actionPrefix(type, payload)}_SUCCESS`,
-        payload: Object.assign(normalize(response, schema), {target}),
       };
     })
-    .catch(validationErrorHandler.bind(null, type, payload))
+    .catch(error => (
+      Observable.of({
+        type: `${actionPrefix(type, payload)}_FAILURE`,
+        payload: {
+          name: error.name,
+          message: error.message,
+          stack: error.stack || (new Error()).stack,
+          response: error.response,
+          id,
+          target,
+        },
+      })
+    ))
 }
 
 function error$(type, payload, error) {
+  console.error(error);
   return Observable.of({
-    type: `${actionPrefix(type, payload)}_FAILUIRE`,
+    type: `${actionPrefix(type, payload)}_FAILURE`,
     payload: {
       name: error.name,
       message: error.message,
-      stack: error.stack || (new Error()).stack
+      stack: error.stack || (new Error()).stack,
+      response: error.response
     },
   });
 }
 
 function validationError$(type, payload, error) {
+  console.error(error);
   return Observable.of({
     type: `${actionPrefix(type, payload)}_FAILURE`,
     payload: error.response,
