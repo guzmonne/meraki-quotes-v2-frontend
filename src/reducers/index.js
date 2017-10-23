@@ -1,6 +1,7 @@
 import * as ActionTypes from '../store/actions.js';
 import {combineReducers} from 'redux';
-import merge from 'lodash/merge.js';
+import merge from 'lodash/merge';
+import get from 'lodash/get'
 import ui from './ui.reducer.js';
 import flags from './flags.reducer.js';
 import {routeReducer} from '../ListeningRouter/';
@@ -14,8 +15,10 @@ const defaultEntitiesState = {
 
 // Updates an entity cache in response to any action with response.entities.
 const entities = (state = defaultEntitiesState, action) => {
-  if (action.response && action.response.entities) {
-    return merge({}, state, action.response.entities)
+  const entities = get(action, 'payload.entities');
+
+  if (entities) {
+    return merge({}, state, entities)
   }
 
   return state

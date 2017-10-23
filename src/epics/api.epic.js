@@ -1,4 +1,5 @@
 import get from 'lodash/get';
+import {normalize} from 'normalizr';
 import {Observable} from 'rxjs/Observable'
 import {
   ERROR,
@@ -7,26 +8,27 @@ import {
 
 const API_ROOT = process.env.REACT_APP_API_ROOT;
 
-const toAction = (endpoint) => (
-  endpoint.replace('/', '').replace(/\//g, '_').toUpperCase()
-);
-
 const headers = () => ({
   'Content-Type': 'application/json',
   'Authorization': `Bearer ${localStorage.getItem('TOKEN')}`
 });
 
-export default action$ => (
+export default (action$, store) => (
   action$
   .ofType(API_CALL)
-  .switchMap(({payload: {endpoint, method, body}}) => {
+  .switchMap(({payload: {
+    endpoint,
+    method,
+    body,
+    schema,
+    target,
+    flag
+  }}) => {
     const loading = Observable.of({
-      type: toAction(endpoint) + '_REQUEST',
+      type: `${target.toUpperCase()}_${flag.toUpperCase()}_REQUEST`
     });
     
     const ajaxMethod = Observable.ajax[method.toLowerCase()];
-
-    console.log(ajaxMethod);
 
     if (!ajaxMethod) throw new Error('Method does not exist');
 
@@ -34,25 +36,42 @@ export default action$ => (
       body !== undefined 
       ? ajaxMethod(`${API_ROOT}${endpoint}`, body, headers())
       : ajaxMethod(`${API_ROOT}${endpoint}`, headers())
-    ).map(({response}) => ({
-      type: toAction(endpoint) + '_SUCCESS',
-      payload: response,
-    }))
+    ).map(({response}) => {
+      if (schema) {
+        return {
+          type: `${target.toUpperCase()}_${flag.toUpperCase()}_SUCCESS`,
+          payload: Object.assign(normalize(response, schema), {target}),
+        };
+      }
+
+      return {
+        type: `${target.toUpperCase()}_${flag.toUpperCase()}_SUCCESS`,
+        payload: response,
+      }
+    })
     .catch((error) => {
       const name = get(error, 'response.name');
 
+      console.error(error);
+
       if (name === 'ValidationError')
         return Observable.of({
-          type: toAction(endpoint) + '_FAILURE',
+          type: `${target.toUpperCase()}_${flag.toUpperCase()}_FAILURE`,
           payload: error.response,
         })
 
-      throw error;
+      return Observable.of({
+        type: ERROR,
+        payload: {
+          name: error.name,
+          message: error.message,
+          stack: error.stack || (new Error()).stack
+        },
+      })
     })
     
     return Observable.concat(loading, request);
   })
-  .do(x => console.log(x))
   .catch(error => ( 
     Observable.of({
       type: ERROR,

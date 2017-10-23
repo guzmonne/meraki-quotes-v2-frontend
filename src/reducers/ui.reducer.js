@@ -1,10 +1,12 @@
 import merge from 'lodash/merge';
+import union from 'lodash/union';
 import camelCase from 'lodash/camelCase';
 import * as ActionTypes from '../store/actions.js';
 
 const defaultState = {
-  menu: {
-    item: 'home',
+  users: {
+    offset: 0,
+    page: 10,
   }
 }
 
@@ -39,6 +41,17 @@ export default (state=defaultState, {type, payload}) => {
         error: undefined, 
       }
     })
+  }
+
+  if (
+    type.indexOf('_SUCCESS') > -1 && payload && payload.result && payload.target
+  ) {
+    let {target, result} = payload;
+    let newState = Object.assign({}, state);
+
+    newState[target].ids = union(state[target].ids, result);
+
+    return newState;
   }
 
   if (type.indexOf('_FAILURE') > -1) {

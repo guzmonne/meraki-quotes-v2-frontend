@@ -1,3 +1,7 @@
 .UsersList {
   width: 100%;
 }
+
+.UsersList > p {
+  text-align: center;
+}

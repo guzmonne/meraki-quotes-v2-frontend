@@ -1,5 +1,6 @@
-// Polyfills
-import 'whatwg-fetch'
+// Moment
+import moment from 'moment';
+import 'moment/locale/es';
 // APP
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -9,7 +10,9 @@ import App from './App/';
 import ListeningRouter from './ListeningRouter/';
 import registerServiceWorker from './registerServiceWorker';
 import configureStore from './store/configureStore.js';
-
+// Configure moment
+moment.locale('es');
+// Start App.
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={configureStore()}>
@@ -20,5 +23,5 @@ ReactDOM.render(
   </BrowserRouter>, 
   document.getElementById('root')
 );
-
+// Service Worker.
 registerServiceWorker();
