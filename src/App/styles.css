@@ -31,9 +31,14 @@ body {
   font-size: 15px;
 }
 
-a {
+a:not([href]):not([tabindex]) {
   text-decoration: none;
   color: #67a8e4;
+  cursor: pointer;
+}
+
+a:not([href]):not([tabindex]):hover {
+  color: #529fe2
 }
 
 [role=button], a, area, button, input, label, select, summary, textarea {
@@ -46,6 +51,12 @@ a {
   text-decoration: none;
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
+}
+
+ul.list-unstyled {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .App {
