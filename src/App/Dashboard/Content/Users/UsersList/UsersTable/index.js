@@ -17,8 +17,8 @@ const UsersTable = ({users, displayDestroyModal}) => (
       </tr>
     </thead>
     <tbody>
-    {users.map(user => 
-      <UserRow key={user.ID}
+    {users.map((user, i) => 
+      <UserRow key={i}
         displayDestroyModal={displayDestroyModal.bind(null, user)}  
         {...user}
       />

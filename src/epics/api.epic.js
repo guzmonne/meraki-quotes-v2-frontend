@@ -21,7 +21,7 @@ export default (action$, store) => (
     API_UPDATE,
     API_DESTROY
   )
-  .mergeMap(({type, payload}) => {
+  .switchMap(({type, payload}) => {
     let request$
 
     switch (type) {
@@ -38,6 +38,8 @@ export default (action$, store) => (
       case API_DESTROY:
         request$ = destroy$;
         break
+      default:
+        break;
     }
 
     return Observable.concat(

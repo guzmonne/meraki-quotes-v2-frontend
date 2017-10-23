@@ -39,11 +39,13 @@ export default (state=defaultState, {type, payload}) => {
   if (type.indexOf('API_INDEX_SUCCESS') > -1) {
     try {
       const {target, result} = payload;
-      return merge(state, {
+      return {
+        ...state,
         [target]: {
+          ...state[target],
           ids: union(state[target].ids, result),
         }
-      })
+      };
     } catch (error) {
       console.error(error);
       return state;
@@ -51,18 +53,21 @@ export default (state=defaultState, {type, payload}) => {
   }
 
   if (type.indexOf('API_DESTROY_REQUEST') > -1) {
-    console.log('request');
     try {
       const {target, id} = payload;
       const ids = state[target].ids;
-      return merge(state, {
+
+      return {
+        ...state,
         [target]: {
+          ...state[target],
+          ids: state[target].ids.filter((_id) => _id !== id),
           destroyedIds: {
+            ...state[target].destroyedIds,
             [id]: indexOf(ids, id),
           },
-          ids: state[target].ids.filter((_id) => _id !== id),
         }
-      })
+      };
     } catch (error) {
       console.error(error);
       return state;

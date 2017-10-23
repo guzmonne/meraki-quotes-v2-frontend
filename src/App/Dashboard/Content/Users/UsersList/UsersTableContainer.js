@@ -6,15 +6,16 @@ import {UPDATE_UI} from '../../../../../store/actions.js';
 const mapStateToProps = (state) => {
   const offset = get(state, 'ui.users.offset');
   const page = get(state, 'ui.users.page');
-  
+  const users = (
+    get(state, 'ui.users.ids', [])
+    .slice(offset * page, offset * page + page)
+    .map(id => (
+      get(state, `entities.users.${id}`)
+    ))
+  );
+
   return {
-    users: (
-      get(state, 'ui.users.ids', [])
-      .slice(offset * page, offset * page + page)
-      .map(id => (
-        get(state, `entities.users.${id}`)
-      ))
-    )
+    users
   }
 };
 
