@@ -1,6 +1,6 @@
 import React from 'react';
 import T from 'prop-types';
-import {IUser} from '../../IUsers.js';
+import {IUser} from '../../../IUsers.js';
 import DateFromNow from '../../../../../../../common/DateFromNow/';
 import {Td} from '../../../../../../../common/Table/';
 import Action from '../../../../../../../common/Action/';

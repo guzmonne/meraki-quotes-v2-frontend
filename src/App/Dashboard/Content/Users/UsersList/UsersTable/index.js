@@ -1,6 +1,6 @@
 import React from 'react';
 import T from 'prop-types';
-import {IUser} from '../IUsers.js';
+import {IUser} from '../../IUsers.js';
 import UserRow from './UserRow/';
 import Table from '../../../../../../common/Table/';
 
