@@ -3,8 +3,6 @@ import get from 'lodash/get';
 import UserShowModal from './UserShowModal/';
 import {
   UPDATE_UI,
-  API_DESTROY,
-  DISPATCH_MULTIPLE_ACTIONS
 } from '../../../../../store/actions.js';
 
 const mapStateToProps = (state) => ({

@@ -1,6 +1,5 @@
 import React from 'react';
 import T from 'prop-types';
-import Card from '../Card/';
 
 const UserProfile = ({user}) => (
   <div className="UserProfile">

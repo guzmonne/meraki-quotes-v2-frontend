@@ -1,6 +1,5 @@
 import './styles.css';
 import React from 'react';
-import T from 'prop-types';
 import Card from '../../Card/';
 import UserForm from '../UserForm/';
 
