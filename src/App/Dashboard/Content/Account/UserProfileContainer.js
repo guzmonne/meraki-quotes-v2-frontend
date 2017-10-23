@@ -1,6 +1,6 @@
 import get from 'lodash/get';
 import {connect} from 'react-redux';
-import UserProfile from './UserProfile/';
+import UserProfile from '../UserProfile/';
 
 const mapStateToProps = (state) => ({
   user: get(state, 'ui.user'),

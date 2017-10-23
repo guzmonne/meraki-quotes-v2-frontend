@@ -9,7 +9,7 @@ import {
 
 const mapStateToProps = (state) => ({
   id: (
-    get(state, 'ui.users.userSelectedForDestructionKey')
+    get(state, 'ui.users.userSelectedToDestroy')
   ),
 });
 
@@ -17,8 +17,8 @@ const closeModal = () => ({
   type: UPDATE_UI,
   payload: {
     users: {
-      showDestroyModal: false,
-      userSelectedForDestructionKey: undefined,
+      displayingDestroyModal: false,
+      userSelectedToDestroy: undefined,
     }
   }
 })

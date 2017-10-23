@@ -1,11 +1,11 @@
 import React from 'react';
 import T from 'prop-types';
-import Card from '../../Card/';
+import Card from '../Card/';
 
 const UserProfile = ({user}) => (
-  <Card className="UserProfile">
+  <div className="UserProfile">
     <h2>Perfil</h2>
-
+    
     <dt><b>Usuario:</b></dt>
     <dd>{user.username}</dd>
 
@@ -14,19 +14,18 @@ const UserProfile = ({user}) => (
 
     <dt><b>Permisos:</b></dt>
     <dd>
-    {user.permissions.length === 0
+    {user.permissions && user.permissions.length > 0
       ?
-      'Sin permisos definidos.'
-      :
-      <ul>
+      <ul className="list-unstyled">
       {user.permissions.map((permission) => (
         <li>{permission}</li>
       ))}
       </ul>
+      :
+      'Sin permisos definidos.'
     }
     </dd>
-
-  </Card>
+  </div>
 );
 
 UserProfile.propTypes = {

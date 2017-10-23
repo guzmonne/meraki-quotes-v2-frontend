@@ -24,8 +24,17 @@ const mapActionsToProps = {
     type: UPDATE_UI,
     payload: {
       users: {
-        showDestroyModal: true,
-        userSelectedForDestructionKey: btoa(JSON.stringify({email})),
+        displayingDestroyModal: true,
+        userSelectedToDestroy: btoa(JSON.stringify({email})),
+      }
+    }
+  }),
+  displayShowModal: (user) => ({
+    type: UPDATE_UI,
+    payload: {
+      users: {
+        displayingShowModal: true,
+        userSelectedToShow: user,
       }
     }
   })

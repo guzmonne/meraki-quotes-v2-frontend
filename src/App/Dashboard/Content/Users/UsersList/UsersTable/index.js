@@ -4,7 +4,7 @@ import {IUser} from '../IUsers.js';
 import UserRow from './UserRow/';
 import Table from '../../../../../../common/Table/';
 
-const UsersTable = ({users, displayDestroyModal}) => (
+const UsersTable = ({users, displayDestroyModal, displayShowModal}) => (
   <Table>
     <thead>
       <tr>
@@ -20,6 +20,7 @@ const UsersTable = ({users, displayDestroyModal}) => (
     {users.map((user, i) => 
       <UserRow key={i}
         displayDestroyModal={displayDestroyModal.bind(null, user)}  
+        displayShowModal={displayShowModal.bind(null, user)}  
         {...user}
       />
     )}
@@ -30,6 +31,7 @@ const UsersTable = ({users, displayDestroyModal}) => (
 UsersTable.propTypes = {
   users: T.arrayOf(T.shape(IUser)),
   displayDestroyModal: T.func,
+  displayShowModal: T.func,
 };
 
 UsersTable.defaultProps = {

@@ -30,7 +30,8 @@ const mapStateToProps = (state) => {
     prevItemKey,
     numberOfUsers: get(state, 'ui.users.ids', []).length,    
     fetching: get(state, 'flags.usersApiIndex'),
-    showDestroyModal: get(state, 'ui.users.showDestroyModal'),
+    displayingDestroyModal: get(state, 'ui.users.displayingDestroyModal'),
+    displayingShowModal: get(state, 'ui.users.displayingShowModal'),
   }
 };
 

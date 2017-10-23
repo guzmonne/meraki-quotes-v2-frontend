@@ -12,10 +12,13 @@ const UserRow = ({
   username,
   email,
   verified,
-  displayDestroyModal
+  displayDestroyModal,
+  displayShowModal,
 }) => (
   <tr>
-    <Td header="Usuario">{username}</Td>
+    <Td header="Usuario">
+      <a onClick={displayShowModal}>{username}</a>
+    </Td>
     <Td header="Email">{email}</Td>
     <Td header="Verificado">{verified === true ? 'Si' : 'No'}</Td>
     <Td header="Creado">
@@ -34,6 +37,7 @@ const UserRow = ({
 
 UserRow.propTypes = Object.assign({}, IUser, {
   displayDestroyModal: T.func,
+  displayShowModal: T.func,
 })
 
 export default UserRow;

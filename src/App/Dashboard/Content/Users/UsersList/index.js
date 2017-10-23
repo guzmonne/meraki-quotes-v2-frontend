@@ -4,6 +4,7 @@ import T from 'prop-types';
 import Card from '../../Card/';
 import UsersTable from './UsersTableContainer.js';
 import UserDestroyModal from './UserDestroyModalContainer.js';
+import UserShowModal from './UserShowModalContainer.js';
 import Spinner from '../../../../../common/Spinner/';
 import Pagination from '../../../../../common/Pagination/';
 
@@ -21,7 +22,8 @@ class UsersList extends React.Component {
       paginate,
       prevItemKey,
       nextItemKey,
-      showDestroyModal,
+      displayingDestroyModal,
+      displayingShowModal,
     } = this.props;
 
     return (
@@ -40,8 +42,11 @@ class UsersList extends React.Component {
           onPrev={() => paginate(offset - 1, page, prevItemKey)}
           onNext={() => paginate(offset + 1, page, nextItemKey)}          
         />
-      {showDestroyModal &&
+      {displayingDestroyModal &&
         <UserDestroyModal />
+      }
+      {displayingShowModal &&
+        <UserShowModal />
       }
       </Card>
     );
@@ -57,7 +62,7 @@ UsersList.propTypes = {
   paginate: T.func,
   nextItemKey: T.string,
   prevItemKey: T.string,
-  showDestroyModal: T.bool,
+  displayingDestroyModal: T.bool,
 }
 
 export default UsersList;
