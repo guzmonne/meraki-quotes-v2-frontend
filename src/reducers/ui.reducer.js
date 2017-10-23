@@ -29,7 +29,7 @@ export default (state=defaultState, {type, payload}) => {
         }
       } catch (error) {
         console.log(error);
-        return state;
+        return Object.assign({}, state);
       }
     case ActionTypes.UPDATE_UI:
       return merge({}, state, payload);
@@ -48,7 +48,40 @@ export default (state=defaultState, {type, payload}) => {
       };
     } catch (error) {
       console.error(error);
-      return state;
+      return Object.assign({}, state);
+    }
+  }
+
+  if (type.indexOf('API_CREATE_SUCCESS') > -1) {
+    try {
+      const {target, result} = payload;
+      return {
+        ...state,
+        [target]: {
+          ...state[target],
+          ids: [...(state[target].ids || []), result],
+        }
+      };
+    } catch (error) {
+      console.error(error);
+      return Object.assign({}, state);
+    }
+  }
+
+  if (type.indexOf('API_CREATE_REQUEST') > -1) {
+    try {
+      const {target, empty} = payload;
+      return {
+        ...state,
+        [camelCase(type.split('_REQUEST')[0])]: undefined,
+        [target]: {
+          ...state[target],
+          empty: {...empty},
+        },
+      };
+    } catch (error) {
+      console.error(error);
+      return Object.assign({}, state);
     }
   }
 
@@ -70,7 +103,7 @@ export default (state=defaultState, {type, payload}) => {
       };
     } catch (error) {
       console.error(error);
-      return state;
+      return Object.assign({}, state);
     }
   }
 
@@ -88,7 +121,7 @@ export default (state=defaultState, {type, payload}) => {
       })
     } catch (error) {
       console.error(error);
-      return state;
+      return Object.assign({}, state);
     }
   }
 
@@ -104,5 +137,5 @@ export default (state=defaultState, {type, payload}) => {
     window.location.href = payload;
   }
 
-  return state;
+  return Object.assign({}, state);
 }

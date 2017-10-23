@@ -2,7 +2,7 @@ import './styles.css';
 import React from 'react';
 import {Route, Switch} from '../../../../ListeningRouter/';
 import UsersList from './UsersListContainer.js';
-import UserCreate from './UserCreate/';
+import UserCreate from './UserCreateContainer.js';
 
 const Users = () => (
   <Switch>

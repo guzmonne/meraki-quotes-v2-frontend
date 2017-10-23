@@ -3,6 +3,7 @@ import {normalize} from 'normalizr';
 import {Observable} from 'rxjs/Observable'
 import {
   ERROR,
+  UPDATE_UI,
   API_INDEX,
   API_CREATE,
   API_SHOW,
@@ -90,15 +91,31 @@ function get$(type, payload) {
 }
 
 function create$(type, payload) {
-  const {endpoint, schema, body, target} = payload
+  const {endpoint, schema, body, target, empty} = payload
   return Observable.ajax.post(`${API_ROOT}${endpoint}`, body, headers())
-    .map(({response}) => {
-      return {
-        type: `${actionPrefix(type, payload)}_SUCCESS`,
-        payload: Object.assign(normalize(response, schema), {target}),
-      };
-    })
-    .catch(validationErrorHandler.bind(null, type, payload))
+    .concatMap(() => Observable.from([{
+      type: `${actionPrefix(type, payload)}_SUCCESS`,
+      payload: Object.assign(normalize(body, schema), {target}),
+      empty,
+    }, {
+      type: UPDATE_UI,
+      payload: {
+        [target]: {empty}
+      }
+    }]))
+    .catch(error => (
+      Observable.concat(
+        validationErrorHandler(type, payload, error),
+        Observable.of({
+          type: UPDATE_UI,
+          payload: {
+            [target]: {
+              empty: body
+            }
+          }
+        })
+      )
+    ))
 }
 
 function update$(type, payload) {
