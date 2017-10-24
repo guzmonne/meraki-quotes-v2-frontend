@@ -17,12 +17,10 @@ import authEpic from './auth.epic.js';
 import readyEpic from './ready.epic.js';
 import apiEpic from './api.epic.js';
 import multipleEpic from './multiple.epic.js';
-import notificationsEpic from './notifications.epic.js';
 
 export default combineEpics(
   apiEpic,
   readyEpic,
   authEpic,
   multipleEpic,
-  notificationsEpic,
 );
