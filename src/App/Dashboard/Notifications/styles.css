@@ -1,0 +1,50 @@
+.Notifications {
+  position: absolute;
+  width: 100%;
+}
+
+.Notifications .Notification {
+  z-index: 101;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: transparent;
+  text-align: center;
+  line-height: 2.5;
+  overflow: hidden; 
+  box-shadow: 0 0 5px black;
+  background: #90a4ae;
+  color: white;
+}
+
+.Notification-content {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.Notification-content span {
+  width: 100%;
+}
+
+.Notification-content svg {
+  margin-left: 1em;
+  margin-right: -2.5em;
+}
+
+.Notifications .Notification--warning {
+  background: #ffbb00;
+}
+
+.Notifications .Notification--info {
+  background: #2196F3;
+}
+
+.Notifications .Notification--danger {
+  background: #F44336;
+}
+
+.Notifications .Notification--success {
+  background: #00c853;
+}
