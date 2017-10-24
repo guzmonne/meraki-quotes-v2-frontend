@@ -5,9 +5,15 @@ import Card from '../../Card/';
 import UserForm from '../UserForm/';
 import {IUser} from '../IUsers.js';
 
+const empty = {
+  username: '',
+  password: '',
+  email: '',
+};
+
 class UserCreate extends React.Component {
   componentWillMount() {
-    this.props.resetForm();
+    this.props.setForm({...empty});
   }
 
   render() {
@@ -18,7 +24,7 @@ class UserCreate extends React.Component {
         <h1>Crear Nuevo Usuario</h1>
         <UserForm 
           user={user}
-          onSubmit={createUser}
+          onSubmit={(body) => createUser(body, {...empty})}
           error={error}
           loading={creating}
         />
@@ -32,7 +38,7 @@ UserCreate.propTypes = {
   error: T.object,
   createUser: T.func,
   creating: T.bool,
-  resetForm: T.func.isRequired,
+  setForm: T.func.isRequired,
 };
 
 export default UserCreate;

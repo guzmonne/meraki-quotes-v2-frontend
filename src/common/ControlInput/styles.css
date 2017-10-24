@@ -4,7 +4,7 @@
 .ControlInput { 
   position:relative; 
   margin-top: 21px;
-  --ControlInputRed: rgb(136, 17, 17);
+  --ControlInputRed: rgb(211, 0, 0);
   --ControlInputBlue: #5264AE;
 }
 

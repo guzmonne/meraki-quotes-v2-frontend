@@ -91,16 +91,17 @@ function get$(type, payload) {
 }
 
 function create$(type, payload) {
-  const {endpoint, schema, body, target, empty} = payload
+  const {endpoint, schema, body, target, formData, formName='form'} = payload
   return Observable.ajax.post(`${API_ROOT}${endpoint}`, body, headers())
     .concatMap(() => Observable.from([{
       type: `${actionPrefix(type, payload)}_SUCCESS`,
       payload: Object.assign(normalize(body, schema), {target}),
-      empty,
     }, {
       type: UPDATE_UI,
       payload: {
-        [target]: {empty}
+        [target]: {
+          [formName]: formData,
+        }
       }
     }]))
     .catch(error => (
@@ -110,7 +111,7 @@ function create$(type, payload) {
           type: UPDATE_UI,
           payload: {
             [target]: {
-              empty: body
+              [formName]: body
             }
           }
         })

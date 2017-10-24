@@ -8,6 +8,11 @@ const defaultState = {
   users: {
     offset: 0,
     page: 10,
+    form: {
+      username: '',
+      password: '',
+      email: '',
+    }
   }
 }
 
@@ -70,13 +75,13 @@ export default (state=defaultState, {type, payload}) => {
 
   if (type.indexOf('API_CREATE_REQUEST') > -1) {
     try {
-      const {target, empty} = payload;
+      const {target, formName, formData} = payload;
       return {
         ...state,
         [camelCase(type.split('_REQUEST')[0])]: undefined,
         [target]: {
           ...state[target],
-          empty: {...empty},
+          [formName]: formData,
         },
       };
     } catch (error) {

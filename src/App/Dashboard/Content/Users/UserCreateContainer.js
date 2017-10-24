@@ -8,36 +8,31 @@ import {
 } from '../../../../store/actions.js';
 import {user} from '../../../../store/schemas.js';
 
-const empty = {
-  username: '',
-  email: '',
-  password: '',
-};
-
 const mapStateToProps = (state) => ({
-  user: get(state, 'ui.users.empty', {...empty}),
+  user: get(state, 'ui.users.form'),
   error: get(state, 'ui.usersApiCreate.error'),
   creating: get(state, 'flags.usersApiCreate')
 });
 
-const createUser = (body) => ({
+const createUser = (body, formData) => ({
   type: API_CREATE,
   payload: {
     body,
     endpoint: '/users',
     schema: user,
     target: 'users',
-    empty: {...empty}, 
+    formData,
+    formName: 'form',
   },
 })
 
 const mapActionsToProps = {
   createUser,
-  resetForm: () => ({
+  setForm: (form) => ({
     type: UPDATE_UI,
     payload: {
       users: {
-        empty: {...empty},
+        form,
       }
     }
   })

@@ -17,7 +17,7 @@ const UserProfile = ({user}) => (
       ?
       <ul className="list-unstyled">
       {user.permissions.map((permission) => (
-        <li>{permission}</li>
+        <li key={permission}>{permission}</li>
       ))}
       </ul>
       :
