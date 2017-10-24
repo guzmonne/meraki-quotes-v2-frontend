@@ -14,7 +14,6 @@
   line-height: 2.5;
   overflow: hidden; 
   box-shadow: 0 0 5px black;
-  background: #90a4ae;
   color: white;
 }
 
@@ -31,6 +30,10 @@
 .Notification-content svg {
   margin-left: 1em;
   margin-right: -2.5em;
+}
+
+.Notifications .Notification--default {
+  background: #90a4ae;  
 }
 
 .Notifications .Notification--warning {

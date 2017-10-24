@@ -5,7 +5,7 @@ import T from 'prop-types';
 const Animate = ({animation, children}) => (
   React.cloneElement(children, {
     ...children.props,
-    ['data-animation']: animation,
+    'data-animation': animation,
   })
 );
 

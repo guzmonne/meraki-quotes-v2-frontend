@@ -9,6 +9,7 @@ import {
   API_SHOW,
   API_UPDATE,
   API_DESTROY,
+  PUSH_NOTIFICATION,
 } from '../store/actions';
 
 const API_ROOT = process.env.REACT_APP_API_ROOT;
@@ -103,6 +104,12 @@ function create$(type, payload) {
           [formName]: formData,
         }
       }
+    }, {
+      type: PUSH_NOTIFICATION,
+      payload: {
+        type: 'success',
+        message: 'Elemento creado con exito.'
+      }
     }]))
     .catch(error => (
       Observable.concat(
@@ -122,24 +129,32 @@ function create$(type, payload) {
 function update$(type, payload) {
   const {endpoint, body} = payload
   return Observable.ajax.put(`${API_ROOT}${endpoint}`, body, headers())
-    .map(({response}) => {
-      return {
-        type: `${actionPrefix(type, payload)}_SUCCESS`,
-      };
-    })
+    .concatMap(({response}) => Observable.from([{
+      type: `${actionPrefix(type, payload)}_SUCCESS`,
+    }, {
+      type: PUSH_NOTIFICATION,
+      payload: {
+        type: 'success',
+        message: 'Se ha actualizado el elemento con exito.'
+      }
+    }]))
     .catch(validationErrorHandler.bind(null, type, payload))
 }
 
 function destroy$(type, payload) {
   const {endpoint, target, id} = payload
   return Observable.ajax.delete(`${API_ROOT}${endpoint}/${id}`, headers())
-    .map(({response}) => {
-      return {
-        type: `${actionPrefix(type, payload)}_SUCCESS`,
-      };
-    })
+    .concatMap(({response}) => Observable.from([{
+      type: `${actionPrefix(type, payload)}_SUCCESS`,
+    }, {
+      type: PUSH_NOTIFICATION,
+      payload: {
+        type: 'success',
+        message: 'Elemento eliminado con exito.'
+      }
+    }]))
     .catch(error => (
-      Observable.of({
+      Observable.from([{
         type: `${actionPrefix(type, payload)}_FAILURE`,
         payload: {
           name: error.name,
@@ -149,13 +164,19 @@ function destroy$(type, payload) {
           id,
           target,
         },
-      })
+      }, {
+        type: PUSH_NOTIFICATION,
+        payload: {
+          type: 'danger',
+          message: 'Ocurrio un error al intentar eliminar el elemento.'
+        }
+      }])
     ))
 }
 
 function error$(type, payload, error) {
   console.error(error);
-  return Observable.of({
+  return Observable.from([{
     type: `${actionPrefix(type, payload)}_FAILURE`,
     payload,
     error: {
@@ -164,15 +185,27 @@ function error$(type, payload, error) {
       stack: error.stack || (new Error()).stack,
       response: error.response
     },
-  });
+  }, {
+    type: PUSH_NOTIFICATION,
+    payload: {
+      type: 'danger',
+      message: 'Ha ocurrido un error inesperado.'
+    }
+  }]);
 }
 
 function validationError$(type, payload, error) {
   console.error(error);
-  return Observable.of({
+  return Observable.from([{
     type: `${actionPrefix(type, payload)}_FAILURE`,
     payload: error.response
-  });
+  }, {
+    type: PUSH_NOTIFICATION,
+    payload: {
+      type: 'danger',
+      message: 'Error de validación. Verificque sus datos.'
+    }
+  }]);
 }
 
 function validationErrorHandler(type, payload, error) {

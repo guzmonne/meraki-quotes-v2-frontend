@@ -1,5 +1,7 @@
 import * as ActionTypes from '../store/actions.js';
 import isNumber from 'lodash/isNumber';
+import findIndex from 'lodash/findIndex';
+import isEqual from 'lodash/isEqual';
 
 const notificationsReducer = (state=[], action) => {
   if (action.type === ActionTypes.PUSH_NOTIFICATION) {
@@ -13,11 +15,13 @@ const notificationsReducer = (state=[], action) => {
   }
 
   if (action.type === ActionTypes.FADE_OUT_NOTIFICATION) {
-    let index = action.payload;
+    const index = findIndex(state, n => isEqual(n, action.payload));
 
-    if (!isNumber(index)) index = state.length - 1;
+    if (index === undefined || index < 0) return state;
 
-    const notification = {...state[index]};
+    const notification = state[index];
+
+    if (notification === undefined) return state;
 
     notification.fadeOut = true;
 
@@ -28,12 +32,17 @@ const notificationsReducer = (state=[], action) => {
   }
 
   if (action.type === ActionTypes.POP_NOTIFICATION) {
-    const index = action.payload;
-    return (
-      isNumber(index) 
-      ? [...state.slice(0, index), ...state.slice(index + 1, state.length)]
-      : state.slice(1, state.length)
-    )
+    const index = (
+      isNumber(action.payload) === true
+      ? action.payload
+      : findIndex(state, n => isEqual(n, {...action.payload, fadeOut: true}))
+    );
+
+    console.log(index);
+
+    if (index === undefined || index < 0) return state;
+
+    return [...state.slice(0, index), ...state.slice(index + 1, state.length)]
   }
 
   return state;  

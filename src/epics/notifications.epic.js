@@ -12,8 +12,14 @@ export default action$ => (
   .ofType(PUSH_NOTIFICATION)
   .mergeMap(({payload}) => (
     Observable.concat(
-      Observable.of({ type: FADE_OUT_NOTIFICATION }).delay(2 * ANIMATION),
-      Observable.of({ type: POP_NOTIFICATION }).delay(ANIMATION)
+      Observable.of({ 
+        type: FADE_OUT_NOTIFICATION,
+        payload,
+      }).delay(2 * ANIMATION),
+      Observable.of({ 
+        type: POP_NOTIFICATION,
+        payload,
+      }).delay(ANIMATION)
     )
   ))
 )

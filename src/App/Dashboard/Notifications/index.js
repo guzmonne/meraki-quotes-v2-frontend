@@ -10,7 +10,7 @@ import SolidExclamationCircleSvg from '../../../common/Icons/SolidExclamationCir
 import SolidExclamationTriangleSvg from '../../../common/Icons/SolidExclamationTriangleSvg.js';
 import SolidExclamationSvg from '../../../common/Icons/SolidExclamationSvg.js';
 
-const TYPES = ['info', 'danger', 'warning', 'success'];
+const TYPES = ['default', 'info', 'danger', 'warning', 'success'];
 
 const ICONS = {
   default: SolidExclamationSvg,
@@ -22,7 +22,6 @@ const ICONS = {
 
 const Notification = ({type, message, fadeOut, onClick}) => {
   const Icon = ICONS[type];
-  console.log(fadeOut);
   return (
     <Animate animation={fadeOut === true ? 'fadeOutUp' : 'fadeInDown'}>
       <div onClick={onClick} className={classnames('Notification', {
