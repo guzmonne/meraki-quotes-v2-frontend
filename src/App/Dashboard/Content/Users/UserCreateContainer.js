@@ -4,7 +4,6 @@ import UserCreate from './UserCreate/';
 import {
   API_CREATE,
   UPDATE_UI,
-  DISPATCH_MULTIPLE_ACTIONS
 } from '../../../../store/actions.js';
 import {user} from '../../../../store/schemas.js';
 

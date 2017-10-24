@@ -21,6 +21,41 @@ const entities = (state = defaultEntitiesState, action) => {
     return merge({}, state, entities)
   }
 
+  if (action.type.indexOf('API_UPDATE_REQUEST') > -1) {
+    try {
+      const {payload: {key, body, target}} = action;
+
+      return merge({}, state, {
+        [target]: {
+          [key]: {
+            ...body,
+            __old__: {...state[target][key]},
+          }
+        }
+      });
+    } catch (error) {
+      console.error(error);
+      return Object.assign({}, state);
+    }
+  }
+
+  if (action.type.indexOf('API_UPDATE_FAILURE') > -1) {
+    try {
+      const {payload: {key, target}} = action;
+      return merge({}, state, {
+        [target]: {
+          [key]: {
+            ...state[target][key].__old__,
+            __old__: undefined,
+          }
+        }
+      });
+    } catch (error) {
+      console.error(error);
+      return Object.assign({}, state);
+    }
+  }
+
   return state
 };
 

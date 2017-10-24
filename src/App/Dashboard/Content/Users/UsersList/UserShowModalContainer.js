@@ -5,9 +5,12 @@ import {
   UPDATE_UI,
 } from '../../../../../store/actions.js';
 
-const mapStateToProps = (state) => ({
-  user: get(state, 'ui.users.userSelectedToShow'),
-});
+const mapStateToProps = (state) => {
+  const key = get(state, 'ui.users.userSelectedToShowKey')
+  return {
+    user: get(state, `entities.users.${key}`),
+  }
+};
 
 const closeModal = () => ({
   type: UPDATE_UI,

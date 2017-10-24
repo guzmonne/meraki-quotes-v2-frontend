@@ -5,17 +5,20 @@ import UserProfile from '../../../UserProfile/';
 import Modal from '../../../../../../common/Modal/';
 import {IUser} from '../../IUsers';
 
-const UserDestroyModal = ({user, closeModal}) => (
-  <Modal title={user.username} type="info" closeModal={closeModal}>
+const UserShowModal = ({user, closeModal}) => (
+  <Modal title={`${user.username}`} 
+    type="info"
+    closeModal={closeModal}
+  >
     <div className="UserShowModal">
       <UserProfile user={user} />
     </div>
   </Modal>
 );
 
-UserDestroyModal.propTypes = {
+UserShowModal.propTypes = {
   user: T.shape(IUser),
   closeModal: T.func.isRequired,
 };
 
-export default UserDestroyModal;
+export default UserShowModal;

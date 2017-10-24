@@ -5,6 +5,7 @@ import Card from '../../Card/';
 import UsersTable from './UsersTableContainer.js';
 import UserDestroyModal from './UserDestroyModalContainer.js';
 import UserShowModal from './UserShowModalContainer.js';
+import UserUpdateModal from './UserUpdateModalContainer.js';
 import Spinner from '../../../../../common/Spinner/';
 import Pagination from '../../../../../common/Pagination/';
 
@@ -24,6 +25,7 @@ class UsersList extends React.Component {
       nextItemKey,
       displayingDestroyModal,
       displayingShowModal,
+      displayingUpdateModal,
     } = this.props;
 
     return (
@@ -47,6 +49,9 @@ class UsersList extends React.Component {
       }
       {displayingShowModal &&
         <UserShowModal />
+      }
+      {displayingUpdateModal &&
+        <UserUpdateModal />
       }
       </Card>
     );

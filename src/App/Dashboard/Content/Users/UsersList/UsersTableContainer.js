@@ -29,12 +29,21 @@ const mapActionsToProps = {
       }
     }
   }),
-  displayShowModal: (user) => ({
+  displayShowModal: ({email}) => ({
     type: UPDATE_UI,
     payload: {
       users: {
         displayingShowModal: true,
-        userSelectedToShow: user,
+        userSelectedToShowKey: btoa(JSON.stringify({email})),
+      }
+    }
+  }),
+  displayUpdateModal: ({email}) => ({
+    type: UPDATE_UI,
+    payload: {
+      users: {
+        displayingUpdateModal: true,
+        userSelectedToUpdateKey: btoa(JSON.stringify({email})),
       }
     }
   })

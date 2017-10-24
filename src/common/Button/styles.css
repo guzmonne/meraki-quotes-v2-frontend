@@ -23,6 +23,14 @@
   background-color: rgba(200, 0, 0, 1);
 }
 
+.btn.btn-orange {
+  background-color: rgb(209, 136, 0);
+}
+
+.btn.btn-orange:hover, .btn.btn-orange:focus {
+  background-color: rgba(192, 122, 0, 0.836);
+}
+
 .btn.btn-grey {
   background-color: rgba(105, 106, 116, 0.8);
 }

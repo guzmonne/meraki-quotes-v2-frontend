@@ -17,6 +17,10 @@
   border-bottom:1px solid #757575;
 }
 
+.ControlInput>input:read-only {
+  cursor: not-allowed;
+}
+
 .ControlInput.ControlInput--error>input {
   border-bottom:1px solid var(--ControlInputRed);
 }

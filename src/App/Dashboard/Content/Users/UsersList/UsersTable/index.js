@@ -4,7 +4,12 @@ import {IUser} from '../../IUsers.js';
 import UserRow from './UserRow/';
 import Table from '../../../../../../common/Table/';
 
-const UsersTable = ({users, displayDestroyModal, displayShowModal}) => (
+const UsersTable = ({
+  users,
+  displayDestroyModal,
+  displayShowModal,
+  displayUpdateModal
+}) => (
   <Table>
     <thead>
       <tr>
@@ -21,6 +26,7 @@ const UsersTable = ({users, displayDestroyModal, displayShowModal}) => (
       <UserRow key={i}
         displayDestroyModal={displayDestroyModal.bind(null, user)}  
         displayShowModal={displayShowModal.bind(null, user)}  
+        displayUpdateModal={displayUpdateModal.bind(null, user)}  
         {...user}
       />
     )}

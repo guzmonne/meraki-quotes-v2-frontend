@@ -7,7 +7,7 @@ import Form from '../../../../../common/Form/';
 import ControlInput from '../../../../../common/ControlInput/';
 import Button from '../../../../../common/Button/';
 
-const UserForm = ({user, loading, error, onSubmit}) => (
+const UserForm = ({user, color, loading, error, onSubmit, fieldsDisabled}) => (
   <Form data={user}>{({
     data,
     handleOnChange,
@@ -21,6 +21,7 @@ const UserForm = ({user, loading, error, onSubmit}) => (
         error={get(error, 'details.0.path.0') === 'username'}
         errorMessage={get(error, 'details.0.message')}
         onChange={handleOnChange('username')}
+        readOnly={fieldsDisabled.username}
       />
       <ControlInput
         value={data.email}
@@ -29,7 +30,9 @@ const UserForm = ({user, loading, error, onSubmit}) => (
         error={get(error, 'details.0.path.0') === 'email'}
         errorMessage={get(error, 'details.0.message')}
         onChange={handleOnChange('email')}
+        readOnly={fieldsDisabled.email}
       />
+    {!fieldsDisabled.password &&
       <ControlInput
         value={data.password}
         label="Contraseña"
@@ -38,7 +41,8 @@ const UserForm = ({user, loading, error, onSubmit}) => (
         errorMessage={get(error, 'details.0.message')}
         onChange={handleOnChange('password')}
       />
-      <Button type="submit" loading={loading}>
+    }
+      <Button color={color} type="submit" loading={loading}>
         Aceptar
       </Button>
     </form>
@@ -46,8 +50,21 @@ const UserForm = ({user, loading, error, onSubmit}) => (
 );
 
 UserForm.propTypes = {
+  color: T.string,
   user: T.shape(IUser),
+  fieldsDisabled: T.shape({
+    username: T.bool,
+    email: T.bool,
+    password: T.bool,
+  })
 };
 
+UserForm.defaultProps = {
+  fieldsDisabled: {
+    username: false,
+    email: false,
+    password: false,
+  }
+};
 
 export default UserForm;

@@ -4,7 +4,7 @@ import T from 'prop-types';
 import classnames from 'classnames';
 import Spinner from '../Spinner/';
 
-const COLORS = ['red', 'grey'];
+const COLORS = ['red', 'grey', 'orange'];
 
 const Button = ({loading, children, color, ...props}) => (
   loading === true

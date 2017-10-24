@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import TimesSvg from '../Icons/TimesSvg.js';
 import Action from '../Action/';
 
-const TYPES = ['danger'];
+const TYPES = ['danger', 'warning', 'info'];
 
 const Modal = ({closeModal, type, title, children}) => (
   <div className="modal-wrapper">

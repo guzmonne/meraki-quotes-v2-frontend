@@ -120,12 +120,11 @@ function create$(type, payload) {
 }
 
 function update$(type, payload) {
-  const {endpoint, schema, body, target} = payload
+  const {endpoint, body} = payload
   return Observable.ajax.put(`${API_ROOT}${endpoint}`, body, headers())
     .map(({response}) => {
       return {
         type: `${actionPrefix(type, payload)}_SUCCESS`,
-        payload: Object.assign(normalize(response, schema), {target}),
       };
     })
     .catch(validationErrorHandler.bind(null, type, payload))
@@ -158,7 +157,8 @@ function error$(type, payload, error) {
   console.error(error);
   return Observable.of({
     type: `${actionPrefix(type, payload)}_FAILURE`,
-    payload: {
+    payload,
+    error: {
       name: error.name,
       message: error.message,
       stack: error.stack || (new Error()).stack,
@@ -171,7 +171,7 @@ function validationError$(type, payload, error) {
   console.error(error);
   return Observable.of({
     type: `${actionPrefix(type, payload)}_FAILURE`,
-    payload: error.response,
+    payload: error.response
   });
 }
 

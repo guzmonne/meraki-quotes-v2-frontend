@@ -53,6 +53,14 @@ Source https://codepen.io/michelmarrache/pen/bDudG?page=1&
   background-color: rgba(255, 0, 0, 0.836);
 }
 
+.modal.modal-warning > h1 {
+  background-color: rgba(255, 166, 0, 0.836);
+}
+
+.modal.modal-info > h1 {
+  background-color: rgba(0, 132, 255, 0.836);
+}
+
 .modal > .modal-close {
   position: absolute;
   right: 10px;

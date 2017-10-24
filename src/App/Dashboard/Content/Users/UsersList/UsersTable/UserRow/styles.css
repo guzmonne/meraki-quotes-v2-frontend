@@ -1,0 +1,11 @@
+.UserRow .Action {
+  margin: 0 0.25em;
+}
+
+.UserRow .Action:first-of-type {
+  margin-left: 0;
+}
+
+.UserRow .Action:last-of-type {
+  margin-right: 0;
+}
