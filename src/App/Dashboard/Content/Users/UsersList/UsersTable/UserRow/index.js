@@ -27,9 +27,6 @@ const UserRow = ({
     <Td header="Creado">
       <DateFromNow>{createdAt}</DateFromNow>
     </Td>
-    <Td header="Actualizado">
-      <DateFromNow>{updatedAt}</DateFromNow>
-    </Td>
     <Td>
       <Action onClick={displayUpdateModal}>
         <PencilSvg fill="orange"/>

@@ -17,7 +17,6 @@ const UsersTable = ({
         <th>Email</th>
         <th>Verificado</th>
         <th>Creado</th>
-        <th>Actualizado</th>
         <th></th>
       </tr>
     </thead>
