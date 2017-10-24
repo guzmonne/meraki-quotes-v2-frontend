@@ -5,6 +5,7 @@ import get from 'lodash/get'
 import ui from './ui.reducer.js';
 import flags from './flags.reducer.js';
 import {routeReducer} from '../ListeningRouter/';
+import notificationsReducer from './notifications.reducer.js';
 
 const defaultEntitiesState = {
   users: {},
@@ -78,6 +79,7 @@ const rootReducer = combineReducers({
   errorMessage,
   flags,
   location: routeReducer,
+  notifications: notificationsReducer,
 });
 
 export default rootReducer;
