@@ -2,7 +2,7 @@ import get from 'lodash/get';
 import {Observable} from 'rxjs/Observable'
 import {
   ERROR,
-  REDIRECT,
+  RELOAD,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
@@ -10,6 +10,7 @@ import {
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
   LOGOUT_FAILURE,
+  PUSH_NOTIFICATION
 } from '../store/actions';
 
 const API_ROOT = process.env.REACT_APP_API_ROOT;
@@ -35,18 +36,36 @@ const loginRequest$ = ({type, payload}) => (
       payload: {
         isAuthenticated: true,
       }
+    }, {
+      type: PUSH_NOTIFICATION,
+      payload: {
+        message: 'Bienvenido a Conapps',
+        type: 'info',
+      }
     }])
   ))
   .catch(error => {
     if (KNOWN_ERRORS.indexOf(get(error, 'response.name')) > -1)
-      return Observable.of({
+      return Observable.from([{
         type: LOGIN_FAILURE,
         payload: get(error, 'response'),
-      });
-    return Observable.of({
+      }, {
+        type: PUSH_NOTIFICATION,
+        payload: {
+          message: 'Error: Verifique sus credenciales.',
+          type: 'danger',
+        }
+      }]);
+    return Observable.from([{
       type: ERROR,
       payload: error,
-    });
+    }, {
+      type: PUSH_NOTIFICATION,
+      payload: {
+        message: 'Se ha producido un error inesperado.',
+        type: 'danger',
+      }
+    }]);
   })
 );
 
@@ -60,15 +79,20 @@ const logout$ = () => (
     Observable.from([{
       type: LOGOUT_SUCCESS
     }, {
-      type: REDIRECT,
-      payload: '/'
+      type: RELOAD
     }])
   ))
   .catch(error => ( 
-    Observable.of({
+    Observable.from([{
       type: LOGOUT_FAILURE,
       payload: error,
-    })
+    }, {
+      type: PUSH_NOTIFICATION,
+      payload: {
+        message: 'Se ha producido un error al intentar cerrar su sesión.',
+        type: 'danger',
+      }
+    }])
   ))
 );
 

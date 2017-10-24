@@ -142,5 +142,9 @@ export default (state=defaultState, {type, payload}) => {
     window.location.href = payload;
   }
 
+  if (type === ActionTypes.RELOAD) {
+    window.location.reload();
+  }
+
   return Object.assign({}, state);
 }

@@ -1,5 +1,6 @@
 export const ERROR = 'ERROR';
 export const REDIRECT = 'REDIRECT';
+export const RELOAD = 'RELOAD';
 export const RESET_ERROR_MESSAGE = 'RESET_ERROR_MESSAGE';
 
 export const UPDATE_FLAGS = 'UPDATE_FLAGS';
