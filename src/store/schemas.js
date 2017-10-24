@@ -5,3 +5,7 @@ export const user = new schema.Entity('users', {}, {
     btoa(JSON.stringify({email}))
   )
 });
+
+export const permission = new schema.Entity('permissions', {}, {
+  idAttribute: 'permission'
+});

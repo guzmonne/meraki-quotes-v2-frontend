@@ -8,11 +8,15 @@ const defaultState = {
   users: {
     offset: 0,
     page: 10,
+    ids: [],
     form: {
       username: '',
       password: '',
       email: '',
     }
+  },
+  permissions: {
+    ids: [],
   }
 }
 
