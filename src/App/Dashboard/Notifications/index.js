@@ -26,7 +26,7 @@ class Notification extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.static === true) return;
+    if (this.props.fixed === true) return;
     this.fadeOutTimeout = setTimeout(() => (
       this.setState({fadeOut: true})
     ), 3000);

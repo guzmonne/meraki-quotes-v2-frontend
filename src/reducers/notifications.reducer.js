@@ -5,11 +5,12 @@ import * as ActionTypes from '../store/actions.js';
 const notificationsReducer = (state=[], action) => {
   if (action.type === ActionTypes.PUSH_NOTIFICATION) {
     try {
-      const {type, message} = action.payload;
+      const {type, message, id, fixed} = action.payload;
       return [...state, {
-        id: uniqueId('notification'),
+        id: id || uniqueId('notification'),
         type,
-        message
+        message,
+        fixed,
       }];
     } catch (error) {
       console.error(error);
