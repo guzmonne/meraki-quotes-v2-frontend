@@ -1,8 +1,8 @@
 import './styles.css';
 import React from 'react';
 import T from 'prop-types';
-import Modal from '../../../../common/Modal';
-import Button from '../../../../common/Button';
+import Modal from '../../../../../common/Modal';
+import Button from '../../../../../common/Button';
 
 const DestroyModal = ({
   id,

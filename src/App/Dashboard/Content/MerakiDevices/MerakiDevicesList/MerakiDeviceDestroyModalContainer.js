@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import get from 'lodash/get';
-import MerakiDeviceDestroyModal from '../../DestroyModal/';
+import MerakiDeviceDestroyModal from '../../Modals/DestroyModal/';
 import {
   UPDATE_UI,
   API_DESTROY,

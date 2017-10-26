@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import get from 'lodash/get';
-import UserDestroyModal from '../../DestroyModal/';
+import UserDestroyModal from '../../Modals/DestroyModal/';
 import {
   UPDATE_UI,
   API_DESTROY,
