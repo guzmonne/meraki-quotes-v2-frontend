@@ -2,9 +2,7 @@ import React from 'react';
 import T from 'prop-types';
 
 const UserProfile = ({user}) => (
-  <div className="UserProfile">
-    <h2>Perfil</h2>
-    
+  <div className="UserProfile">    
     <dt><b>Usuario:</b></dt>
     <dd>{user.username}</dd>
 

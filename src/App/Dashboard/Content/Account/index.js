@@ -7,7 +7,10 @@ import Card from '../Card/';
 const Account = () => (
   <div className="Account">    
   
-    <Card><UserProfile /></Card>
+    <Card>
+      <h2>Perfil</h2>  
+      <UserProfile />
+    </Card>
   
     <div></div>    
   
