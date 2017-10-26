@@ -32,6 +32,28 @@
   margin-right: -2.5em;
 }
 
+
+.Notification-striped {
+  background: repeating-linear-gradient(
+    -55deg,
+    rgba(255, 255, 255, 0.1) 1px,
+    rgba(255, 255, 255, 0.01) 2px,
+    rgba(255, 255, 255, 0.01) 11px,
+    rgba(255, 255, 255, 0.1) 12px,
+    rgba(255, 255, 255, 0.1) 20px
+	);
+  position: absolute;
+  left: -46px;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+  animation-name: move-stripes;
+	animation-duration: .6s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+}
+
 .Notifications .Notification--default {
   background: #90a4ae;  
 }
@@ -50,4 +72,13 @@
 
 .Notifications .Notification--success {
   background: #00c853;
+}
+
+@keyframes move-stripes {
+	from {
+		transform: translateX(0);
+	}
+	to { 
+		transform: translateX(46px);
+	}
 }

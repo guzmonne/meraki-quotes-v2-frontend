@@ -46,13 +46,14 @@ class Notification extends React.Component {
 
   render() {
     const {fadeOut} = this.state;
-    const {type, message} = this.props;
+    const {type, message, fixed} = this.props;
     const Icon = ICONS[type];
     return (
       <Animate animation={fadeOut === true ? 'fadeOutUp' : 'fadeInDown'}>
         <div onClick={this.close} className={classnames('Notification', {
           [`Notification--${type}`]: TYPES.indexOf(type) > -1,
         })}>
+        {fixed && <div className="Notification-striped"></div>}
           <div className="Notification-content">
           {Icon && <Icon type={type} fill={'white'} size={1.5}/>}
             <span>{message}</span>
