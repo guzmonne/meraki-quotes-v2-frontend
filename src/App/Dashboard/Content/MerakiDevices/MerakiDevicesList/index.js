@@ -11,13 +11,13 @@ import Pagination from '../../../../../common/Pagination/';
 
 class MerakiDevicesList extends React.Component {
   componentWillMount() {
-    this.props.fetchMerakiDevices(this.props.page);
+    this.props.fetch(this.props.page);
   }
 
   render() {
     const {
       fetching,
-      numberOfDevices,
+      count,
       offset,
       page,
       paginate,
@@ -32,10 +32,10 @@ class MerakiDevicesList extends React.Component {
       <Card className="MerakiDevicesList">
         <h1>Lista de Equipos de Meraki</h1>
         <MerakiDevicesTable />
-      {fetching && numberOfDevices === 0 &&
+      {fetching && count === 0 &&
         <Spinner color="black" size="xl"/>
       }
-      {!fetching && numberOfDevices === 0 &&
+      {!fetching && count === 0 &&
         <p>No se han encontrado equipos.</p>
       }
 
@@ -52,7 +52,7 @@ class MerakiDevicesList extends React.Component {
       }
         <Pagination 
           disabledPrev={offset === 0}
-          disabledNext={numberOfDevices <= page * (offset + 1)}
+          disabledNext={count <= page * (offset + 1)}
           onPrev={() => paginate(offset - 1, page, prevItemKey)}
           onNext={() => paginate(offset + 1, page, nextItemKey)}          
         />
@@ -62,9 +62,9 @@ class MerakiDevicesList extends React.Component {
 }
 
 MerakiDevicesList.propTypes = {
-  fetchMerakiDevices: T.func.isRequired,
+  fetch: T.func.isRequired,
   fetching: T.bool,
-  numberOfDevices: T.number,
+  count: T.number,
   offset: T.number,
   page: T.number,
   paginate: T.func,
