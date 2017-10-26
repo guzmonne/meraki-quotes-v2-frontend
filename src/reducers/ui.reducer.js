@@ -32,7 +32,7 @@ const defaultState = {
       PartNumber: '',
       Description: '',
       ImageUrl: '',
-      Price: '',
+      Price: 0,
     }
   }
 }
