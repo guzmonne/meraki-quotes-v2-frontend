@@ -40,6 +40,15 @@ class Notification extends React.Component {
     window.clearTimeout(this.closeTimeout);
   }
 
+  componentWillReceiveProps(newProps) {
+    if (newProps.fadeOut === true && this.props.fixed === true) {
+      this.setState({fadeOut: true});
+      this.closeTimeout = setTimeout(() => (
+        this.close()
+      ), 1000);
+    }
+  }
+
   close = (e) => {
     this.props.onClose && this.props.onClose(this.props.id);
   }

@@ -22,11 +22,34 @@ const notificationsReducer = (state=[], action) => {
     try {
       const index = findIndex(state, n => n.id === action.payload);
 
-      if (index === undefined || index < -1)
+      if (index === undefined || index < 0)
         return state.slice(0, state.length - 1);
 
       return [
         ...state.slice(0, index),
+        ...state.slice(index + 1, state.length)
+      ];
+    } catch (error) {
+      console.error(error);
+      return state;
+    }
+  }
+
+  if (action.type === ActionTypes.FADE_OUT_NOTIFICATION) {
+    try {
+      const index = findIndex(state, n => n.id === action.payload);
+
+      if (index === undefined || index < 0)
+        return state.slice(0, state.length - 1);
+
+      const fadeOutNotification = {
+        ...state[index],
+        fadeOut: true,
+      };
+
+      return [
+        ...state.slice(0, index),
+        fadeOutNotification,
         ...state.slice(index + 1, state.length)
       ];
     } catch (error) {
