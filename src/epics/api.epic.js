@@ -11,7 +11,6 @@ import {
   API_UPDATE,
   API_DESTROY,
   PUSH_NOTIFICATION,
-  FADE_OUT_NOTIFICATION,
 } from '../store/actions';
 
 const API_ROOT = process.env.REACT_APP_API_ROOT;
@@ -25,7 +24,7 @@ export default (action$, store) => (
     API_UPDATE,
     API_DESTROY
   )
-  .debounceTime(300)
+  .throttleTime(200)
   .switchMap(({type, payload}) => {
     let request$
 
@@ -90,34 +89,11 @@ function get$(type, payload) {
   const request$ = (
     Observable.ajax.get(`${API_ROOT}${endpoint}`, headers())
     .concatMap(({response}) => Observable.from([{
-      type: FADE_OUT_NOTIFICATION,
-      payload: lastIndexNotificationId,
-    }, {
       type: `${actionPrefix(type, payload)}_SUCCESS`,
       payload: Object.assign(normalize(response, schema), {target}),
     }]))
     .catch(validationErrorHandler.bind(null, type, payload))
   );
-
-  if (type === API_INDEX) {
-    const id = uniqueId('epic-notification');
-    const notifications$ = Observable.from([{
-      type: FADE_OUT_NOTIFICATION,
-      payload: lastIndexNotificationId,
-    }, {
-      type: PUSH_NOTIFICATION,
-      payload: {
-        type: 'info',
-        message: 'Sincronizando...',
-        id,
-        fixed: true,
-      }
-    }]);
-
-    lastIndexNotificationId = id;
-
-    return Observable.concat(notifications$, request$);
-  }
 
   return request$;
 }
