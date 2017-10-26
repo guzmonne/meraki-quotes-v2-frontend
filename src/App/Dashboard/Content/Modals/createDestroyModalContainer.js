@@ -19,13 +19,14 @@ const mapStateToPropsConstructor = ({
   message: okMessage,
 });
 
-const closeModal = ({
+const closeModalConstructor = ({
   modalFlagName,
   updateUiPayload,
+  target
 }) => () => ({
   type: UPDATE_UI,
   payload: {
-    merakiDevices: {
+    [target]: {
       [modalFlagName]: false,
       ...updateUiPayload,
     }
@@ -37,23 +38,28 @@ const mapActionsToPropsConstructor = ({
   target,
   modalFlagName,
   updateUiPayload,
-}) => ({
-  closeModal: closeModal({
+}) => {
+  const closeModal = closeModalConstructor({
     modalFlagName,
     updateUiPayload,
-  }),
-  onDestroy: (id) => ({
-    type: DISPATCH_MULTIPLE_ACTIONS,
-    payload: [{
-      type: API_DESTROY,
-      payload: {
-        endpoint,
-        target,
-        id: id,
-      },
-    }, closeModal()]
-  })
-});
+    target,
+  });
+
+  return {
+    closeModal,
+    onDestroy: (id) => ({
+      type: DISPATCH_MULTIPLE_ACTIONS,
+      payload: [{
+        type: API_DESTROY,
+        payload: {
+          endpoint,
+          target,
+          id,
+        },
+      }, closeModal()]
+    })
+  };
+};
 
 
 const createDestroyModalContainer = ({
