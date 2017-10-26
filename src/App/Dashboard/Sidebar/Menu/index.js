@@ -9,13 +9,13 @@ const menu = [{
   path: '/'
 }, {
   label: 'Quotes',
-  path: '/quotes',
+  path: '/merakiQuotes',
   items: [{
     label: 'Nuevo',
-    path: '/quotes/new',
+    path: '/merakiQuotes/new',
   }, {
     label: 'Compartidos',
-    path: '/quotes/shared',
+    path: '/merakiQuotes/shared',
   }]
 }, {
   label: 'Equipos',

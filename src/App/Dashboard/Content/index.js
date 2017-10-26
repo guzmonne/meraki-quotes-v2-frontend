@@ -19,7 +19,7 @@ const Content = ({isAuthenticated}) => (
       <Route exact path="/" component={Welcome}/>
       <Route path="/users" component={Users}/>
       <Route path="/account" component={Account}/>        
-      <Route path="/merakiDevices" component={MerakiDevices}/>        
+      <Route path="/merakiDevices" component={MerakiDevices}/>    
       <Route component={NotFound}/>
     </Switch>
   :

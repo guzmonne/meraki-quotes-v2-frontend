@@ -23,6 +23,24 @@ const defaultState = {
       url: '',
     }
   },
+  merakiQuotes: {
+    offset: 0,
+    page: 15,
+    ids: [],
+    form: {
+      AdminMargin: 0.3,
+      DealApproved: false,
+      Description: '',
+      Discount: 0.35,
+      HardwareMargin: 0.2,
+      LicenseYears: 3,
+      Name: '',
+      ServiceLevel: '9x5xNBD',
+      ServiceMargin: 0.3,
+      SoftwareMargin: 0.2,
+      Devices: [],
+    }
+  },
   merakiDevices: {
     offset: 0,
     page: 15,
