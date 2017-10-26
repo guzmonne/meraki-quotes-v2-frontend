@@ -5,7 +5,7 @@ import MerakiDeviceRow from './MerakiDeviceRow/';
 import Table from '../../../../../../common/Table/';
 
 const MerakiDevicesTable = ({
-  merakiDevices,
+  items,
   displayDestroyModal,
   displayShowModal,
   displayUpdateModal
@@ -22,7 +22,7 @@ const MerakiDevicesTable = ({
       </tr>
     </thead>
     <tbody>
-    {merakiDevices.map((device, i) => 
+    {items.map((device, i) => 
       <MerakiDeviceRow key={device.ID} 
         displayShowModal={displayShowModal.bind(null, device)} 
         displayUpdateModal={displayUpdateModal.bind(null, device)} 
@@ -35,14 +35,14 @@ const MerakiDevicesTable = ({
 );
 
 MerakiDevicesTable.propTypes = {
-  merakiDevices: T.arrayOf(T.shape(IMerakiDevice)),
+  items: T.arrayOf(T.shape(IMerakiDevice)),
   displayDestroyModal: T.func,
   displayShowModal: T.func,
   displayUpdateModal: T.func,
 };
 
 MerakiDevicesTable.defaultProps = {
-  merakiDevices: [],
+  items: [],
 };
 
 export default MerakiDevicesTable;

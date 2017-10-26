@@ -1,6 +1,6 @@
 import UsersList from './UsersList/';
 import {user} from '../../../../store/schemas.js';
-import createListContainer from '../Pages/createListContainer.js';
+import createListContainer from '../HoC/createListContainer.js';
 
 const UsersListContainer = createListContainer({
   target: 'users',

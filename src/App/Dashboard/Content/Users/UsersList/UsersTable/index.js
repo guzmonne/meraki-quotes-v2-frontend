@@ -5,7 +5,7 @@ import UserRow from './UserRow/';
 import Table from '../../../../../../common/Table/';
 
 const UsersTable = ({
-  users,
+  items,
   displayDestroyModal,
   displayShowModal,
   displayUpdateModal
@@ -21,7 +21,7 @@ const UsersTable = ({
       </tr>
     </thead>
     <tbody>
-    {users.map((user, i) => 
+    {items.map((user, i) => 
       <UserRow key={i}
         displayDestroyModal={displayDestroyModal.bind(null, user)}  
         displayShowModal={displayShowModal.bind(null, user)}  
@@ -34,13 +34,13 @@ const UsersTable = ({
 );
 
 UsersTable.propTypes = {
-  users: T.arrayOf(T.shape(IUser)),
+  items: T.arrayOf(T.shape(IUser)),
   displayDestroyModal: T.func,
   displayShowModal: T.func,
 };
 
 UsersTable.defaultProps = {
-  users: [],
+  items: [],
 };
 
 export default UsersTable;
