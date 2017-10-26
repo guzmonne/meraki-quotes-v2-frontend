@@ -1,11 +1,39 @@
+import React from 'react';
+import T from 'prop-types';
 import {connect} from 'react-redux';
 import get from 'lodash/get';
-import UserUpdateModal from './UserUpdateModal/';
+import UpdateModal from '../../Modals/UpdateModal/';
 import {
   UPDATE_UI,
   API_UPDATE,
   DISPATCH_MULTIPLE_ACTIONS,
 } from '../../../../../store/actions.js';
+import UserForm from '../UserForm/';
+import {IUser} from '../IUsers';
+
+const UserUpdateModal = ({user, closeModal, updateUser}) => (
+  <UpdateModal title={`Editando: ${user.username}`}
+    type="warning"
+    closeModal={closeModal}>
+    <div className="UserShowModal">
+      <UserForm user={user}
+        color="orange"
+        fieldsDisabled={{
+          email: true,
+          password: true,
+        }}
+        onSubmit={({username, email}) => {
+          updateUser(btoa(JSON.stringify({email})), {username})
+        }}/>
+    </div>
+  </UpdateModal>
+);
+
+UserUpdateModal.propTypes = {
+  user: T.shape(IUser),
+  closeModal: T.func.isRequired,
+  updateUser: T.func,
+};
 
 const mapStateToProps = (state) => {
   const key = get(state, 'ui.users.userSelectedToUpdateKey');
