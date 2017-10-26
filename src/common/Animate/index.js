@@ -10,7 +10,7 @@ const Animate = ({animation, children}) => (
 );
 
 Animate.propTypes = {
-  animation: T.oneOf(['fadeInDown', 'fadeOutUp']),
+  animation: T.oneOf(['fadeInDown', 'fadeOutUp', 'spin']),
   children: T.node,
 };
 

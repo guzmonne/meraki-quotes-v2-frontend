@@ -4,6 +4,7 @@ import T from 'prop-types';
 import Spinner from '../../../../common/Spinner/';
 import UserSvg from '../../../../common/Icons/UserSvg.js';
 import TimesSvg from '../../../../common/Icons/TimesSvg.js';
+import SpinnerThirdSvg from '../../../../common/Icons/SpinnerThirdSvg.js';
 
 class UserInfo extends React.Component {
   state = {
@@ -11,20 +12,33 @@ class UserInfo extends React.Component {
   }
 
   handleMouseEnter = (e) => (
-    this.props.isAuthenticated && this.setState({content: 'Cerrar Sesión'})
+    this.props.isAuthenticated && this.setState({
+      content: 'Cerrar Sesión',
+      hover: true,
+    })
   )
 
   handleMouseLeave = (e) => (
-    this.props.isAuthenticated && this.setState({content: ''})
+    this.props.isAuthenticated && this.setState({
+      content: '',
+      hover: false,
+    })
   )
     
   render() {
-    const {isAuthenticated, username, onClick, isLoggingOut} = this.props;
+    let {content, hover} = this.state;
+    const {
+      isSyncing,
+      isLoggingOut,
+      isAuthenticated,
+      username,
+      onClick,
+    } = this.props;
     const Icon = (this.state.content === '' && !isLoggingOut === true) 
       ? <UserSvg fill="green" size="1" /> 
       : <TimesSvg fill={isLoggingOut ? 'grey' : 'red'} size="1" />;
     
-    let content = this.state.content || username
+    content = content || username
 
     if (isLoggingOut === true)
       content = <Spinner color="grey" />
@@ -34,11 +48,19 @@ class UserInfo extends React.Component {
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}>
       {isAuthenticated === true
-        ?
-        <span className="content" onClick={onClick}>
-          {Icon}
-          <span>{content}</span>
-        </span>
+        ? isSyncing 
+          ?
+          <span className="content" onClick={onClick}>
+            <SpinnerThirdSvg fill={hover ? 'red' : '#1976D2'} size="1" spin />
+            <span style={{color: hover ? 'inherit' : '#1976D2'}}>
+              {hover ? content : 'Sincronizando'}
+            </span>
+          </span>
+          :
+          <span className="content" onClick={onClick}>
+            {Icon}
+            <span>{content}</span>
+          </span>
         :
         <span className="content">
           <UserSvg fill="red" size="1" />
