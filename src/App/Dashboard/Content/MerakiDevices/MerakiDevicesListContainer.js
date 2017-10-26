@@ -30,6 +30,7 @@ const mapStateToProps = (state) => {
     prevItemKey,
     numberOfDevices: get(state, 'ui.merakiDevices.ids', []).length,    
     fetching: get(state, 'flags.merakidevicesApiIndex'),
+    displayingShowModal: get(state, 'ui.merakiDevices.displayingShowModal'),
   }
 };
 

@@ -3,6 +3,7 @@ import React from 'react';
 import T from 'prop-types';
 import Card from '../../Card/';
 import MerakiDevicesTable from './MerakiDevicesTableContainer.js';
+import MerakiDeviceShowModal from './MerakiDeviceShowModalContainer.js';
 import Spinner from '../../../../../common/Spinner/';
 import Pagination from '../../../../../common/Pagination/';
 
@@ -20,6 +21,7 @@ class MerakiDevicesList extends React.Component {
       paginate,
       prevItemKey,
       nextItemKey,
+      displayingShowModal,
     } = this.props;
 
     return (
@@ -31,6 +33,9 @@ class MerakiDevicesList extends React.Component {
       }
       {!fetching && numberOfDevices === 0 &&
         <p>No se han encontrado equipos.</p>
+      }
+      {displayingShowModal &&
+        <MerakiDeviceShowModal />
       }
         <Pagination 
           disabledPrev={offset === 0}
@@ -53,6 +58,7 @@ MerakiDevicesList.propTypes = {
   nextItemKey: T.string,
   prevItemKey: T.string,
   displayingDestroyModal: T.bool,
+  displayingShowModal: T.bool,
 }
 
 export default MerakiDevicesList;
@@ -61,9 +67,7 @@ export default MerakiDevicesList;
 {displayingDestroyModal &&
   <UserDestroyModal />
 }
-{displayingShowModal &&
-  <UserShowModal />
-}
+
 {displayingUpdateModal &&
   <UserUpdateModal />
 }

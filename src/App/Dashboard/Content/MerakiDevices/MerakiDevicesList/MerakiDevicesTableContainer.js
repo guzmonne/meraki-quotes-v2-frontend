@@ -3,7 +3,9 @@ import get from 'lodash/get';
 import MerakiDevicesTable from './MerakiDevicesTable/';
 import {UPDATE_UI} from '../../../../../store/actions.js';
 
-const encodeKey = (key) => btoa(JSON.stringify(key));
+const encodeKey = ({Category, PartNumber}) => (
+  btoa(JSON.stringify({Category, PartNumber}))
+);
 
 const mapStateToProps = (state) => {
   const offset = get(state, 'ui.merakiDevices.offset');
@@ -22,30 +24,30 @@ const mapStateToProps = (state) => {
 };
 
 const mapActionsToProps = {
-  displayDestroyModal: ({CreatedAt, PartNumber}) => ({
+  displayDestroyModal: (device) => ({
     type: UPDATE_UI,
     payload: {
       merakiDevices: {
         displayingDestroyModal: true,
-        merakiDeviceSelectedToDestroy: encodeKey({CreatedAt, PartNumber}),
+        merakiDeviceSelectedToDestroy: encodeKey(device),
       }
     }
   }),
-  displayShowModal: ({CreatedAt, PartNumber}) => ({
+  displayShowModal: (device) => ({
     type: UPDATE_UI,
     payload: {
       merakiDevices: {
         displayingShowModal: true,
-        merakiDeviceSelectedToShowKey: encodeKey({CreatedAt, PartNumber}),
+        merakiDeviceSelectedToShowKey: encodeKey(device),
       }
     }
   }),
-  displayUpdateModal: ({CreatedAt, PartNumber}) => ({
+  displayUpdateModal: (device) => ({
     type: UPDATE_UI,
     payload: {
       merakiDevices: {
         displayingUpdateModal: true,
-        merakiDeviceSelectedToUpdateKey: encodeKey({CreatedAt, PartNumber}),
+        merakiDeviceSelectedToUpdateKey: encodeKey(device),
       }
     }
   })

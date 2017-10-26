@@ -11,10 +11,13 @@ const MerakiDeviceRow = ({
   Description,
   PartNumber,
   Price,
-  ImageUrl
+  ImageUrl,
+  displayShowModal
 }) => (
   <tr className="MerakiDeviceRow">
-    <Td header="Número de Parte">{PartNumber}</Td>
+    <Td header="Número de Parte">
+      <a onClick={displayShowModal}>{PartNumber}</a>
+    </Td>
     <Td header="Categoría">{Category}</Td>    
     <Td header="Descripción">{Description}</Td>
     <Td header="Creado"><DateFromNow>{createdAt}</DateFromNow></Td>

@@ -22,7 +22,7 @@ Source https://codepen.io/michelmarrache/pen/bDudG?page=1&
   position: relative;
   display: inline-block;
   vertical-align: middle;
-  width: 50%;
+  min-width: 50%;
   margin: 0 auto;
   padding: 10px;
   

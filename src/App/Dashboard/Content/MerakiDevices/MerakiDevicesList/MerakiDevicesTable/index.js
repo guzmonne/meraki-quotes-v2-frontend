@@ -22,7 +22,10 @@ const MerakiDevicesTable = ({
     </thead>
     <tbody>
     {merakiDevices.map((device, i) => 
-      <MerakiDeviceRow key={device.ID} {...device} />
+      <MerakiDeviceRow key={device.ID} 
+        displayShowModal={displayShowModal.bind(null, device)}  
+        {...device} 
+      />
     )}
     </tbody>
   </Table>  
