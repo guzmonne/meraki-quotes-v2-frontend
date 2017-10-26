@@ -4,6 +4,8 @@ import T from 'prop-types';
 import Card from '../../Card/';
 import MerakiDevicesTable from './MerakiDevicesTableContainer.js';
 import MerakiDeviceShowModal from './MerakiDeviceShowModalContainer.js';
+import MerakiDeviceUpdateModal from './MerakiDeviceUpdateModalContainer.js';
+import MerakiDeviceDestroyModal from './MerakiDeviceDestroyModalContainer.js';
 import Spinner from '../../../../../common/Spinner/';
 import Pagination from '../../../../../common/Pagination/';
 
@@ -22,6 +24,8 @@ class MerakiDevicesList extends React.Component {
       prevItemKey,
       nextItemKey,
       displayingShowModal,
+      displayingDestroyModal,
+      displayingUpdateModal,
     } = this.props;
 
     return (
@@ -34,6 +38,15 @@ class MerakiDevicesList extends React.Component {
       {!fetching && numberOfDevices === 0 &&
         <p>No se han encontrado equipos.</p>
       }
+
+      {displayingDestroyModal &&
+        <MerakiDeviceDestroyModal />
+      }
+      
+      {displayingUpdateModal &&
+        <MerakiDeviceUpdateModal />
+      }
+
       {displayingShowModal &&
         <MerakiDeviceShowModal />
       }
@@ -59,16 +72,7 @@ MerakiDevicesList.propTypes = {
   prevItemKey: T.string,
   displayingDestroyModal: T.bool,
   displayingShowModal: T.bool,
+  displayingUpdateModal: T.bool,
 }
 
 export default MerakiDevicesList;
-
-/**
-{displayingDestroyModal &&
-  <UserDestroyModal />
-}
-
-{displayingUpdateModal &&
-  <UserUpdateModal />
-}
- */

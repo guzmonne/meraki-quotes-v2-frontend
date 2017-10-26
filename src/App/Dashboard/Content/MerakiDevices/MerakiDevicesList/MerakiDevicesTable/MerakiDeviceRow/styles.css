@@ -10,3 +10,15 @@
   text-align: center;
   display:block;
 }
+
+.MerakiDeviceRow .Action {
+  margin: 0 0.25em;
+}
+
+.MerakiDeviceRow .Action:first-of-type {
+  margin-left: 0;
+}
+
+.MerakiDeviceRow .Action:last-of-type {
+  margin-right: 0;
+}

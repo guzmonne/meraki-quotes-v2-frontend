@@ -1,0 +1,15 @@
+.MerakiDeviceDestroyModal {
+  padding: 1em 0 0 0;
+}
+
+.MerakiDeviceDestroyModal .button-bar {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 1em;
+  padding: 1em;
+}
+
+.MerakiDeviceDestroyModal .button-bar .btn {
+  margin: 0;
+}

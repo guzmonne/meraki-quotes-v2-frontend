@@ -22,8 +22,6 @@ const notificationsReducer = (state=[], action) => {
     try {
       const index = findIndex(state, n => n.id === action.payload);
 
-      console.log(index);
-      
       if (index === undefined || index < -1)
         return state.slice(0, state.length - 1);
 

@@ -228,12 +228,12 @@ function validationError$(type, payload, error) {
   console.error(error);
   return Observable.from([{
     type: `${actionPrefix(type, payload)}_FAILURE`,
-    payload: error.response
+    payload: Object.assign({}, error.response, payload)
   }, {
     type: PUSH_NOTIFICATION,
     payload: {
       type: 'danger',
-      message: 'Error de validación. Verificque sus datos.'
+      message: 'Error de validación. Verifique sus datos.'
     }
   }]);
 }

@@ -3,19 +3,11 @@ import React from 'react';
 import T from 'prop-types';
 import Card from '../../Card/';
 import MerakiDeviceForm from '../MerakiDeviceForm/';
-import {IMerakiDevice} from '../IMerakiDevices.js';
-
-const empty = {
-  Category: '',
-  PartNumber: '',
-  Description: '',
-  ImageUrl: '',
-  Price: 0,
-};
+import {IMerakiDevice, empty} from '../IMerakiDevices.js';
 
 class MerakiDeviceCreate extends React.Component {
   componentWillMount() {
-    this.props.setForm({...empty});
+    this.props.setForm(empty());
   }
 
   render() {
@@ -26,7 +18,7 @@ class MerakiDeviceCreate extends React.Component {
         <h1>Crear Nuevo Usuario</h1>
         <MerakiDeviceForm 
           merakiDevice={merakiDevice}
-          onSubmit={(body) => createMerakiDevice(body, {...empty})}
+          onSubmit={(body) => createMerakiDevice(body, empty())}
           error={error}
           loading={creating}
         />

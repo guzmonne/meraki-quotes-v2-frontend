@@ -6,6 +6,14 @@ export const IMerakiDevice = {
   Description: T.string,
   ID: T.string,
   PartNumber: T.string,
-  Price: T.number,
+  Price: T.oneOfType([T.number, T.string]),
   ImageUrl: T.string,
 };
+
+export const empty = () => ({
+  Category: '',
+  PartNumber: '',
+  Description: '',
+  ImageUrl: '',
+  Price: 0,
+});
