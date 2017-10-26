@@ -2,10 +2,10 @@ import {connect} from 'react-redux';
 import get from 'lodash/get';
 import DestroyModal from './DestroyModal/';
 import {
-  UPDATE_UI,
   API_DESTROY,
   DISPATCH_MULTIPLE_ACTIONS
 } from '../../../../store/actions.js';
+import {closeModalConstructor} from './helpers.js';
 
 const mapStateToPropsConstructor = ({
   uiIdPath,
@@ -18,20 +18,6 @@ const mapStateToPropsConstructor = ({
   title: modalTitle,
   message: okMessage,
 });
-
-const closeModalConstructor = ({
-  modalFlagName,
-  updateUiPayload,
-  target
-}) => () => ({
-  type: UPDATE_UI,
-  payload: {
-    [target]: {
-      [modalFlagName]: false,
-      ...updateUiPayload,
-    }
-  }
-})
 
 const mapActionsToPropsConstructor = ({
   endpoint,

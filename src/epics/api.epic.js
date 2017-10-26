@@ -1,5 +1,4 @@
 import get from 'lodash/get';
-import uniqueId from 'lodash/uniqueId';
 import {normalize} from 'normalizr';
 import {Observable} from 'rxjs/Observable'
 import {
@@ -80,8 +79,6 @@ function loading$ (type, payload) {
     payload
   })
 }
-
-var lastIndexNotificationId = uniqueId('epic-notification');
 
 function get$(type, payload) {
   const {endpoint, schema, target} = payload

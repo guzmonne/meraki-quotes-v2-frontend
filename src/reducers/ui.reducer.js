@@ -200,7 +200,7 @@ function url_base64_decode(str) {
       output += '=';
       break;
     default:
-      throw 'Illegal base64url string!';
+      return '';
   }
   var result = window.atob(output); //polifyll https://github.com/davidchambers/Base64.js
   try{
