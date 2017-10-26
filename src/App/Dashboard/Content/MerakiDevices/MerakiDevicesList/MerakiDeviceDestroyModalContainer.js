@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import get from 'lodash/get';
-import MerakiDeviceDestroyModal from './MerakiDeviceDestroyModal/';
+import MerakiDeviceDestroyModal from '../../DestroyModal/';
 import {
   UPDATE_UI,
   API_DESTROY,
@@ -11,6 +11,8 @@ const mapStateToProps = (state) => ({
   id: (
     get(state, 'ui.merakiDevices.merakiDeviceSelectedToDestroy')
   ),
+  title: 'Eliminar equipo',
+  message: '¿Esta seguro que desea eliminar este equipo?',
 });
 
 const closeModal = () => ({
@@ -25,15 +27,7 @@ const closeModal = () => ({
 
 const mapActionsToProps = {
   closeModal,
-  resetForm: (form) => ({
-    type: UPDATE_UI,
-    payload: {
-      permissions: {
-        form,
-      }
-    }
-  }),
-  destroyMerakiDevice: (id) => ({
+  onDestroy: (id) => ({
     type: DISPATCH_MULTIPLE_ACTIONS,
     payload: [{
       type: API_DESTROY,
