@@ -24,7 +24,7 @@ export default (action$, store) => (
     API_DESTROY
   )
   .throttleTime(200)
-  .switchMap(({type, payload}) => {
+  .mergeMap(({type, payload}) => {
     let request$
 
     switch (type) {

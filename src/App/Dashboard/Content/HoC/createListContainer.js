@@ -7,6 +7,8 @@ import {
 } from '../../../../store/actions.js';
 
 function paginationKeys(offset, page, ids) {
+  page *= 3;
+
   let prevItemKey = (
     (offset - 1) * page <= 0 ? ids[0] : ids[(offset - 1) * page]
   );
