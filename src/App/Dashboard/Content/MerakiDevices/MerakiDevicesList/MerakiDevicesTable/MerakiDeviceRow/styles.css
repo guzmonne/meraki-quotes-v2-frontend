@@ -1,0 +1,12 @@
+.table > tbody > tr.MerakiDeviceRow > td {
+  height: 100%;
+  vertical-align: middle;
+}
+
+.MerakiDeviceRow img {
+  max-width: 9em;
+  max-height: 4em;
+  margin: 0 auto;
+  text-align: center;
+  display:block;
+}

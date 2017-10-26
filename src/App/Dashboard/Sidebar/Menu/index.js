@@ -19,10 +19,10 @@ const menu = [{
   }]
 }, {
   label: 'Equipos',
-  path: '/devices',
+  path: '/merakiDevices',
   items: [{
     label: 'Nuevo',
-    path: '/devices/new',
+    path: '/merakiDevices/new',
   }]
 }, {
   label: 'Usuarios',

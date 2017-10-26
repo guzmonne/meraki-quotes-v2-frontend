@@ -5,6 +5,7 @@ import {Route, Switch} from '../../../ListeningRouter/';
 import Login from './LoginContainer.js';
 import Users from './Users/';
 import Account from './Account/';
+import MerakiDevices from './MerakiDevices/';
 
 const Welcome = () => <h1>Welcome!</h1>
 
@@ -18,6 +19,7 @@ const Content = ({isAuthenticated}) => (
       <Route exact path="/" component={Welcome}/>
       <Route path="/users" component={Users}/>
       <Route path="/account" component={Account}/>        
+      <Route path="/merakiDevices" component={MerakiDevices}/>        
       <Route component={NotFound}/>
     </Switch>
   :

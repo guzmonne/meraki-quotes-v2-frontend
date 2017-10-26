@@ -22,6 +22,18 @@ const defaultState = {
       method: '',
       url: '',
     }
+  },
+  merakiDevices: {
+    offset: 0,
+    page: 15,
+    ids: [],
+    form: {
+      Category: '',
+      PartNumber: '',
+      Description: '',
+      ImageUrl: '',
+      Price: '',
+    }
   }
 }
 

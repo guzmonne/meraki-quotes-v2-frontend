@@ -9,8 +9,8 @@ const Table = ({children}) => (
   </div> 
 );
 
-export const Td = ({header, children}) => (
-  <td data-title={header}>{children}</td>
+export const Td = ({className, header, children}) => (
+  <td data-title={header} className={className}>{children}</td>
 )
 
 export default Table;
