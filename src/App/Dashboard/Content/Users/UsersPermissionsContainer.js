@@ -4,6 +4,7 @@ import UsersPermissions from './UsersPermissions/';
 import {permission} from '../../../../store/schemas.js';
 import {
   API_INDEX,
+  UPDATE_UI,
 } from '../../../../store/actions.js';
 
 const mapStateToProps = (state) => {
@@ -13,6 +14,7 @@ const mapStateToProps = (state) => {
   
   return {
     permissions: permissionsList,
+    displayingCreateModal: get(state, 'ui.permissions.displayingCreateModal'),
   }
 };
 
@@ -24,6 +26,14 @@ const mapActionsToProps = {
       schema: [permission],
       target: 'permissions',
     },
+  }),
+  displayCreateModal: () => ({
+    type: UPDATE_UI,
+    payload: {
+      permissions: {
+        displayingCreateModal: true,
+      }
+    }
   })
 };
 

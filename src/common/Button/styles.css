@@ -16,19 +16,19 @@
 }
 
 .btn.btn-red {
-  background-color: rgba(200, 0, 0, 0.8);
+  background-color: #FF5252;
 }
 
 .btn.btn-red:hover, .btn.btn-red:focus {
-  background-color: rgba(200, 0, 0, 1);
+  background-color: rgb(250, 49, 49);
 }
 
 .btn.btn-orange {
-  background-color: rgb(209, 136, 0);
+  background-color: #FF9800;
 }
 
 .btn.btn-orange:hover, .btn.btn-orange:focus {
-  background-color: rgba(192, 122, 0, 0.836);
+  background-color: rgb(230, 135, 2);
 }
 
 .btn.btn-grey {
@@ -37,6 +37,14 @@
 
 .btn.btn-grey:hover, .btn.btn-grey:focus {
   background-color: rgba(105, 106, 116, 1);
+}
+
+.btn.btn-green {
+  background-color: #4CAF50;
+}
+
+.btn.btn-green:hover, .btn.btn-green:focus {
+  background-color: rgb(54, 155, 57);
 }
 
 .btn:disabled {

@@ -4,18 +4,22 @@ import T from 'prop-types';
 import classnames from 'classnames';
 import Spinner from '../Spinner/';
 
-const COLORS = ['red', 'grey', 'orange'];
+const COLORS = ['red', 'grey', 'orange', 'green'];
+
+const className = (color) => (
+  classnames('btn', {
+    [`btn-${color}`]: COLORS.indexOf(color) > -1,
+  })
+)
 
 const Button = ({loading, children, color, ...props}) => (
   loading === true
   ? 
-  <button className="btn" disabled>
+  <button className={className(color)} disabled>
     <span><Spinner /></span>
   </button>
   : 
-  <button className={classnames('btn', {
-    [`btn-${color}`]: COLORS.indexOf(color) > -1,
-  })} {...props}>
+  <button className={className(color)} {...props}>
     <span>{children}</span>
   </button>
 );

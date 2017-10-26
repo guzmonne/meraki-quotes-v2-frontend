@@ -1,3 +1,7 @@
 .UsersPermissions {
   width: 100%;
 }
+
+.UsersPermissions .btn {
+  margin: 1em 0;
+}

@@ -50,15 +50,19 @@ Source https://codepen.io/michelmarrache/pen/bDudG?page=1&
 }
 
 .modal.modal-danger > h1 {
-  background-color: rgba(255, 0, 0, 0.836);
+  background-color: #FF5252;
 }
 
 .modal.modal-warning > h1 {
-  background-color: rgba(255, 166, 0, 0.836);
+  background-color: #FF9800;
 }
 
 .modal.modal-info > h1 {
-  background-color: rgba(0, 132, 255, 0.836);
+  background-color: #2196F3;
+}
+
+.modal.modal-success > h1 {
+  background-color: #4CAF50;
 }
 
 .modal > .modal-close {

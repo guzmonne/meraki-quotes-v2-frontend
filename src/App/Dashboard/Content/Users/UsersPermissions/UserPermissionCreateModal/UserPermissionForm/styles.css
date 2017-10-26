@@ -1,0 +1,12 @@
+.UserPermissionForm {
+  padding: 1em;
+}
+
+.UserPermissionForm .ControlInput {
+  margin-top: 3em;
+}
+
+.UserPermissionForm .btn {
+  margin: 0 auto;
+  margin-top: 2em;
+}

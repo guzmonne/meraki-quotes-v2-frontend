@@ -25,6 +25,14 @@ const closeModal = () => ({
 
 const mapActionsToProps = {
   closeModal,
+  resetForm: (form) => ({
+    type: UPDATE_UI,
+    payload: {
+      permissions: {
+        form,
+      }
+    }
+  }),
   destroyUser: (id) => ({
     type: DISPATCH_MULTIPLE_ACTIONS,
     payload: [{

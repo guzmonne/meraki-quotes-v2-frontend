@@ -21,7 +21,7 @@ const UsersPermissionsTable = ({permissions}) => (
     </thead>
     <tbody>
     {permissions.map(p => (
-      <tr>
+      <tr key={p.permission}>
         <Td header="Nombre">{p.permission}</Td>
         <Td header="Metodo">
           <Label type={METHOD_TO_TYPE[p.method]}>{p.method}</Label>

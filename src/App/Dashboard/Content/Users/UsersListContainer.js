@@ -67,7 +67,10 @@ const mapActionsToProps = {
     if (offset < 0) offset = 0
     return {
       type: DISPATCH_MULTIPLE_ACTIONS,
-      payload: [updateUI(page, offset), fetchUsers(page, lastItemKey)]
+      payload: [
+        updateUI(page, offset),
+        fetchUsers(page, lastItemKey)
+      ]
     }
   },
   fetchUsers,

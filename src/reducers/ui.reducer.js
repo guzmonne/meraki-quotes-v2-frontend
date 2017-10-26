@@ -17,6 +17,11 @@ const defaultState = {
   },
   permissions: {
     ids: [],
+    form: {
+      permission: '',
+      method: '',
+      url: '',
+    }
   }
 }
 

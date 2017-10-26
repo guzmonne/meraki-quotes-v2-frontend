@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import get from 'lodash/get';
 import UsersPermissionsTable from './UsersPermissionsTable/';
-import {user} from '../../../../../store/schemas.js';
+
 
 const mapStateToProps = (state) => {
   const ids = get(state, 'ui.permissions.ids', []);
@@ -10,6 +10,7 @@ const mapStateToProps = (state) => {
   
   return {
     permissions: permissionsList,
+    displayingCreateModal: get(state, 'ui.permissions.displayingCreateModal')
   }
 };
 
