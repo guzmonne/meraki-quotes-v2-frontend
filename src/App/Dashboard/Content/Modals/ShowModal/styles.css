@@ -1,16 +1,21 @@
-.MerakiDeviceShowModal {
+.ShowModal {
   display: flex;
   align-items: center;
   justify-content: space-around;
   padding: 0.5em;
 }
 
-.MerakiDeviceShowModal dd,
-.MerakiDeviceShowModal dt {
+.ShowModal dd,
+.ShowModal dt {
+  margin-left: 0;
   text-align: left;
 }
 
-.MerakiDeviceShowModal img {
+.ShowModal .Profile {
+  margin: 1em;
+}
+
+.ShowModal img {
   max-height: 20em;
   max-width: 25em;
 }
