@@ -23,7 +23,7 @@ UserShowModal.propTypes = {
 
 
 const mapStateToProps = (state) => {
-  const key = get(state, 'ui.users.userSelectedToShowKey')
+  const key = get(state, 'ui.users.usersSelectedToShowKey')
   return {
     user: get(state, `entities.users.${key}`),
   }

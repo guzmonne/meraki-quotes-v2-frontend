@@ -37,7 +37,7 @@ MerakiDeviceUpdateModal.propTypes = {
 };
 
 export default createUpdateModalContainer({
-  uiKeyName: 'merakiDeviceSelectedToUpdateKey',
+  uiKeyName: 'merakiDevicesSelectedToUpdateKey',
   modelName: 'merakiDevice',
   modalFlagName: 'displayingUpdateModal',
   updateUiPayload: {

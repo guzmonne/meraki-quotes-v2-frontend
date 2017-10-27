@@ -48,7 +48,7 @@ const mapActionsToPropsConstructor = ({
   }
 };
 
-const createShowModalContainer = ({
+const createUpdateModalContainer = ({
   uiKeyName,
   modelName,
   modalFlagName,
@@ -86,4 +86,4 @@ const createShowModalContainer = ({
   return ConnectedContainer;
 }
 
-export default createShowModalContainer;
+export default createUpdateModalContainer;

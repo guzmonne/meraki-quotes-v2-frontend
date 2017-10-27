@@ -37,18 +37,18 @@ const mapActionsToPropsConstructor = ({
   displayShowModal: (item) => ({
     type: UPDATE_UI,
     payload: {
-      merakiDevices: {
+      [target]: {
         displayingShowModal: true,
-        [`${target}SelectedToShow`]: encodeKey(item),
+        [`${target}SelectedToShowKey`]: encodeKey(item),
       }
     }
   }),
   displayUpdateModal: (item) => ({
     type: UPDATE_UI,
     payload: {
-      merakiDevices: {
+      [target]: {
         displayingUpdateModal: true,
-        [`${target}SelectedToUpdate`]: encodeKey(item),
+        [`${target}SelectedToUpdateKey`]: encodeKey(item),
       }
     }
   })

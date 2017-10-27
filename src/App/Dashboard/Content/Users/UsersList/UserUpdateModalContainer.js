@@ -28,7 +28,7 @@ UserUpdateModal.propTypes = {
 };
 
 export default createUpdateModalContainer({
-  uiKeyName: 'userSelectedToUpdateKey',
+  uiKeyName: 'usersSelectedToUpdateKey',
   modelName: 'user',
   modalFlagName: 'displayingUpdateModal',
   updateUiPayload: {

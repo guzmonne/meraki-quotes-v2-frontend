@@ -37,7 +37,7 @@ MerakiDeviceShowModal.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const key = get(state, 'ui.merakiDevices.merakiDeviceSelectedToShowKey')
+  const key = get(state, 'ui.merakiDevices.merakiDevicesSelectedToShowKey')
 
   return {
     merakiDevice: get(state, `entities.merakiDevices.${key}`, {}),
