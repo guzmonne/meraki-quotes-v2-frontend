@@ -1,5 +1,6 @@
 import React from 'react';
 import T from 'prop-types';
+import isFunction from 'lodash/isFunction';
 import Table from '../../../../common/Table/';
 
 const createTableComponent = ({
@@ -24,7 +25,7 @@ const createTableComponent = ({
       </thead>
       <tbody>
       {items.map((item, i) => 
-        <Component key={item[rowId]} 
+        <Component key={isFunction(rowId) ? rowId(item) : item[rowId]} 
           displayShowModal={displayShowModal.bind(null, item)} 
           displayUpdateModal={displayUpdateModal.bind(null, item)} 
           displayDestroyModal={displayDestroyModal.bind(null, item)} 

@@ -17,14 +17,14 @@ class UserCreate extends React.Component {
   }
 
   render() {
-    const {user, error, createUser, creating} = this.props
+    const {item, error, create, creating} = this.props
 
     return (
       <Card className="UserCreate">
         <h1>Crear Nuevo Usuario</h1>
         <UserForm 
-          user={user}
-          onSubmit={(body) => createUser(body, {...empty})}
+          user={item}
+          onSubmit={(body) => create(body, {...empty})}
           error={error}
           loading={creating}
         />
@@ -34,9 +34,9 @@ class UserCreate extends React.Component {
 }
 
 UserCreate.propTypes = {
-  user: T.shape(IUser),
+  item: T.shape(IUser),
   error: T.object,
-  createUser: T.func,
+  create: T.func,
   creating: T.bool,
   setForm: T.func.isRequired,
 };

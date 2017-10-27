@@ -4,6 +4,7 @@ import T from 'prop-types';
 import Card from '../../Card/';
 import MerakiDeviceForm from '../MerakiDeviceForm/';
 import {IMerakiDevice, empty} from '../IMerakiDevices.js';
+import removeEmpty from '../../../../../modules/removeEmpty.js';
 
 class MerakiDeviceCreate extends React.Component {
   componentWillMount() {
@@ -11,14 +12,14 @@ class MerakiDeviceCreate extends React.Component {
   }
 
   render() {
-    const {merakiDevice, error, createMerakiDevice, creating} = this.props
+    const {item, error, create, creating} = this.props
 
     return (
       <Card className="MerakiDeviceCreate">
         <h1>Crear Nuevo Usuario</h1>
         <MerakiDeviceForm 
-          merakiDevice={merakiDevice}
-          onSubmit={(body) => createMerakiDevice(body, empty())}
+          merakiDevice={item}
+          onSubmit={(body) => create(removeEmpty(body), empty())}
           error={error}
           loading={creating}
         />
@@ -28,9 +29,9 @@ class MerakiDeviceCreate extends React.Component {
 }
 
 MerakiDeviceCreate.propTypes = {
-  merakiDevice: T.shape(IMerakiDevice),
+  item: T.shape(IMerakiDevice),
   error: T.object,
-  createMerakiDevice: T.func,
+  create: T.func,
   creating: T.bool,
   setForm: T.func.isRequired,
 };

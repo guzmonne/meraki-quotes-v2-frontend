@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable'
 import {
   ERROR,
   UPDATE_UI,
+  API_CALL,
   API_INDEX,
   API_CREATE,
   API_SHOW,
@@ -17,6 +18,7 @@ const API_ROOT = process.env.REACT_APP_API_ROOT;
 export default (action$, store) => (
   action$
   .ofType(
+    API_CALL,
     API_INDEX,
     API_CREATE,
     API_SHOW,
@@ -42,7 +44,7 @@ export default (action$, store) => (
         request$ = destroy$;
         break
       default:
-        break;
+        request$ = call$;
     }
 
     return Observable.concat(
@@ -69,7 +71,7 @@ function headers () {
   }
 };
 
-function actionPrefix(type, {target}) {
+function actionPrefix(type, {target = ''}) {
   return `${target.toUpperCase()}_${type}`
 }
 
@@ -219,4 +221,21 @@ function validationErrorHandler(type, payload, error) {
     return validationError$(type, payload, error);
 
   return error$(type, payload, error)
+}
+
+function call$(type, payload) {
+  const {endpoint, method, body} = payload
+  
+  const request$ =  Observable.ajax[method.toLowerCase()]
+
+  return (
+    body !== undefined 
+    ? request$(`${API_ROOT}${endpoint}`, body, headers())
+    : request$(`${API_ROOT}${endpoint}`, headers())
+  )
+  .map(({response}) => ({
+    type: `API_CALL_SUCCESS`,
+    payload: response,
+  }))
+  .catch(validationErrorHandler.bind(null, type, payload))
 }

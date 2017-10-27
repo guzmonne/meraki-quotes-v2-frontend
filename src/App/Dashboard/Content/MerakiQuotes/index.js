@@ -1,4 +1,3 @@
-import './styles.css';
 import React from 'react';
 import {Route, Switch} from '../../../../ListeningRouter/';
 import MerakiQuotesList from './MerakiQuotesListContainer.js';

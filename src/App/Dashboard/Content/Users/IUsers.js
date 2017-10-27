@@ -8,3 +8,9 @@ export const IUser = {
   email: T.string,
   verified: T.bool,
 }
+
+export const empty = () => ({
+  username: '',
+  email: '',
+  password: '',
+});

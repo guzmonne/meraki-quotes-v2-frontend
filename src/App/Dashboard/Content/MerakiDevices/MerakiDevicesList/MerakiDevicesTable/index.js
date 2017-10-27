@@ -11,7 +11,7 @@ const MerakiDevicesTable = createTableComponent({
     'Precio',
     '',
   ],
-  rowId: 'ID',
+  rowId: (item) => `${item.Category}${item.PartNumber}`,
   schema: IMerakiDevice,
   displayName: 'MerakiDevicesTable',
 })(MerakiDeviceRow);

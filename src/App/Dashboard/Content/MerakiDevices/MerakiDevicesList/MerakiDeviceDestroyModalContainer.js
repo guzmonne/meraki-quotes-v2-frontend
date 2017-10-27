@@ -3,7 +3,7 @@ import
 from '../../Modals/createDestroyModalContainer.js';
 
 export default createDestroyModalContainer({
-  uiIdPath: 'merakiDevices.merakiDeviceSelectedToDestroyKey',
+  uiIdPath: 'merakiDevices.merakiDevicesSelectedToDestroyKey',
   modalTitle: 'Eliminar equipo',
   okMessage: '¿Esta seguro que desea eliminar este equipo?',
   modalFlagName: 'displayingDestroyModal',

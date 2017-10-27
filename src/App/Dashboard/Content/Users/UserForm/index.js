@@ -2,13 +2,13 @@ import './styles.css';
 import React from 'react';
 import T from 'prop-types';
 import get from 'lodash/get';
-import {IUser} from '../IUsers.js';
+import {IUser, empty} from '../IUsers.js';
 import Form from '../../../../../common/Form/';
 import ControlInput from '../../../../../common/ControlInput/';
 import Button from '../../../../../common/Button/';
 
 const UserForm = ({user, color, loading, error, onSubmit, fieldsDisabled}) => (
-  <Form data={user}>{({
+  <Form data={Object.assign({}, empty(), user)}>{({
     data,
     handleOnChange,
     handleOnSubmit

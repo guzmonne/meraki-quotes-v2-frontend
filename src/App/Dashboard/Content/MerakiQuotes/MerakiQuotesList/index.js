@@ -6,7 +6,7 @@ import MerakiQuotesTable from './MerakiQuotesTableContainer.js';
 import MerakiQuoteShowModal from './MerakiQuoteShowModalContainer.js';
 import MerakiQuoteUpdateModal from './MerakiQuoteUpdateModalContainer.js';
 import MerakiQuoteDestroyModal from './MerakiQuoteDestroyModalContainer.js';
-import Spinner from '../../../../../common/Spinner/';
+import Spinner from '../../../../../common/Spiner/';
 import Pagination from '../../../../../common/Pagination/';
 
 class MerakiQuotesList extends React.Component {

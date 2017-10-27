@@ -3,7 +3,7 @@ import
 from '../../Modals/createDestroyModalContainer.js';
 
 export default createDestroyModalContainer({
-  uiIdPath: 'users.userSelectedToDestroyKey',
+  uiIdPath: 'users.usersSelectedToDestroyKey',
   modalTitle: 'Eliminar usuario',
   okMessage: '¿Esta seguro que desea eliminar al usuario?',
   modalFlagName: 'displayingDestroyModal',

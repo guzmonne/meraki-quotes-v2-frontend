@@ -4,8 +4,8 @@ import ChangePasswordForm from './ChangePasswordForm/';
 import {API_CALL} from '../../../../store/actions.js';
 
 const mapStateToProps = (state) => ({
-  errors: get(state, 'ui.usersChangepassword.error'),
-  submitting: get(state, 'flags.usersChangepassword'),
+  errors: get(state, 'ui.changepasswordApiCall.error'),
+  submitting: get(state, 'flags.changepasswordApiCall'),
 });
 
 const mapActionsToProps = {
@@ -15,6 +15,7 @@ const mapActionsToProps = {
       endpoint: '/users/changePassword',
       method: 'POST',
       body: body,
+      target: 'changePassword',
     }
   })
 };
