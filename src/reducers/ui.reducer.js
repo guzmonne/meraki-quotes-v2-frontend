@@ -4,10 +4,13 @@ import indexOf from 'lodash/indexOf';
 import camelCase from 'lodash/camelCase';
 import * as ActionTypes from '../store/actions.js';
 
+const page = 15;
+const offset = 0;
+
 const defaultState = {
   users: {
-    offset: 0,
-    page: 10,
+    offset,
+    page,
     ids: [],
     form: {
       username: '',
@@ -24,8 +27,8 @@ const defaultState = {
     }
   },
   merakiQuotes: {
-    offset: 0,
-    page: 15,
+    offset,
+    page,
     ids: [],
     form: {
       AdminMargin: 0.3,
@@ -42,8 +45,8 @@ const defaultState = {
     }
   },
   merakiDevices: {
-    offset: 0,
-    page: 15,
+    offset,
+    page,
     ids: [],
     form: {
       Category: '',
