@@ -16,7 +16,7 @@ const Button = ({loading, children, color, ...props}) => (
   loading === true
   ? 
   <button className={className(color)} disabled>
-    <span><Spinner /></span>
+    <span><Spinner color="white"/></span>
   </button>
   : 
   <button className={className(color)} {...props}>

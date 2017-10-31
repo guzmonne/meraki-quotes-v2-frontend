@@ -7,19 +7,14 @@ import {
   UPDATE_UI,
 } from '../../../../store/actions.js';
 
-const mapStateToProps = (state) => {
-  const ids = get(state, 'ui.permissions.ids', []);
-  const permissions = get(state, 'entities.permissions', {});
-  const permissionsList = ids.map(id => permissions[id]);
-  
-  return {
-    permissions: permissionsList,
-    displayingCreateModal: get(state, 'ui.permissions.displayingCreateModal'),
-  }
-};
+const mapStateToProps = (state) => ({
+  count: Object.keys(get(state, 'entities.permissions', {})).length,
+  fetching: get(state, 'flags.permissionsApiIndex'),
+  displayingCreateModal: get(state, 'ui.permissions.displayingCreateModal'),
+});
 
 const mapActionsToProps = {
-  fetchPermissions: () => ({
+  fetch: () => ({
     type: API_INDEX,
     payload: {
       endpoint: '/users/permissions',
