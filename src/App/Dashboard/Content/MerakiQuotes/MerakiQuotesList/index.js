@@ -3,7 +3,7 @@ import React from 'react';
 import T from 'prop-types';
 import Card from '../../Card/';
 import MerakiQuotesTable from './MerakiQuotesTableContainer.js';
-import Spinner from '../../../../../common/Spiner/';
+import Spinner from '../../../../../common/Spinner/';
 import Pagination from '../../../../../common/Pagination/';
 
 class MerakiQuotesList extends React.Component {

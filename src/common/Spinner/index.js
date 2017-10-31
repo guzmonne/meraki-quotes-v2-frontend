@@ -1,17 +1,14 @@
 import './styles.css';
 import React from 'react';
-import T from 'prop-types';
-import classnames from 'classnames';
 
-const Spinner = ({className, onClick, children}) => (
-  <span className={classnames('Spinner', className)} onClick={onClick}>
-    {children}
-  </span>
+const Spinner = () => (
+  <div className="sk-wave sk-wave-black sk-wave-xl">
+    <div className="sk-rect sk-rect1"></div>
+    <div className="sk-rect sk-rect2"></div>
+    <div className="sk-rect sk-rect3"></div>
+    <div className="sk-rect sk-rect4"></div>
+    <div className="sk-rect sk-rect5"></div>
+  </div>
 );
-
-Spinner.propTypes = {
-  children: T.node.isRequired,
-  onClick: T.func.isRequired,
-};
 
 export default Spinner;
