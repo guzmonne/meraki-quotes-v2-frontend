@@ -13,6 +13,14 @@ export const merakiDevices = new schema.Entity('merakiDevices', {}, {
   )
 });
 
+
+export const merakiQuotes = new schema.Entity('merakiQuotes', {}, {
+  idAttribute: ({UserID, createdAt}) => (
+    btoa(JSON.stringify({UserID, createdAt}))
+  )
+});
+
+
 export const permission = new schema.Entity('permissions', {}, {
   idAttribute: 'permission'
 });

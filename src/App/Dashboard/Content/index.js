@@ -6,7 +6,7 @@ import Login from './LoginContainer.js';
 import Users from './Users/';
 import Account from './Account/';
 import MerakiDevices from './MerakiDevices/';
-//import MerakiQuotes from './MerakiQuotes/';
+import MerakiQuotes from './MerakiQuotes/';
 
 const Welcome = () => <h1>Welcome!</h1>
 
@@ -21,6 +21,7 @@ const Content = ({isAuthenticated}) => (
       <Route path="/users" component={Users}/>
       <Route path="/account" component={Account}/>        
       <Route path="/merakiDevices" component={MerakiDevices}/>    
+      <Route path="/merakiQuotes" component={MerakiQuotes}/>    
       <Route component={NotFound}/>
     </Switch>
   :

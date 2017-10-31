@@ -9,7 +9,8 @@ const mapStateToProps = (state) => ({
   username: get(state, 'ui.user.username'),
   isSyncing: (
     get(state, 'flags.usersApiIndex') ||
-    get(state, 'flags.merakidevicesApiIndex')    
+    get(state, 'flags.merakidevicesApiIndex') ||
+    get(state, 'flags.merakiquotesApiIndex')    
   ),
 });
 

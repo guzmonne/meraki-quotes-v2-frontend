@@ -4,7 +4,7 @@ import createListContainer from '../HoC/createListContainer.js';
 
 const MerakiQuotesListContainer = createListContainer({
   target: 'merakiQuotes',
-  fetchingFlag: 'merakidevicesApiIndex',
+  fetchingFlag: 'merakiquotesApiIndex',
   schema: merakiQuotes,
   displayName:'MerakiQuotesListContainer'
 })(MerakiQuotesList);

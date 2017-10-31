@@ -1,15 +1,13 @@
-import {IMerakiQuotes} from '../../IMerakiQuotess.js';
+import {IMerakiQuotes} from '../../IMerakiQuotes.js';
 import MerakiQuoteRow from './MerakiQuoteRow/';
 import createTableComponent from '../../../HoC/createTableComponent.js';
 
 const MerakiQuotesTable = createTableComponent({
   headers: [
-    'Número de Parte',
-    'Categoría',        
+    'ID',
+    'Nombre',        
     'Descripción',
     'Creado',
-    'Precio',
-    '',
   ],
   rowId: 'ID',
   schema: IMerakiQuotes,

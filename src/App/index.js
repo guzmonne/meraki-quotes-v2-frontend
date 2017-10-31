@@ -16,7 +16,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-      {this.props.ready === true
+      {this.props.ready === false
         ?
         <Route path="/" component={Dashboard}/>
         :
