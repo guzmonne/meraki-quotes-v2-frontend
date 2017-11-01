@@ -36,7 +36,7 @@ export default createUpdateModalContainer({
   },
   target: 'users',
   title: ({username}) => (
-    `Editando usuario: ${username}]`
+    `Editando usuario: ${username}`
   ),
   displayName:'UserUpdateModal',
 })(UserUpdateModal);

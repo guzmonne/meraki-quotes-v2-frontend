@@ -1,0 +1,9 @@
+.MerakiQuoteShowGlobalOptions {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.MerakiQuoteShowGlobalOptions .ControlInput {
+  width: 100%;
+}

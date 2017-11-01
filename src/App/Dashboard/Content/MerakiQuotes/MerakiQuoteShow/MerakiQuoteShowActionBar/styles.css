@@ -1,0 +1,8 @@
+.MerakiQuoteShowActionBar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.MerakiQuoteShowActionBar .btn {
+  margin: 1em 0;
+}

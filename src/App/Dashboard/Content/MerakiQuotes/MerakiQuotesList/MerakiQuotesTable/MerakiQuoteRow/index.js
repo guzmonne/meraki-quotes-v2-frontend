@@ -1,5 +1,6 @@
 import './styles.css';
 import React from 'react';
+import {Link} from 'react-router-dom';
 import {IMerakiQuotes} from '../../../IMerakiQuotes.js';
 import DateFromNow from '../../../../../../../common/DateFromNow/';
 import {Td} from '../../../../../../../common/Table/';
@@ -11,10 +12,13 @@ const MerakiQuoteRow = ({
   Name,
   Description,
   createdAt,
+  UserID,
 }) => (
   <tr className="MerakiQuoteRow">
     <Td header="ID">
-      <a>{ID.slice(0, 8)}</a>
+      <Link to={`/merakiQuotes/${btoa(JSON.stringify({UserID, createdAt}))}`}>
+        {ID.slice(0, 8)}
+      </Link>
     </Td>
     <Td header="Nombre">
       {Name.slice(0, MAX_LENGTH)}

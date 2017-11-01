@@ -1,6 +1,7 @@
 import './styles.css';
 import React from 'react';
 import T from 'prop-types';
+import Card from '../../../Card/';
 import ControlInput from '../../../../../../common/ControlInput/';
 import Button from '../../../../../../common/Button/';
 
@@ -40,7 +41,7 @@ class SearchMerakiDeviceForm extends React.Component {
     const {searchText, quantity, selectedItem} = this.state; 
 
     return (
-      <div className="SearchMerakiDeviceForm">
+      <Card className="SearchMerakiDeviceForm">
         <form onSubmit={this.handleSearch} className="search-form">
 
           <ControlInput
@@ -51,7 +52,7 @@ class SearchMerakiDeviceForm extends React.Component {
           />
 
           
-          </form>   
+        </form>   
           
         <form onSubmit={this.handleAdd} className="add-form">
           
@@ -63,11 +64,11 @@ class SearchMerakiDeviceForm extends React.Component {
           />
         
           <Button color="green" type="submit" disabled={!!selectedItem}>
-            Aceptar
+            Agregar
           </Button>
         
         </form>
-      </div>
+      </Card>
     )
   }
 }

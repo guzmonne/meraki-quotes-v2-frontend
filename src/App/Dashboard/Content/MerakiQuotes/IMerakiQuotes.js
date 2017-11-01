@@ -29,7 +29,7 @@ export const empty = () => ({
   ServiceMargin: 0.3,
   SoftwareMargin: 0.2,
   Devices: [],
-  createdAt: '',
-  updatedAt: '',
+  createdAt: Date.now(),
+  updatedAt: Date.now(),
   UserName: '',
 });

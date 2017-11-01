@@ -1,0 +1,24 @@
+.SearchMerakiDeviceForm {
+  display: flex;
+  justify-content: space-between;
+}
+
+.SearchMerakiDeviceForm .search-form,
+.SearchMerakiDeviceForm .add-form  {
+  width: 50%;
+}
+
+.SearchMerakiDeviceForm .add-form {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 1em;
+}
+
+.SearchMerakiDeviceForm .add-form .ControlInput {
+  width: 100%;
+}
+
+.SearchMerakiDeviceForm .add-form .btn {
+  margin: 1em 0 0 1em;
+  width: 100%;
+}
