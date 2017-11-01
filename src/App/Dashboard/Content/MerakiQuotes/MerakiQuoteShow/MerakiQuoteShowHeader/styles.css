@@ -1,4 +1,8 @@
-.MerakiQuoteShowHeader {
+.MerakiQuoteShowHeader .MerakiQuoteShowHeader__body {
   display: flex;
   justify-content: space-between;
+}
+
+.MerakiQuoteShowHeader h3 {
+  color: grey;
 }

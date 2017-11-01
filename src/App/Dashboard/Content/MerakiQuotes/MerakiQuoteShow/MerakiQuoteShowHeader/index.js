@@ -12,11 +12,11 @@ const MerakiQuoteShowHeader = ({
   createdAt,
   updatedAt
 }) => (
-  <Card>
+  <Card className="MerakiQuoteShowHeader">
     <h2>{Name}</h2>
     <h3>{Description}</h3>
 
-    <div className="MerakiQuoteShowHeader">
+    <div className="MerakiQuoteShowHeader__body">
 
       <div className="MerakiQuoteShowHeader__createdBy">
         <dt>Creado Por</dt>
