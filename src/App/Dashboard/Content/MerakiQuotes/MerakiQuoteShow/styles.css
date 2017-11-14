@@ -16,6 +16,11 @@
   grid-area: actions;
 }
 
+.MerakiQuoteShow .Card:nth-child(5) {
+  width: 100%;
+  grid-area: table;
+}
+
 .MerakiQuoteShow {
   width: 100%;
   max-width: 1080px;
@@ -27,5 +32,6 @@
   grid-template-areas: 
     "header header"
     "search search"
-    "global actions";
+    "global actions"
+    "table table";
 }

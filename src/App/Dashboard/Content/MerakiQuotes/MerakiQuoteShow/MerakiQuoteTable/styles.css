@@ -1,0 +1,61 @@
+.MerakiQuoteTable > .table-responsive-vertical > .table > thead > tr > th,
+.MerakiQuoteTable > .table-responsive-vertical > .table > tbody > tr > th,
+.MerakiQuoteTable > .table-responsive-vertical > .table > tfoot > tr > th,
+.MerakiQuoteTable > .table-responsive-vertical > .table > thead > tr > td,
+.MerakiQuoteTable > .table-responsive-vertical > .table > tbody > tr > td,
+.MerakiQuoteTable > .table-responsive-vertical > .table > tfoot > tr > td {
+  vertical-align: middle;
+}
+
+.MerakiQuoteTable .ControlInput {
+  margin-top: -2px;
+}
+
+.MerakiQuoteTable .ControlInput input {
+  font-size: 1em;
+} 
+
+.MerakiQuoteTable small {
+  color: darkgrey;
+}
+
+/*
+<div className="MerakiDevice">
+            
+  <img src={src} alt="Meraki Device"/>
+  <div className="MerakiDeviceNameAndDescription">
+
+    <h4>MR26-HW</h4>
+    <p>Meraki MR26 Cloud Managed AP</p>
+  
+  </div>
+
+</div>
+*/
+
+.MerakiQuoteTable .MerakiDevice {
+  display: flex;
+  align-items: center;
+}
+
+.MerakiQuoteTable .MerakiDevice img {
+  max-height: 5em;
+  width: 7em;
+  margin-right: 1em;
+}
+
+.MerakiQuoteTable .MerakiDevice h4 {
+  margin-bottom: 0;
+}
+
+.MerakiQuoteTable .rows-title {
+  font-weight: 700;
+  font-size: 0.8em;
+  padding: 0 0.5em;
+  background-color: #888;
+  color: #fff;
+}
+
+.MerakiQuoteTable .table {
+  margin-bottom: 0;
+}
