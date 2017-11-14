@@ -24,9 +24,9 @@ class MerakiQuoteShow extends React.Component {
 
   render() {
     const {updateQuote} = this;
-    let {merakiQuote={}, fetching} = this.props;
+    let {merakiQuote, fetching} = this.props;
 
-    if (fetching === true || fetching === undefined) 
+    if (!merakiQuote && (fetching === true || fetching === undefined)) 
       return <Spinner color="black" size="xl"/>
 
     return (
