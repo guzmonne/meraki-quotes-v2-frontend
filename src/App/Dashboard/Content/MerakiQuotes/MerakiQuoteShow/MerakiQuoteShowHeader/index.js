@@ -1,6 +1,5 @@
 import './styles.css';
 import React from 'react';
-import T from 'prop-types';
 import DateFromNow from '../../../../../../common/DateFromNow/';
 import Card from '../../../Card/';
 import {IMerakiQuotes} from '../../IMerakiQuotes.js';

@@ -25,7 +25,7 @@ export default (action$, store) => (
     API_UPDATE,
     API_DESTROY
   )
-  .throttleTime(200)
+  .debounceTime(200)  
   .mergeMap(({type, payload}) => {
     let request$
 
@@ -134,7 +134,8 @@ function create$(type, payload) {
 
 function update$(type, payload) {
   const {endpoint, body} = payload
-  return Observable.ajax.put(`${API_ROOT}${endpoint}`, body, headers())
+  return Observable
+    .ajax.put(`${API_ROOT}${endpoint}`, body, headers())
     .concatMap(({response}) => Observable.from([{
       type: `${actionPrefix(type, payload)}_SUCCESS`,
     }, {

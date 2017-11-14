@@ -26,11 +26,15 @@ const entities = (state = defaultEntitiesState, action) => {
     try {
       const {payload: {key, body, target}} = action;
 
+      const item = { ...state[target][key] };
+
+      const __old__ = item.__old__ ? item.__old__ : item
+
       return merge({}, state, {
         [target]: {
           [key]: {
             ...body,
-            __old__: {...state[target][key]},
+            __old__,
           }
         }
       });
@@ -43,14 +47,15 @@ const entities = (state = defaultEntitiesState, action) => {
   if (action.type.indexOf('API_UPDATE_FAILURE') > -1) {
     try {
       const {payload: {key, target}} = action;
-      return merge({}, state, {
+      const result = merge({}, state, {
         [target]: {
           [key]: {
             ...state[target][key].__old__,
-            __old__: undefined,
-          }
+          },
         }
       });
+      delete state[target][key].__old__;
+      return result;
     } catch (error) {
       console.error(error);
       return Object.assign({}, state);

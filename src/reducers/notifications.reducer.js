@@ -6,6 +6,12 @@ const notificationsReducer = (state=[], action) => {
   if (action.type === ActionTypes.PUSH_NOTIFICATION) {
     try {
       const {type, message, id, fixed} = action.payload;
+
+      const last = state[state.length - 1];
+
+      // Avoid showing duplicate messages.
+      if (last && last.message === message) return state;
+
       return [...state, {
         id: id || uniqueId('notification'),
         type,

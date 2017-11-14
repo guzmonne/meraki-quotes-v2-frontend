@@ -2,6 +2,8 @@ import {connect} from 'react-redux';
 import get from 'lodash/get';
 import {
   API_SHOW,
+  API_UPDATE,
+  DISPATCH_MULTIPLE_ACTIONS
 } from '../../../../store/actions.js';
 import {merakiQuotes} from '../../../../store/schemas.js';
 import MerakiQuoteShow from './MerakiQuoteShow/';
@@ -15,6 +17,25 @@ const mapStateToProps = (state, props) => {
 };
 
 const mapActionsToProps = {
+  updateQuote: (key, body) => {
+    const payload = {
+      endpoint: `/merakiQuotes/${key}`,
+      target: 'merakiQuotes',
+      schema: merakiQuotes,
+      body,
+      key,
+    };
+    return {
+      type: DISPATCH_MULTIPLE_ACTIONS,
+      payload: [{
+        type: 'MERAKIQUOTE_API_UPDATE_REQUEST',
+        payload,
+      }, {
+        type: API_UPDATE,
+        payload,
+      }],
+    };
+  },
   fetch: (key) => ({
     type: API_SHOW,
     payload: {

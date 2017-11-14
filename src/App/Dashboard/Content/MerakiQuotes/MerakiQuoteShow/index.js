@@ -6,7 +6,7 @@ import MerakiQuoteShowHeader from './MerakiQuoteShowHeader/';
 import SearchMerakiDeviceForm from './SearchMerakiDeviceForm/';
 import MerakiQuoteShowGlobalOptions from './MerakiQuoteShowGlobalOptions/';
 import MerakiQuoteShowActionBar from './MerakiQuoteShowActionBar/';
-import {IMerakiQuotes, empty} from '../IMerakiQuotes.js';
+import {IMerakiQuotes} from '../IMerakiQuotes.js';
 import Spinner from '../../../../../common/Spinner/';
 
 class MerakiQuoteShow extends React.Component {
@@ -16,16 +16,24 @@ class MerakiQuoteShow extends React.Component {
     this.props.fetch(key);
   }
 
+  updateQuote = (updates) => {
+    const key = get(this.props, 'match.params.key');
+    if (!key) return;
+    this.props.updateQuote(key, updates)
+  }
+
   render() {
+    const {updateQuote} = this;
     let {merakiQuote={}, fetching} = this.props;
 
-    if (fetching === true) return <Spinner color="black" size="xl"/>
+    if (fetching === true || fetching === undefined) 
+      return <Spinner color="black" size="xl"/>
 
     return (
       <div className="MerakiQuoteShow">
-        <MerakiQuoteShowHeader {...merakiQuote} />
-        <SearchMerakiDeviceForm />
-        <MerakiQuoteShowGlobalOptions {...merakiQuote} />
+        <MerakiQuoteShowHeader {...merakiQuote} onUpdate={updateQuote}/>
+        <SearchMerakiDeviceForm onUpdate={updateQuote}/>
+        <MerakiQuoteShowGlobalOptions {...merakiQuote} onUpdate={updateQuote}/>
         <MerakiQuoteShowActionBar />
       </div>
     )
