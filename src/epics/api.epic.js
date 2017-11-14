@@ -133,11 +133,15 @@ function create$(type, payload) {
 }
 
 function update$(type, payload) {
-  const {endpoint, body} = payload
+  const {endpoint, body, key, target} = payload
   return Observable
     .ajax.put(`${API_ROOT}${endpoint}`, body, headers())
     .concatMap(({response}) => Observable.from([{
       type: `${actionPrefix(type, payload)}_SUCCESS`,
+      payload: {
+        key,
+        target,
+      }
     }, {
       type: PUSH_NOTIFICATION,
       payload: {

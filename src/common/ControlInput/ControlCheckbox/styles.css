@@ -1,0 +1,22 @@
+.ControlInput.ControlCheckbox {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  align-items: start;
+  text-align: left;
+  margin-top: 0;
+}
+
+.ControlInput.ControlCheckbox label {
+  color: var(--ControlInputBlue);
+  position: static;
+  font-size: 1em;
+}
+
+.ControlInput>input[type=checkbox] {
+  padding:10px 10px 10px 5px;
+  display: block;
+  border: none;
+  width: auto;
+  margin-bottom: 1.2em;
+}

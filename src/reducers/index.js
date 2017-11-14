@@ -62,6 +62,18 @@ const entities = (state = defaultEntitiesState, action) => {
     }
   }
 
+  if (action.type.indexOf('API_UPDATE_SUCCESS') > -1) {
+    try {
+      const { payload: { key, target } } = action;
+      const newState = merge({}, state);
+      delete newState[target][key].__old__;
+      return newState;
+    } catch (error) {
+      console.error(error);
+      return Object.assign({}, state);
+    }
+  }
+
   return state
 };
 

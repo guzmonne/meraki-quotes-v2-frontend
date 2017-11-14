@@ -28,7 +28,7 @@ const mapActionsToProps = {
     return {
       type: DISPATCH_MULTIPLE_ACTIONS,
       payload: [{
-        type: 'MERAKIQUOTE_API_UPDATE_REQUEST',
+        type: 'MERAKIQUOTES_API_UPDATE_REQUEST',
         payload,
       }, {
         type: API_UPDATE,

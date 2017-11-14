@@ -18,7 +18,7 @@ class MerakiQuoteShowGlobalOptions extends React.Component {
     return (
       <Card className="MerakiQuoteShowGlobalOptions">
         <ControlInput
-          value={LicenceYears || 1}
+          value={LicenceYears}
           label="Años"
           type="number"
           onChange={this.handleChange('LicenceYears')}

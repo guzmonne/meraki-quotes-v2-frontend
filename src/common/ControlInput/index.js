@@ -2,6 +2,7 @@ import './styles.css';
 import React from 'react';
 import T from 'prop-types';
 import classnames from 'classnames';
+import ControlCheckbox from './ControlCheckbox/';
 
 class ControlInput extends React.Component {
   state = {
@@ -25,13 +26,23 @@ class ControlInput extends React.Component {
 
   render() {
     const {pristine, dirty} = this.state;
-    const {value, label, error, errorMessage, onChange, ...props} = this.props;
+    const {
+      value,
+      label,
+      error,
+      errorMessage,
+      onChange,
+      ...props
+    } = this.props;
+
+    if (this.props.type === 'checkbox') 
+      return <ControlCheckbox {...this.props} />
+
     return (
       <div className={classnames('ControlInput', {
         [`ControlInput--error`]: dirty && !pristine && error
       })}>      
         <input
-          type="text"
           value={value}
           onChange={this.handleOnChange(onChange)}
           onBlur={this.handleOnBlur}
