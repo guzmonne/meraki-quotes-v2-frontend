@@ -7,6 +7,7 @@ import SearchMerakiDeviceForm from './SearchMerakiDeviceForm/';
 import MerakiQuoteShowGlobalOptions from './MerakiQuoteShowGlobalOptions/';
 import MerakiQuoteShowActionBar from './MerakiQuoteShowActionBar/';
 import MerakiQuoteTable from './MerakiQuoteTable/';
+import MerakiQuoteGlobalVariables from './MerakiQuoteGlobalVariables/';
 import {IMerakiQuotes} from '../IMerakiQuotes.js';
 import Spinner from '../../../../../common/Spinner/';
 
@@ -36,10 +37,8 @@ class MerakiQuoteShow extends React.Component {
         <SearchMerakiDeviceForm onUpdate={updateQuote}/>
         <MerakiQuoteShowGlobalOptions {...merakiQuote} onUpdate={updateQuote}/>
         <MerakiQuoteShowActionBar />
-        <MerakiQuoteTable
-          merakiQuote={merakiQuote}
-          onUpdate={updateQuote}
-        />
+        <MerakiQuoteTable merakiQuote={merakiQuote} onUpdate={updateQuote} />
+        <MerakiQuoteGlobalVariables {...merakiQuote} onUpdate={updateQuote} />
       </div>
     )
   }
