@@ -27,13 +27,16 @@ const mapActionsToProps = {
     };
     return {
       type: DISPATCH_MULTIPLE_ACTIONS,
-      payload: [{
-        type: 'MERAKIQUOTES_API_UPDATE_REQUEST',
-        payload,
-      }, {
-        type: API_UPDATE,
-        payload,
-      }],
+      payload: {
+        actions: [{
+          type: 'MERAKIQUOTES_API_UPDATE_REQUEST',
+          payload,
+        }, {
+          type: API_UPDATE,
+          payload,
+        }],
+        interval: 1000 
+      },
     };
   },
   fetch: (key) => ({

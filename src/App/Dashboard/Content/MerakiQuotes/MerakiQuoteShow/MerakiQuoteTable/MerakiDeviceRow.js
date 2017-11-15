@@ -58,11 +58,17 @@ const MerakiDeviceRow = ({
         min="0"
         max="100"
         step="0.01"
-        value={accounting.toFixed(device.Intro * 100, 2)}
+        value={parseFloat(accounting.toFixed(device.Intro * 100, 2), 10)}
         onChange={(e) => {
+          const Intro = parseFloat(e.target.value === ''
+            ? 0
+            : accounting.toFixed(parseFloat(e.target.value, 10) / 100, 4)
+            , 10
+          );
+          console.log(Intro);
           onUpdate({
             ...device,
-            Intro: parseFloat(e.target.value, 10) / 100,
+            Intro,
           });
         }}
       />
