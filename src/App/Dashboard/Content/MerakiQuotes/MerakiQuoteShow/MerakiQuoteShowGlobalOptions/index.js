@@ -1,14 +1,18 @@
 import './styles.css';
 import React from 'react';
 import T from 'prop-types';
+import accounting from 'accounting';
 import Card from '../../../Card/';
 import ControlInput from '../../../../../../common/ControlInput/';
 import {IMerakiQuotes} from '../../IMerakiQuotes.js';
 
 class MerakiQuoteShowGlobalOptions extends React.Component {
   handleChange = (label) => (e) => {
+    const value = label === 'Discount' 
+      ? parseFloat(e.target.value, 10) / 100 
+      : e.target.value;
     this.props.onUpdate({
-      [label]: e.target.value,
+      [label]: value,
     });
   }
 
@@ -30,11 +34,11 @@ class MerakiQuoteShowGlobalOptions extends React.Component {
           onChange={this.handleChange('DealApproved')}
         />
         <ControlInput
-          value={Discount}
+          value={parseFloat(accounting.toFixed(Discount * 100, 2), 10)}
           label="Descuento"
           type="number"
           min="0.00"
-          max="1.00"
+          max="100.00"
           step="0.01"
           onChange={this.handleChange('Discount')}
         />
