@@ -54,7 +54,7 @@ const MerakiQuotePurchaseOptions = ({
           {accounting.formatMoney(calculateUnifiedPrice(merakiQuote))}
         </span>
       </div>
-      <p>*Contrato a 36 meses obligatorio</p>
+      <p>* Contrato a 36 meses obligatorio</p>
 
     </Card>
     <Card>
@@ -75,7 +75,7 @@ const MerakiQuotePurchaseOptions = ({
     </Card>
     <Card>
 
-      <h3 className="red">Solución Administrada</h3>
+      <h3 className="red">Solución Administrada**</h3>
       <div className="price">
         <span>Inversión Inicial</span>
         <span>
@@ -88,7 +88,7 @@ const MerakiQuotePurchaseOptions = ({
           {accounting.formatMoney(calculateTraditionalPrice(merakiQuote))}
         </span>
       </div>
-      <p>**Con el fin de impulsar más las soluciones administradas, se sugiere ofrecer esta solución con margenes más elevados de manera de disminuir la diferencia con las otras dos soluciones.</p>
+      <p>** Con el fin de impulsar más las soluciones administradas, se sugiere ofrecer esta solución con margenes más elevados de manera de disminuir la diferencia con las otras dos soluciones.</p>
     </Card>
   </div>  
 );
