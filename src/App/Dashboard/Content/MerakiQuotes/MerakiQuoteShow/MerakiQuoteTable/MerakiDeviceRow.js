@@ -3,57 +3,68 @@ import T from 'prop-types';
 import accounting from 'accounting';
 import ControlInput from '../../../../../../common/ControlInput/';
 import { Td } from '../../../../../../common/Table/';
+import logo from './meraki_logo.png';
 
 const salesPrice = (price=0, discount=0, intro=0, margin=0) => (
   price * (1 - discount) * (1 + intro) / (1 - margin)
 );
 
 const MerakiDeviceRow = ({
-  ImageUrl,
-  PartNumber,
-  Description,
-  Price,
   Discount,
-  Intro,
   Margin,
-  Qty,
+  device,
+  onUpdate,
 }) => (
   <tr>
     <Td header="Nombre & Descripción">
       <div className="MerakiDevice">
 
-      {PartNumber.indexOf('LIC') === -1 && 
-        <img src={ImageUrl} alt={PartNumber} />
-      }
+        <img src={device.ImageUrl || logo} alt={device.PartNumber} />
+
         <div className="MerakiDeviceNameAndDescription">
 
-          <h4>{PartNumber}</h4>
-          <small>{Description}</small>
+          <h4>{device.PartNumber}</h4>
+          <small>{device.Description}</small>
 
         </div>
 
       </div>
     </Td>
     <Td>
-      {accounting.formatMoney(Price)}
+      {accounting.formatMoney(device.Price)}
     </Td>
     <Td>
       <ControlInput
-        type="text"
-        value={Qty}
-        onChange={() => {}}
+        type="number"
+        min="0"
+        step="1"
+        value={device.Qty}
+        onChange={(e) => {
+          onUpdate({
+            ...device,
+            Qty: parseInt(e.target.value, 10),
+          });
+        }}
       />
     </Td>
     <Td>
       {accounting.toFixed(Discount * 100, 2)}
     </Td>
     <Td>
-  {PartNumber.indexOf('LIC') > -1
+  {device.PartNumber.indexOf('LIC') > -1
     ? '-'
     : <ControlInput
-        type="text"
-        value={accounting.toFixed(Intro * 100, 2)}
-        onChange={() => { }}
+        type="number"
+        min="0"
+        max="100"
+        step="0.01"
+        value={accounting.toFixed(device.Intro * 100, 2)}
+        onChange={(e) => {
+          this.props.onUpdate({
+            ...device,
+            Intro: parseFloat(e.target.value, 10) / 100,
+          });
+        }}
       />
   }
     </Td>
@@ -62,26 +73,29 @@ const MerakiDeviceRow = ({
     </Td>
     <Td>
       {accounting.formatMoney(
-        salesPrice(Price, Discount, Intro, Margin)
+        salesPrice(device.Price, Discount, device.Intro, Margin)
       )}
     </Td>
     <Td>
       {accounting.formatMoney(
-        salesPrice(Price, Discount, Intro, Margin) * Qty
+        salesPrice(device.Price, Discount, device.Intro, Margin) * device.Qty
       )}
     </Td>
   </tr>
 );
 
 MerakiDeviceRow.propTypes = {
-  ImageUrl: T.string,
-  PartNumber: T.string,
-  Description: T.string,
-  Price: T.number,
+  device: T.shape({
+    ImageUrl: T.string,
+    PartNumber: T.string,
+    Description: T.string,
+    Price: T.number,
+    Intro: T.number,
+    Qty: T.number,
+  }),
   Discount: T.number,
-  Intro: T.number,
   Margin: T.number,
-  Qty: T.number,
+  onUpdate: T.func,
 };
 
 export default MerakiDeviceRow;
