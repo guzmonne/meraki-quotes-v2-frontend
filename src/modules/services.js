@@ -3,18 +3,6 @@ const MONTHS_IN_A_YEAR = 12,
   ANUAL_COMPOUND_INTEREST = 1.12,
   MONTHLY_COMPOUND_INTEREST = 0.0333,
   NBD = '9x5xNBD',
-  SERVICE_LEVEL_CONSTANTS = {
-    '9x5xNBD': {
-      admin: 2.030,
-      service: 0.4444
-    },
-    '24x7x4': {
-      admin: 3.041,
-      service: 1.405
-    }
-  },
-  MODIFIER_DISCOUNT = 0.5,
-  MODIFIER_MAX_DEVICES = 50,
   SERVICE_COST_PER_DEVICE = 7,
   SERVICE_MAX_DISCOUNT = 0.5,
   ADMIN_COST = {

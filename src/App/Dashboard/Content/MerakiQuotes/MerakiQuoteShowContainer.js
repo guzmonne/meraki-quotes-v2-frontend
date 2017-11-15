@@ -12,7 +12,6 @@ const mapStateToProps = (state, props) => {
   const key = get(props, 'match.params.key');
   return {
     merakiQuote: get(state, `entities.merakiQuotes.${key}`),
-    fetching: get(state, 'flags.merakiquotesApiShow'),
   };
 };
 

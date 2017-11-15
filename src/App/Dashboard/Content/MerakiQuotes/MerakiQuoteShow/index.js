@@ -25,7 +25,7 @@ class MerakiQuoteShow extends React.Component {
 
   render() {
     const {updateQuote} = this;
-    let {merakiQuote={}, fetching} = this.props;
+    let {merakiQuote={}} = this.props;
 
     if ( !merakiQuote.LicenceYears ) 
       return <Spinner color="black" size="xl"/>
@@ -47,7 +47,6 @@ class MerakiQuoteShow extends React.Component {
 
 MerakiQuoteShow.propTypes = {
   merakiQuote: T.shape(IMerakiQuotes),
-  fetching: T.bool,
   fetch: T.func,
 };
 

@@ -1,9 +1,7 @@
 import React from 'react';
 import T from 'prop-types';
 import accounting from 'accounting';
-import ControlInput from '../../../../../../common/ControlInput/';
 import { Td } from '../../../../../../common/Table/';
-import logo from './meraki_logo.png';
 import {
   calculateHardwareMonthlyPrice,
   calculateLicenseMonthlyPrice
