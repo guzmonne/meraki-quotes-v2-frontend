@@ -5,23 +5,23 @@ import ControlInput from '../../../../../../common/ControlInput/';
 import { Td } from '../../../../../../common/Table/';
 import logo from './meraki_logo.png';
 import {
-  calculateServiceCost,
-  calculateAdministrationCost
+  calculateHardwareMonthlyPrice,
+  calculateLicenseMonthlyPrice
 } from '../../../../../../modules/services.js';
 import { IMerakiQuotes } from '../../IMerakiQuotes';
 
-function calculateSupportPrice(merakiQuote, type) {
-  const result = type === 'service'
+function calculateFinancingPrice(merakiQuote, type) {
+  const result = type === 'hardware'
     ? accounting.formatMoney(
-      calculateServiceCost(merakiQuote) / (1 - merakiQuote.ServiceMargin)
+      calculateHardwareMonthlyPrice(merakiQuote)
     )
     : accounting.formatMoney(
-      calculateAdministrationCost(merakiQuote)
-    )
+      calculateLicenseMonthlyPrice(merakiQuote)
+    );
   return result;
 }
 
-const SupportRow = ({
+const FinancingRow = ({
   name,
   description,
   merakiQuote,
@@ -42,28 +42,28 @@ const SupportRow = ({
       </Td>
       <Td> - </Td>
       <Td> - </Td>
-      <Td> - </Td>
+      <Td>{accounting.toFixed(merakiQuote.Discount * 100, 2)}</Td>
       <Td> - </Td>
       <Td>
-      {accounting.toFixed(
-      type === 'service' 
-        ? merakiQuote.ServiceMargin * 100
-        : merakiQuote.AdminMargin * 100
-      , 2)
-      }
+        {accounting.toFixed(
+          type === 'hardware'
+            ? merakiQuote.HardwareMargin * 100
+            : merakiQuote.SoftwareMargin * 100
+          , 2)
+        }
       </Td>
       <Td> - </Td>
       <Td>
-      {calculateSupportPrice(merakiQuote, type)}
+        {calculateFinancingPrice(merakiQuote, type)}
       </Td>
     </tr>
   );
 
-SupportRow.propTypes = {
+FinancingRow.propTypes = {
   name: T.string,
   description: T.string,
   merakiQuote: T.shape(IMerakiQuotes),
-  type: T.oneOf(['service', 'administration'])
+  type: T.oneOf(['software', 'hardware'])
 };
 
-export default SupportRow;
+export default FinancingRow;

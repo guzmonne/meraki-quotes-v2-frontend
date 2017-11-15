@@ -1,41 +1,35 @@
 /* DEFAULTS */
-const NBD = '9x5xNBD';
-
-const SERVICE_LEVEL_CONSTANTS = {
-  '9x5xNBD': {
-    admin: 2.030,
-    service: 0.4444
+const MONTHS_IN_A_YEAR = 12,
+  ANUAL_COMPOUND_INTEREST = 1.12,
+  MONTHLY_COMPOUND_INTEREST = 0.0333,
+  NBD = '9x5xNBD',
+  SERVICE_LEVEL_CONSTANTS = {
+    '9x5xNBD': {
+      admin: 2.030,
+      service: 0.4444
+    },
+    '24x7x4': {
+      admin: 3.041,
+      service: 1.405
+    }
   },
-  '24x7x4': {
-    admin: 3.041,
-    service: 1.405
-  }
-}
-
-const MODIFIER_DISCOUNT = 0.5
-
-const MODIFIER_MAX_DEVICES = 50
-
-const SERVICE_COST_PER_DEVICE = 7
-const SERVICE_MAX_DISCOUNT = 0.5
-
-const ADMIN_COST = {
-  'Wireless': 50,
-  'Switches': 50,
-  'UTM': 200
-}
-
-const ADMIN_CATEGORIES = [
-  'Wireless',
-  'Switches',
-  'UTM',
-];
-
-const ADMIN_MAX_DISCOUNT = 0.70
-
-const MAX_DEVICES = 50
-
-const LN = Math.log
+  MODIFIER_DISCOUNT = 0.5,
+  MODIFIER_MAX_DEVICES = 50,
+  SERVICE_COST_PER_DEVICE = 7,
+  SERVICE_MAX_DISCOUNT = 0.5,
+  ADMIN_COST = {
+    'Wireless': 50,
+    'Switches': 50,
+    'UTM': 200
+  },
+  ADMIN_CATEGORIES = [
+    'Wireless',
+    'Switches',
+    'UTM',
+  ],
+  ADMIN_MAX_DISCOUNT = 0.70,
+  MAX_DEVICES = 50,
+  LN = Math.log;
 
 /**
  * Filter function to get the hardware devices from a Meraki Products collection
@@ -83,3 +77,38 @@ export const calculateAdministrationCost = (quote) => (
     return acc + adminLog(Qty) * Qty;
   }, 0)
 );
+
+export const calculateLicenseMonthlyPrice = ({ 
+  LicenceYears,
+  Devices = [],
+  SoftwareMargin,
+  Discount 
+}) => {
+  const licensesTotalCost = (
+    Devices
+      .filter(isLicense)
+      .reduce((acc, {Price, Qty, Intro=0}) => (
+        acc + Price * Qty * (1 - Discount) * (1 + Intro)
+      ), 0)
+    ),
+    months = LicenceYears * MONTHS_IN_A_YEAR,
+    interest = Math.pow(ANUAL_COMPOUND_INTEREST, LicenceYears);
+  
+  return interest * licensesTotalCost / (1 - SoftwareMargin) / months
+};
+
+export const calculateHardwareMonthlyPrice = ({
+  LicenceYears,
+  Devices = [],
+  HardwareMargin,
+  Discount
+}) => {
+  const hardwareTotalCost = (
+    Devices
+      .filter(isHardware)
+      .reduce((acc, { Price, Qty, Intro = 0 }) => (
+        acc + Price * Qty * (1 - Discount) * (1 + Intro)
+      ), 0)
+  );
+  return hardwareTotalCost / (1 - HardwareMargin) * MONTHLY_COMPOUND_INTEREST;
+};
