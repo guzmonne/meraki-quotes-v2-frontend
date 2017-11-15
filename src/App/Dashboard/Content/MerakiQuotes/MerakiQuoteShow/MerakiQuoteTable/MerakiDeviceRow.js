@@ -60,7 +60,7 @@ const MerakiDeviceRow = ({
         step="0.01"
         value={accounting.toFixed(device.Intro * 100, 2)}
         onChange={(e) => {
-          this.props.onUpdate({
+          onUpdate({
             ...device,
             Intro: parseFloat(e.target.value, 10) / 100,
           });
