@@ -8,7 +8,8 @@
   --ControlInputBlue: #5264AE;
 }
 
-.ControlInput>input {
+.ControlInput>input,
+.ControlInput>select {
   font-size:18px;
   padding:10px 10px 10px 5px;
   display:block;
@@ -17,15 +18,23 @@
   border-bottom:1px solid #757575;
 }
 
+.ControlInput>select {
+  background-color: white;
+  border-radius: 0;
+  -webkit-appearance:none;
+}
+
 .ControlInput>input:read-only {
   cursor: not-allowed;
 }
 
-.ControlInput.ControlInput--error>input {
+.ControlInput.ControlInput--error>input,
+.ControlInput.ControlInput--error>select  {
   border-bottom:1px solid var(--ControlInputRed);
 }
 
 .ControlInput>input:focus 		{ outline:none; }
+.ControlInput>select:focus 		{ outline:none; }
 
 /* LABEL ======================================= */
 .ControlInput label 				 {
@@ -44,15 +53,19 @@
 }
 
 /* active state */
-.ControlInput>input:focus ~ label, 
-.ControlInput>input.has-content ~ label {
+.ControlInput>input:focus ~ label,
+.ControlInput>select:focus ~ label,  
+.ControlInput>input.has-content ~ label,
+.ControlInput>select.has-content ~ label {
   top:-20px;
   font-size:14px;
   color: var(--ControlInputBlue);
 }
 
-.ControlInput.ControlInput--error>input:focus ~ label, 
-.ControlInput.ControlInput--error>input.has-content ~ label {
+.ControlInput.ControlInput--error>input:focus ~ label,
+.ControlInput.ControlInput--error>select:focus ~ label,
+.ControlInput.ControlInput--error>input.has-content ~ label,
+.ControlInput.ControlInput--error>select.has-content ~ label {
   color: var(--ControlInputRed);
 }
 /* BOTTOM BARS ================================= */
@@ -91,6 +104,11 @@
   width:50%;
 }
 
+.ControlInput>select:focus ~ .bar:before, 
+.ControlInput>select:focus ~ .bar:after {
+  width:50%;
+}
+
 /* HIGHLIGHTER ================================== */
 .highlight {
   position:absolute;
@@ -107,7 +125,15 @@
   animation:inputHighlighter 0.3s ease;
 }
 
+.ControlInput>select:focus ~ .highlight {
+  animation:inputHighlighter 0.3s ease;
+}
+
 .ControlInput.ControlInput--error>input:focus ~ .highlight {
+  animation:inputHighlighterRed 0.3s ease;
+}
+
+.ControlInput.ControlInput--error>select:focus ~ .highlight {
   animation:inputHighlighterRed 0.3s ease;
 }
 

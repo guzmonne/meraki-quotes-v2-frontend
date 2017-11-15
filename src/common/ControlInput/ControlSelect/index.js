@@ -1,11 +1,8 @@
-import './styles.css';
 import React from 'react';
 import T from 'prop-types';
 import classnames from 'classnames';
-import ControlCheckbox from './ControlCheckbox/';
-import ControlSelect from './ControlSelect/';
 
-class ControlInput extends React.Component {
+class ControlSelect extends React.Component {
   state = {
     pristine: true,
     dirty: false,
@@ -13,9 +10,9 @@ class ControlInput extends React.Component {
 
   handleOnChange = (onChange) => (e) => {
     if (this.state.pristine === true) {
-      this.setState({pristine: false});      
+      this.setState({ pristine: false });
     }
-    
+
     onChange(e);
   }
 
@@ -26,47 +23,46 @@ class ControlInput extends React.Component {
   }
 
   render() {
-    const {pristine, dirty} = this.state;
+    const { pristine, dirty } = this.state;
     const {
       value,
       label,
       error,
       errorMessage,
       onChange,
+      options = [],
       ...props
     } = this.props;
 
-    if (this.props.type === 'select')
-      return <ControlSelect {...this.props} />
-
-    if (this.props.type === 'checkbox') 
-      return <ControlCheckbox {...this.props} />
-
     return (
-      <div className={classnames('ControlInput', {
+      <div className={classnames('ControlInput ControlSelect', {
         [`ControlInput--error`]: dirty && !pristine && error
-      })}>      
-        <input
+      })}>
+        <select
           value={value}
           onChange={this.handleOnChange(onChange)}
           onBlur={this.handleOnBlur}
           className={value !== '' ? 'has-content' : ''}
           {...props}
-        />
+        >
+          {options.map(option => (
+            <option key={option} value={option}>{option}</option>
+          ))}
+        </select>
         <span className="highlight"></span>
         <span className={classnames('bar', {
           [`bar--error`]: dirty && !pristine && error
         })}></span>
         <label>{label}</label>
-      {errorMessage && error && !pristine && dirty &&
-        <span className="error-message">{errorMessage}</span>
-      }
+        {errorMessage && error && !pristine && dirty &&
+          <span className="error-message">{errorMessage}</span>
+        }
       </div>
     )
   }
 }
 
-ControlInput.propTypes = {
+ControlSelect.propTypes = {
   value: T.any.isRequired,
   label: T.string,
   text: T.string,
@@ -75,8 +71,8 @@ ControlInput.propTypes = {
   errorMessage: T.string,
 };
 
-ControlInput.defaultProps = {
+ControlSelect.defaultProps = {
   type: 'text',
 };
 
-export default ControlInput;
+export default ControlSelect;

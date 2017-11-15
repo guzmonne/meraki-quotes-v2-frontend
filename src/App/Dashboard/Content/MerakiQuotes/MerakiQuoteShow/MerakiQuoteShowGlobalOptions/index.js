@@ -24,7 +24,8 @@ class MerakiQuoteShowGlobalOptions extends React.Component {
         <ControlInput
           value={LicenceYears}
           label="Años"
-          type="number"
+          type="select"
+          options={[1, 3, 5, 7, 10]}
           onChange={this.handleChange('LicenceYears')}
         />
         <ControlInput

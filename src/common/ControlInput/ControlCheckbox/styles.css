@@ -13,6 +13,10 @@
   font-size: 1em;
 }
 
+.ControlInput.ControlCheckbox>input:focus ~ label {
+  font-size: 1em;
+}
+
 .ControlInput>input[type=checkbox] {
   padding:10px 10px 10px 5px;
   display: block;

@@ -28,7 +28,8 @@ class MerakiQuoteGlobalVariables extends React.Component {
         <ControlInput
           value={ServiceLevel}
           label="Tipo de Servicio"
-          type="text"
+          type="select"
+          options={['9x5xNBD', '24x7x4']}
           onChange={this.handleChange('ServiceLevel')}
         />
         <ControlInput
