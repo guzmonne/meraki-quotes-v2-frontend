@@ -9,10 +9,19 @@ import Thead from './Thead.js';
 import MerakiDeviceRow from './MerakiDeviceRow.js';
 import SupportRow from './SupportRow.js'
 import FinancingRow from './FinancingRow.js'
+import { isLicense } from '../../../../../../modules/services';
+
+const isHardware = device => (
+  device.PartNumber.indexOf('LIC') === -1
+);
+
+const isLicence = device => (
+  device.PartNumber.indexOf('LIC') !== -1
+);
 
 class MerakiQuoteTable extends React.Component {
   handleOnUpdate = (device) => {
-    let devices = this.props.merakiQuote.Devices;
+    let devices = this.props.Devices || [];
 
     const index = findIndex(devices, ({ID}) => ID === device.ID);
 
@@ -34,39 +43,41 @@ class MerakiQuoteTable extends React.Component {
           <Thead />
           <tbody>
             <tr><td colSpan="8" className="rows-title">Hardware</td></tr>
-            {
-              merakiQuote &&
-              merakiQuote.Devices &&
-              merakiQuote.Devices.filter(device => (
-                device.PartNumber.indexOf('LIC') === -1
-              ))
-                .map((device, index) => (
-                  <MerakiDeviceRow
-                    key={device.ID}
-                    onUpdate={this.handleOnUpdate}
-                    Discount={merakiQuote.Discount}
-                    Margin={merakiQuote.HardwareMargin}
-                    device={device}
-                  />
-                ))
-            }
+          {(!merakiQuote.Devices || 
+            merakiQuote.Devices.filter(isHardware).length === 0) &&
+            <tr><td colSpan="8">
+              No se han cargado equipos a esta cotización.
+            </td></tr>
+          }
+          {(merakiQuote.Devices || []).filter(isHardware)
+            .map((device, index) => (
+              <MerakiDeviceRow
+                key={device.ID}
+                onUpdate={this.handleOnUpdate}
+                Discount={merakiQuote.Discount}
+                Margin={merakiQuote.HardwareMargin}
+                device={device}
+              />
+            ))
+          }
             <tr><td colSpan="8" className="rows-title">Software</td></tr>
-            {
-              merakiQuote &&
-              merakiQuote.Devices &&
-              merakiQuote.Devices.filter(device => (
-                device.PartNumber.indexOf('LIC') > -1
-              ))
-                .map(device => (
-                  <MerakiDeviceRow
-                    key={device.ID}
-                    Discount={merakiQuote.Discount}
-                    Margin={merakiQuote.SoftwareMargin}
-                    onUpdate={this.handleOnUpdate}
-                    device={device}
-                  />
-                ))
-            }
+          {(!merakiQuote.Devices ||
+            merakiQuote.Devices.filter(isLicense).length === 0) &&
+            <tr><td colSpan="8">
+              No se han cargado licencias a esta cotización.
+            </td></tr>
+          }
+          {(merakiQuote.Devices || []).filter(isLicence)
+            .map(device => (
+              <MerakiDeviceRow
+                key={device.ID}
+                Discount={merakiQuote.Discount}
+                Margin={merakiQuote.SoftwareMargin}
+                onUpdate={this.handleOnUpdate}
+                device={device}
+              />
+            ))
+          }
             <tr><td colSpan="8" className="rows-title">
               Administración, Soporte y Financiación
             </td></tr>

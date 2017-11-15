@@ -1,0 +1,22 @@
+.MerakiQuotePurchaseOptions .Card:not(:last-of-type) {
+  margin-bottom: 0.5em;
+}
+
+.MerakiQuotePurchaseOptions h3.yellow {
+  color: goldenrod;
+}
+
+.MerakiQuotePurchaseOptions h3.green {
+  color: green;
+}
+
+.MerakiQuotePurchaseOptions h3.red {
+  color: red;
+}
+
+.MerakiQuotePurchaseOptions .price {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid grey;
+  padding: 0.5em 0;
+}

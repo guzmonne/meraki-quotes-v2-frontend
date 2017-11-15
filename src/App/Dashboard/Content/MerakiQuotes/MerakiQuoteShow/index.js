@@ -8,6 +8,7 @@ import MerakiQuoteShowGlobalOptions from './MerakiQuoteShowGlobalOptions/';
 import MerakiQuoteShowActionBar from './MerakiQuoteShowActionBar/';
 import MerakiQuoteTable from './MerakiQuoteTable/';
 import MerakiQuoteGlobalVariables from './MerakiQuoteGlobalVariables/';
+import MerakiQuotePurchaseOptions from './MerakiQuotePurchaseOptions/';
 import {IMerakiQuotes} from '../IMerakiQuotes.js';
 import Spinner from '../../../../../common/Spinner/';
 
@@ -39,6 +40,7 @@ class MerakiQuoteShow extends React.Component {
         <MerakiQuoteShowActionBar />
         <MerakiQuoteTable merakiQuote={merakiQuote} onUpdate={updateQuote} />
         <MerakiQuoteGlobalVariables {...merakiQuote} onUpdate={updateQuote} />
+        <MerakiQuotePurchaseOptions merakiQuote={merakiQuote} />
       </div>
     )
   }

@@ -5,30 +5,30 @@
   grid-gap: 0.5em 0.5em;
 }
 
-.MerakiQuoteShow .Card:nth-child(1) {
+.MerakiQuoteShow div:nth-child(1) {
   grid-column: span 4;
 }
 
-.MerakiQuoteShow .Card:nth-child(2) {
+.MerakiQuoteShow div:nth-child(2) {
   grid-column: span 4;
 }
 
-.MerakiQuoteShow .Card:nth-child(3) {
+.MerakiQuoteShow div:nth-child(3) {
   grid-column: span 2;
 }
 
-.MerakiQuoteShow .Card:nth-child(4) {
+.MerakiQuoteShow div:nth-child(4) {
   grid-column: span 2;
 }
 
-.MerakiQuoteShow .Card:nth-child(5) {
+.MerakiQuoteShow div:nth-child(5) {
   grid-column: span 4;
 }
 
-.MerakiQuoteShow .Card:nth-child(6) {
+.MerakiQuoteShow div:nth-child(6) {
   grid-column: span 1;
 }
 
-.MerakiQuoteShow .Card:nth-child(7) {
+.MerakiQuoteShow div:nth-child(7) {
   grid-column: span 3;
 }

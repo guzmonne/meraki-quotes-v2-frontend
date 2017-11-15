@@ -44,10 +44,10 @@ const serviceLog = (
   log(SERVICE_COST_PER_DEVICE, SERVICE_MAX_DISCOUNT, MAX_DEVICES)
 );
 
-export const calculateServiceCost = (quote) => {
-  const serviceTypeModifier = quote.ServiceLevel === NBD ? 2 : 1;
+export const calculateServiceCost = ({ Devices = [], ServiceLevel }) => {
+  const serviceTypeModifier = ServiceLevel === NBD ? 2 : 1;
   const qty = (
-    quote.Devices
+    Devices
     .filter(isHardware)
     .filter(device => ADMIN_CATEGORIES.indexOf(device.Category) !== -1)
     .reduce((acc, device) => acc + device.Qty, 0)
@@ -55,8 +55,8 @@ export const calculateServiceCost = (quote) => {
   return serviceLog(qty) * qty * serviceTypeModifier;
 }
 
-export const calculateAdministrationCost = (quote) => (
-  quote.Devices
+export const calculateAdministrationCost = ({ Devices = [] }) => (
+  Devices
   .filter(isHardware)
   .filter(device => ADMIN_CATEGORIES.indexOf(device.Category) !== -1)
   .reduce((acc, device) => {
