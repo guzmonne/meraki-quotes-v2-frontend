@@ -7,6 +7,7 @@ import Card from '../../../Card/';
 import Table from '../../../../../../common/Table/';
 import Thead from './Thead.js';
 import MerakiDeviceRow from './MerakiDeviceRow.js';
+import SupportRow from './SupportRow.js'
 
 class MerakiQuoteTable extends React.Component {
   handleOnUpdate = (device) => {
@@ -65,6 +66,21 @@ class MerakiQuoteTable extends React.Component {
                   />
                 ))
             }
+            <tr><td colSpan="8" className="rows-title">
+              Administración, Soporte y Financiación
+            </td></tr>
+            <SupportRow 
+              name="Soporte"
+              description="Cuota mensual de soporte de equipos."
+              type="service"
+              merakiQuote={merakiQuote}
+            />
+            <SupportRow
+              name="Administración"
+              description="Cuota mensual para la administración del equipamiento."
+              type="administration"
+              merakiQuote={merakiQuote}
+            />
           </tbody>
         </Table>
       </Card>

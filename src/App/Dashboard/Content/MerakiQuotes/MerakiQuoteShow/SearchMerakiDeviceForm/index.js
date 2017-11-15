@@ -46,7 +46,7 @@ class SearchMerakiDeviceForm extends React.Component {
 
           <ControlInput
             value={searchText}
-            label="Buscar equipos por modelo o descripción"
+            label="Buscar equipos o licencias por modelo o descripción"
             type="text"
             onChange={this.handleSearch}
           />
