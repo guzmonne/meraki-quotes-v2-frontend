@@ -40,7 +40,7 @@ MerakiQuoteShowHeader.propTypes = IMerakiQuotes
 
 MerakiQuoteShowHeader.defaultProps =  {
   Name: 'Meraki Quote de prueba',
-  Description: 'Descripción de Meraki Quote de Prueba',
+  Description: '',
   UserName: 'Guzmán Monné'
 };
 

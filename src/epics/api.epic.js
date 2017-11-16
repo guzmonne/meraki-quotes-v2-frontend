@@ -100,23 +100,27 @@ function get$(type, payload) {
 function create$(type, payload) {
   const {endpoint, schema, body, target, formData, formName='form'} = payload
   return Observable.ajax.post(`${API_ROOT}${endpoint}`, body, headers())
-    .concatMap(() => Observable.from([{
-      type: `${actionPrefix(type, payload)}_SUCCESS`,
-      payload: Object.assign(normalize(body, schema), {target}),
-    }, {
-      type: UPDATE_UI,
-      payload: {
-        [target]: {
-          [formName]: formData,
+    .switchMap(({response}) => Observable.from([{
+        type: `${actionPrefix(type, payload)}_SUCCESS`,
+        payload: Object.assign(normalize({
+          ...body,
+          ...response
+        }, schema), {target}),
+      }, {
+        type: UPDATE_UI,
+        payload: {
+          [target]: {
+            [formName]: formData,
+          }
+        }
+      }, {
+        type: PUSH_NOTIFICATION,
+        payload: {
+          type: 'success',
+          message: 'Elemento creado con exito.'
         }
       }
-    }, {
-      type: PUSH_NOTIFICATION,
-      payload: {
-        type: 'success',
-        message: 'Elemento creado con exito.'
-      }
-    }]))
+    ]))
     .catch(error => (
       Observable.concat(
         validationErrorHandler(type, payload, error),
