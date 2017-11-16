@@ -1,7 +1,7 @@
 import './styles.css';
 import React from 'react';
 import T from 'prop-types';
-import findIndex from 'lodash/findIndex.js';
+import get from 'lodash/get.js';
 import {IMerakiQuotes} from '../../IMerakiQuotes.js';
 import Card from '../../../Card/';
 import Table from '../../../../../../common/Table/';
@@ -20,10 +20,8 @@ const isLicence = device => (
 );
 
 class MerakiQuoteTable extends React.Component {
-  handleOnUpdate = (device) => {
-    let devices = this.props.Devices || [];
-
-    const index = findIndex(devices, ({ID}) => ID === device.ID + index);
+  handleOnUpdate = (index) => (device) => {
+    let devices = get(this.props, 'merakiQuote.Devices', []);
 
     this.props.onUpdate({
       Devices: [
@@ -34,9 +32,37 @@ class MerakiQuoteTable extends React.Component {
     });
   }
 
+  handleOnDelete = (index) => () => {
+    let devices = get(this.props, 'merakiQuote.Devices', []);
+
+    console.log(index, [
+      ...devices.slice(0, index),
+      ...devices.slice(index + 1, devices.length)
+    ]);
+
+    this.props.onUpdate({
+      Devices: [
+        ...devices.slice(0, index),
+        ...devices.slice(index + 1, devices.length)
+      ],
+    });
+  }
+
   render() {
     const { merakiQuote } = this.props;
-    
+    const { Devices = [] } = merakiQuote;
+
+    const items = Devices.reduce((acc, device, index) => {
+      if (isLicence(device))
+        acc.software.push({index, device});
+      else
+        acc.hardware.push({index, device});
+
+      return acc;
+    }, {hardware: [], software: []});
+
+    console.log(items);
+
     return (
       <Card className="MerakiQuoteTable">
         <Table hover={false}>
@@ -49,17 +75,16 @@ class MerakiQuoteTable extends React.Component {
               No se han cargado equipos a esta cotización.
             </td></tr>
           }
-          {(merakiQuote.Devices || []).filter(isHardware)
-            .map((device, index) => (
-              <MerakiDeviceRow
-                key={device.ID + index}
-                onUpdate={this.handleOnUpdate}
-                Discount={merakiQuote.Discount}
-                Margin={merakiQuote.HardwareMargin}
-                device={device}
-              />
-            ))
-          }
+          {items.hardware.map(({ index, device}) => (
+            <MerakiDeviceRow
+              key={index + device.ID}
+              device={device}
+              onUpdate={this.handleOnUpdate(index)}
+              onDelete={this.handleOnDelete(index)}
+              Discount={merakiQuote.Discount}
+              Margin={merakiQuote.HardwareMargin}
+            />
+          ))}
             <tr><td colSpan="8" className="rows-title">Software</td></tr>
           {(!merakiQuote.Devices ||
             merakiQuote.Devices.filter(isLicense).length === 0) &&
@@ -67,17 +92,16 @@ class MerakiQuoteTable extends React.Component {
               No se han cargado licencias a esta cotización.
             </td></tr>
           }
-          {(merakiQuote.Devices || []).filter(isLicence)
-            .map((device, index) => (
+            {items.software.map(({ index, device }) => (
               <MerakiDeviceRow
-                key={device.ID + index}
+                key={index}
+                device={device}
                 Discount={merakiQuote.Discount}
                 Margin={merakiQuote.SoftwareMargin}
-                onUpdate={this.handleOnUpdate}
-                device={device}
+                onUpdate={this.handleOnUpdate(index)}
+                onDelete={this.handleOnDelete(index)}
               />
-            ))
-          }
+            ))}
             <tr><td colSpan="8" className="rows-title">
               Administración, Soporte y Financiación
             </td></tr>

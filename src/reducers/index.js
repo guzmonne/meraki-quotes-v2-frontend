@@ -1,5 +1,7 @@
 import * as ActionTypes from '../store/actions.js';
 import {combineReducers} from 'redux';
+import omitBy from 'lodash/omitBy.js';
+import isArray from 'lodash/isArray.js';
 import merge from 'lodash/merge';
 import get from 'lodash/get'
 import ui from './ui.reducer.js';
@@ -30,14 +32,25 @@ const entities = (state = defaultEntitiesState, action) => {
 
       const __old__ = item.__old__ ? item.__old__ : item
 
-      return merge({}, state, {
+      const objectToMerge = omitBy(body, isArray);
+      const objectToConcat = omitBy(body, (item) => !isArray(item));
+
+      let result = merge({}, state, {
         [target]: {
           [key]: {
-            ...body,
+            ...objectToMerge,
             __old__,
           }
         }
       });
+
+      Object.keys(objectToConcat).forEach(keyToConcat => {
+        result[target][key][keyToConcat] = objectToConcat[keyToConcat];
+      });
+
+      console.log(result);
+
+      return result;
     } catch (error) {
       console.error(error);
       return Object.assign({}, state);

@@ -9,7 +9,7 @@ const MerakiQuotesTable = createTableComponent({
     'Descripción',
     'Creado',
   ],
-  rowId: 'ID',
+  rowId: ({ UserID, createdAt }) => btoa(JSON.stringify({ UserID, createdAt })),
   schema: IMerakiQuotes,
   displayName: 'MerakiQuotesTable',
 })(MerakiQuoteRow);

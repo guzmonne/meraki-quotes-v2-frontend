@@ -59,3 +59,9 @@
 .MerakiQuoteTable .table {
   margin-bottom: 0;
 }
+
+.MerakiDeviceNameAndDescription a.delete:not([href]):not([tabindex]) {
+    text-decoration: none;
+    color: #e46767;
+    cursor: pointer;
+}

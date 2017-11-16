@@ -14,6 +14,7 @@ const MerakiDeviceRow = ({
   Margin,
   device,
   onUpdate,
+  onDelete,
 }) => (
   <tr>
     <Td header="Nombre & Descripción">
@@ -25,6 +26,10 @@ const MerakiDeviceRow = ({
 
           <h4>{device.PartNumber}</h4>
           <small>{device.Description}</small>
+          <br />
+          <small onClick={onDelete}>
+            <a className="delete">Eliminar</a>
+          </small>
 
         </div>
 
@@ -102,6 +107,7 @@ MerakiDeviceRow.propTypes = {
   Discount: T.number,
   Margin: T.number,
   onUpdate: T.func,
+  onDelete: T.func,
 };
 
 export default MerakiDeviceRow;
