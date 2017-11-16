@@ -80,7 +80,7 @@ class SearchMerakiDeviceForm extends React.Component {
     
     return items.find(device => (
       device.PartNumber === `LIC-${
-        PartNumber.indexOf('Z1') > -1 ? '-Z1-' : ''
+        PartNumber.indexOf('Z1') > -1 ? 'Z1-' : ''
       }ENT-${
         LicenceYears
       }YR`
