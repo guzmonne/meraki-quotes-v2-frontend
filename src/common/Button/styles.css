@@ -91,3 +91,8 @@
   padding-top: 120%;
   transition: width .2s ease-out, padding-top .2s ease-out;
 }
+
+.btn.btn-active {
+  opacity: 0.5;
+  box-shadow: none;
+}

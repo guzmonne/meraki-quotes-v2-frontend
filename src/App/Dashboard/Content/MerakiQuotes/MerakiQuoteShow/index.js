@@ -13,6 +13,10 @@ import {IMerakiQuotes} from '../IMerakiQuotes.js';
 import Spinner from '../../../../../common/Spinner/';
 
 class MerakiQuoteShow extends React.Component {
+  state = {
+    deleting: false,
+  }
+
   componentWillMount() {
     const key = get(this.props, 'match.params.key');
     if (!key) return;
@@ -25,9 +29,16 @@ class MerakiQuoteShow extends React.Component {
     this.props.updateQuote(key, updates)
   }
 
+  toggleDeleting = () => (
+    this.setState(state => ({
+      deleting: !state.deleting
+    }))
+  )
+
   render() {
-    const {updateQuote} = this;
-    let {merakiQuote={}} = this.props;
+    const {updateQuote, toggleDeleting} = this;
+    const {deleting} = this.state;
+    const {merakiQuote={}} = this.props;
 
     if ( !merakiQuote.LicenceYears ) 
       return <Spinner color="black" size="xl"/>
@@ -40,8 +51,15 @@ class MerakiQuoteShow extends React.Component {
           onUpdate={updateQuote}
         />
         <MerakiQuoteShowGlobalOptions {...merakiQuote} onUpdate={updateQuote}/>
-        <MerakiQuoteShowActionBar />
-        <MerakiQuoteTable merakiQuote={merakiQuote} onUpdate={updateQuote} />
+        <MerakiQuoteShowActionBar 
+          deleting={deleting} 
+          toggleDeleting={toggleDeleting}
+        />
+        <MerakiQuoteTable 
+          deleting={deleting}
+          merakiQuote={merakiQuote}
+          onUpdate={updateQuote}
+        />
         <MerakiQuoteGlobalVariables {...merakiQuote} onUpdate={updateQuote} />
         <MerakiQuotePurchaseOptions merakiQuote={merakiQuote} />
       </div>

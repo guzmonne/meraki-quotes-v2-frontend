@@ -41,3 +41,7 @@
 .SearchMerakiDeviceForm .absolute table {
   margin-bottom: 0;
 }
+
+.SearchMerakiDeviceForm .absolute .table > tbody > tr > td:nth-child(1) {
+  width: 10em;
+}

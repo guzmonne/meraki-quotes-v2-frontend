@@ -44,7 +44,7 @@ class MerakiQuoteTable extends React.Component {
   }
 
   render() {
-    const { merakiQuote } = this.props;
+    const { merakiQuote, deleting } = this.props;
     const { Devices = [] } = merakiQuote;
 
     const items = Devices.reduce((acc, device, index) => {
@@ -71,6 +71,7 @@ class MerakiQuoteTable extends React.Component {
           {items.hardware.map(({ index, device}) => (
             <MerakiDeviceRow
               key={index + device.ID}
+              deleting={deleting}
               device={device}
               onUpdate={this.handleOnUpdate(index)}
               onDelete={this.handleOnDelete(index)}
@@ -89,6 +90,7 @@ class MerakiQuoteTable extends React.Component {
               <MerakiDeviceRow
                 key={index}
                 device={device}
+                deleting={deleting}
                 Discount={merakiQuote.Discount}
                 Margin={merakiQuote.SoftwareMargin}
                 onUpdate={this.handleOnUpdate(index)}
@@ -132,6 +134,7 @@ class MerakiQuoteTable extends React.Component {
 MerakiQuoteTable.propTypes = {
   merakiQuote: T.shape(IMerakiQuotes),
   onUpdate: T.func,
+  deleting: T.bool,
 }
 
 export default MerakiQuoteTable;
