@@ -22,3 +22,22 @@
   margin: 1em 0 0 1em;
   width: 100%;
 }
+
+.SearchMerakiDeviceForm .relative {
+  position: relative;
+}
+
+.SearchMerakiDeviceForm .absolute {
+  position: absolute;
+  background-color: white;
+  padding: 1em;
+  z-index: 1;
+  box-shadow: 0px 6px 15px 0px rgba(0,0,0,0.75);
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.SearchMerakiDeviceForm .absolute table {
+  margin-bottom: 0;
+}

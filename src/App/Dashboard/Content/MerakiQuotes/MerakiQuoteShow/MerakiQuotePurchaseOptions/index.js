@@ -37,8 +37,6 @@ const calculateHardwareCost = (merakiQuote) => {
     ), 0)
   );
 
-  console.log(hardwareCost);
-
   return hardwareCost / (1 - HardwareMargin);
 }
 

@@ -47,14 +47,11 @@ const entities = (state = defaultEntitiesState, action) => {
   if (action.type.indexOf('API_UPDATE_FAILURE') > -1) {
     try {
       const {payload: {key, target}} = action;
-      const result = merge({}, state, {
-        [target]: {
-          [key]: {
-            ...state[target][key].__old__,
-          },
-        }
-      });
-      delete state[target][key].__old__;
+
+      const result = { ...state };
+
+      result[target][key] = result[target][key].__old__;
+      delete result[target][key].__old__;
       return result;
     } catch (error) {
       console.error(error);

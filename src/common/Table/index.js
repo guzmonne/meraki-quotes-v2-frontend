@@ -2,7 +2,7 @@ import './styles.css';
 import React from 'react';
 import classnames from 'classnames';
 
-const Table = ({hover, children}) => (
+const Table = ({hover=true, children}) => (
   <div className="table-responsive-vertical shadow-z-1">
     <table className={classnames('table', {
       'table-hover': hover === true

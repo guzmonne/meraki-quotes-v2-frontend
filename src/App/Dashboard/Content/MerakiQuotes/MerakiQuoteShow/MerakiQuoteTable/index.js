@@ -23,7 +23,7 @@ class MerakiQuoteTable extends React.Component {
   handleOnUpdate = (device) => {
     let devices = this.props.Devices || [];
 
-    const index = findIndex(devices, ({ID}) => ID === device.ID);
+    const index = findIndex(devices, ({ID}) => ID === device.ID + index);
 
     this.props.onUpdate({
       Devices: [
@@ -52,7 +52,7 @@ class MerakiQuoteTable extends React.Component {
           {(merakiQuote.Devices || []).filter(isHardware)
             .map((device, index) => (
               <MerakiDeviceRow
-                key={device.ID}
+                key={device.ID + index}
                 onUpdate={this.handleOnUpdate}
                 Discount={merakiQuote.Discount}
                 Margin={merakiQuote.HardwareMargin}
@@ -68,9 +68,9 @@ class MerakiQuoteTable extends React.Component {
             </td></tr>
           }
           {(merakiQuote.Devices || []).filter(isLicence)
-            .map(device => (
+            .map((device, index) => (
               <MerakiDeviceRow
-                key={device.ID}
+                key={device.ID + index}
                 Discount={merakiQuote.Discount}
                 Margin={merakiQuote.SoftwareMargin}
                 onUpdate={this.handleOnUpdate}

@@ -3,7 +3,7 @@ import React from 'react';
 import T from 'prop-types';
 import get from 'lodash/get';
 import MerakiQuoteShowHeader from './MerakiQuoteShowHeader/';
-import SearchMerakiDeviceForm from './SearchMerakiDeviceForm/';
+import SearchMerakiDeviceForm from './SearchMerakiDeviceFormContainer.js';
 import MerakiQuoteShowGlobalOptions from './MerakiQuoteShowGlobalOptions/';
 import MerakiQuoteShowActionBar from './MerakiQuoteShowActionBar/';
 import MerakiQuoteTable from './MerakiQuoteTable/';
@@ -35,7 +35,10 @@ class MerakiQuoteShow extends React.Component {
     return (
       <div className="MerakiQuoteShow">
         <MerakiQuoteShowHeader {...merakiQuote} onUpdate={updateQuote}/>
-        <SearchMerakiDeviceForm onUpdate={updateQuote}/>
+        <SearchMerakiDeviceForm 
+          merakiQuote={merakiQuote}
+          onUpdate={updateQuote}
+        />
         <MerakiQuoteShowGlobalOptions {...merakiQuote} onUpdate={updateQuote}/>
         <MerakiQuoteShowActionBar />
         <MerakiQuoteTable merakiQuote={merakiQuote} onUpdate={updateQuote} />
