@@ -19,7 +19,6 @@ class UsersPermissions extends React.Component {
       displayCreateModal,
       displayingCreateModal
     } = this.props;
-    console.log(count);
     return (
       <Card className="UsersPermissions">
         <h1>Permisos de Usuarios</h1>

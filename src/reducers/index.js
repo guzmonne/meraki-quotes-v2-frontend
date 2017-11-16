@@ -48,8 +48,6 @@ const entities = (state = defaultEntitiesState, action) => {
         result[target][key][keyToConcat] = objectToConcat[keyToConcat];
       });
 
-      console.log(result);
-
       return result;
     } catch (error) {
       console.error(error);

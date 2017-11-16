@@ -155,7 +155,6 @@ export default (state=defaultState, {type, payload}) => {
   }
 
   if (type.indexOf('API_DESTROY_FAILURE') > -1) {
-    console.log('destroy');
     try {
       const {target, id} = payload;
       const ids = state[target].ids;

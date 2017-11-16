@@ -70,7 +70,6 @@ const MerakiDeviceRow = ({
             : accounting.toFixed(parseFloat(e.target.value, 10) / 100, 4)
             , 10
           );
-          console.log(Intro);
           onUpdate({
             ...device,
             Intro,

@@ -35,11 +35,6 @@ class MerakiQuoteTable extends React.Component {
   handleOnDelete = (index) => () => {
     let devices = get(this.props, 'merakiQuote.Devices', []);
 
-    console.log(index, [
-      ...devices.slice(0, index),
-      ...devices.slice(index + 1, devices.length)
-    ]);
-
     this.props.onUpdate({
       Devices: [
         ...devices.slice(0, index),
@@ -60,8 +55,6 @@ class MerakiQuoteTable extends React.Component {
 
       return acc;
     }, {hardware: [], software: []});
-
-    console.log(items);
 
     return (
       <Card className="MerakiQuoteTable">

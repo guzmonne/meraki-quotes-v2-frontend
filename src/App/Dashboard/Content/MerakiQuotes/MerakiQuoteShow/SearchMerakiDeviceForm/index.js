@@ -109,8 +109,6 @@ class SearchMerakiDeviceForm extends React.Component {
       this.state.selectedItem || this.findSelectedItem()
     );
 
-    console.log(selectedItem);
-
     if (!selectedItem) return;
 
     const {Devices=[]} = this.props.merakiQuote;
