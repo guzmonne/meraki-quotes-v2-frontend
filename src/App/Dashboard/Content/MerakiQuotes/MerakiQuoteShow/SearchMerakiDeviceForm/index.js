@@ -27,7 +27,7 @@ class SearchMerakiDeviceForm extends React.Component {
   handleSearch = (e) => {
     e.preventDefault();
 
-    const searchText = e.target.value;
+    const searchText = e.target.value.toUpperCase();
 
     this.setState({searchText});
   }
@@ -182,13 +182,29 @@ class SearchMerakiDeviceForm extends React.Component {
               <Table>
 
                 <tbody>
-                {items.slice(0, 5).map((device) => (
+              {
+                items
+                .filter(device => (
+                  device.PartNumber.indexOf(searchText) > -1
+                ))
+                .length === 0 &&
+                <tr colSpan="3">
+                  <td>No se han encontrado elementos.</td>
+                </tr>
+              }
+              {
+                items
+                .filter(device => (
+                  device.PartNumber.indexOf(searchText) > -1
+                ))
+                .reverse()
+                .slice(0, 5).map((device) => (
                   <tr onClick={() => this.select(device)} key={device.ID}>
                     <td>{device.PartNumber}</td>
                     <td>{device.Description}</td>
                     <td>{accounting.formatMoney(device.Price)}</td>
                   </tr>
-                ))}
+              ))}
                 </tbody>
 
               </Table>
