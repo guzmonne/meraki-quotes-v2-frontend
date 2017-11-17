@@ -57,7 +57,7 @@ const mapActionsToProps = {
           type: API_UPDATE,
           payload,
         }],
-        interval: 1000 
+        interval: 500 
       },
     };
   },
