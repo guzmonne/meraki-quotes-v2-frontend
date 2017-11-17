@@ -1,6 +1,7 @@
 import './styles.css';
 import React from 'react';
 import FileSaver from 'file-saver';
+import T from 'prop-types';
 import Card from '../../../Card/';
 import Button from '../../../../../../common/Button/';
 import 
@@ -19,12 +20,14 @@ class MerakiQuoteShowActionBar extends React.Component {
   }
 
   render() {
-    const { toggleDeleting, deleting } = this.props;
+    const { toggleDeleting, deleting, clone, merakiQuote } = this.props;
 
     return (
       <Card className="MerakiQuoteShowActionBar">
         <Button>Compartir</Button>
-        <Button>Clonar</Button>
+        <Button onClick={() => clone(merakiQuote)}>
+          Clonar
+        </Button>
         <Button onClick={this.downloadQuote}>
           Descargar
         </Button>
@@ -36,5 +39,11 @@ class MerakiQuoteShowActionBar extends React.Component {
     );
   }
 }
+
+MerakiQuoteShowActionBar.propTypes = {
+  toggleDeleting: T.func,
+  deleting: T.bool,
+  clone: T.func,
+};
 
 export default MerakiQuoteShowActionBar;

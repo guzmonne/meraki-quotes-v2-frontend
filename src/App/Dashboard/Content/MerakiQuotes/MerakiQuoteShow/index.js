@@ -24,6 +24,15 @@ class MerakiQuoteShow extends React.Component {
     this.props.fetch(key);
   }
 
+  componentWillReceiveProps(newProps) {
+    if (
+      newProps.cloning === false &&
+      this.props.cloning === true &&
+      newProps.id
+    )
+      this.props.history.push(`/merakiQuotes/${newProps.id}`);
+  }
+
   updateQuote = (updates) => {
     const key = get(this.props, 'match.params.key');
     if (!key) return;
@@ -39,7 +48,13 @@ class MerakiQuoteShow extends React.Component {
   render() {
     const {updateQuote, toggleDeleting} = this;
     const {deleting} = this.state;
-    const {merakiQuote={}, openModal, closeModal, showingModal} = this.props;
+    const {
+      merakiQuote={},
+      openModal,
+      closeModal,
+      showingModal,
+      clone,
+    } = this.props;
 
     if ( !merakiQuote.LicenceYears ) 
       return <Spinner color="black" size="xl"/>
@@ -59,7 +74,8 @@ class MerakiQuoteShow extends React.Component {
           {...merakiQuote}
           onUpdate={updateQuote}
         />
-        <MerakiQuoteShowActionBar 
+        <MerakiQuoteShowActionBar
+          clone={clone}
           deleting={deleting} 
           toggleDeleting={toggleDeleting}
           merakiQuote={merakiQuote}
@@ -89,6 +105,7 @@ MerakiQuoteShow.propTypes = {
   showingModal: T.bool,
   openModal: T.func,
   closeModal: T.func,
+  clone: T.func,
 };
 
 export default MerakiQuoteShow
