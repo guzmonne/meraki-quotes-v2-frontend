@@ -9,6 +9,7 @@ import MerakiQuoteShowActionBar from './MerakiQuoteShowActionBar/';
 import MerakiQuoteTable from './MerakiQuoteTable/';
 import MerakiQuoteGlobalVariables from './MerakiQuoteGlobalVariables/';
 import MerakiQuotePurchaseOptions from './MerakiQuotePurchaseOptions/';
+import MerakiNameAndDescriptionModal from './MerakiNameAndDescriptionModal/';
 import {IMerakiQuotes} from '../IMerakiQuotes.js';
 import Spinner from '../../../../../common/Spinner/';
 
@@ -38,14 +39,18 @@ class MerakiQuoteShow extends React.Component {
   render() {
     const {updateQuote, toggleDeleting} = this;
     const {deleting} = this.state;
-    const {merakiQuote={}} = this.props;
+    const {merakiQuote={}, openModal, closeModal, showingModal} = this.props;
 
     if ( !merakiQuote.LicenceYears ) 
       return <Spinner color="black" size="xl"/>
 
     return (
       <div className="MerakiQuoteShow">
-        <MerakiQuoteShowHeader {...merakiQuote} onUpdate={updateQuote}/>
+        <MerakiQuoteShowHeader
+          openModal={openModal}
+          onUpdate={updateQuote}
+          {...merakiQuote} 
+        />
         <SearchMerakiDeviceForm 
           merakiQuote={merakiQuote}
           onUpdate={updateQuote}
@@ -62,6 +67,13 @@ class MerakiQuoteShow extends React.Component {
         />
         <MerakiQuoteGlobalVariables {...merakiQuote} onUpdate={updateQuote} />
         <MerakiQuotePurchaseOptions merakiQuote={merakiQuote} />
+      {showingModal &&  
+        <MerakiNameAndDescriptionModal
+          onUpdate={updateQuote}
+          closeModal={closeModal}
+          {...merakiQuote}
+        />
+      }
       </div>
     )
   }
@@ -70,6 +82,9 @@ class MerakiQuoteShow extends React.Component {
 MerakiQuoteShow.propTypes = {
   merakiQuote: T.shape(IMerakiQuotes),
   fetch: T.func,
+  showingModal: T.bool,
+  openModal: T.func,
+  closeModal: T.func,
 };
 
 export default MerakiQuoteShow

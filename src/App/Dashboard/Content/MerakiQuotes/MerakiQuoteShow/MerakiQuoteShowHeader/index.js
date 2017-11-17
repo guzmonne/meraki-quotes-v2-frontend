@@ -1,5 +1,6 @@
 import './styles.css';
 import React from 'react';
+import T from 'prop-types';
 import DateFromNow from '../../../../../../common/DateFromNow/';
 import Card from '../../../Card/';
 import {IMerakiQuotes} from '../../IMerakiQuotes.js';
@@ -9,10 +10,13 @@ const MerakiQuoteShowHeader = ({
   Description,
   UserName,
   createdAt,
-  updatedAt
+  updatedAt,
+  openModal,
 }) => (
   <Card className="MerakiQuoteShowHeader">
-    <h2>{Name}</h2>
+    <h2>
+      <a onClick={openModal}>{Name}</a>  
+    </h2>
     <h3>{Description}</h3>
 
     <div className="MerakiQuoteShowHeader__body">
@@ -36,7 +40,9 @@ const MerakiQuoteShowHeader = ({
   </Card>
 );
 
-MerakiQuoteShowHeader.propTypes = IMerakiQuotes
+MerakiQuoteShowHeader.propTypes = Object.assign({}, IMerakiQuotes, {
+  openModal: T.func,
+});
 
 MerakiQuoteShowHeader.defaultProps =  {
   Name: 'Meraki Quote de prueba',

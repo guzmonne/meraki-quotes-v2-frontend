@@ -3,7 +3,8 @@ import get from 'lodash/get';
 import {
   API_SHOW,
   API_UPDATE,
-  DISPATCH_MULTIPLE_ACTIONS
+  DISPATCH_MULTIPLE_ACTIONS,
+  UPDATE_UI,
 } from '../../../../store/actions.js';
 import {merakiQuotes} from '../../../../store/schemas.js';
 import MerakiQuoteShow from './MerakiQuoteShow/';
@@ -12,10 +13,27 @@ const mapStateToProps = (state, props) => {
   const key = get(props, 'match.params.key');
   return {
     merakiQuote: get(state, `entities.merakiQuotes.${key}`),
+    showingModal: get(state, 'ui.merakiQuotes.showingNameAndDescriptionModal'),
   };
 };
 
 const mapActionsToProps = {
+  openModal: () => ({
+    type: UPDATE_UI,
+    payload: {
+      merakiQuotes: {
+        showingNameAndDescriptionModal: true,
+      }
+    }
+  }),
+  closeModal: () => ({
+    type: UPDATE_UI,
+    payload: {
+      merakiQuotes: {
+        showingNameAndDescriptionModal: false,
+      }
+    }
+  }),
   updateQuote: (key, body) => {
     const payload = {
       endpoint: `/merakiQuotes/${key}`,
