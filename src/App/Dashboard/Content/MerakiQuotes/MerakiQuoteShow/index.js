@@ -55,10 +55,14 @@ class MerakiQuoteShow extends React.Component {
           merakiQuote={merakiQuote}
           onUpdate={updateQuote}
         />
-        <MerakiQuoteShowGlobalOptions {...merakiQuote} onUpdate={updateQuote}/>
+        <MerakiQuoteShowGlobalOptions 
+          {...merakiQuote}
+          onUpdate={updateQuote}
+        />
         <MerakiQuoteShowActionBar 
           deleting={deleting} 
           toggleDeleting={toggleDeleting}
+          merakiQuote={merakiQuote}
         />
         <MerakiQuoteTable 
           deleting={deleting}

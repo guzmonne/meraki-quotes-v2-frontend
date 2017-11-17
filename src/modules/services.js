@@ -45,7 +45,7 @@ const serviceLog = (
 );
 
 export const calculateServiceCost = ({ Devices = [], ServiceLevel }) => {
-  const serviceTypeModifier = ServiceLevel === NBD ? 2 : 1;
+  const serviceTypeModifier = ServiceLevel === NBD ? 1 : 2;
   const qty = (
     Devices
     .filter(isHardware)
@@ -53,7 +53,13 @@ export const calculateServiceCost = ({ Devices = [], ServiceLevel }) => {
     .reduce((acc, device) => acc + device.Qty, 0)
   );
   return serviceLog(qty) * qty * serviceTypeModifier;
-}
+};
+
+export const calculateServicePrice = (quote) => {
+  const { ServiceMargin } = quote;
+  const cost = calculateServiceCost(quote);
+  return cost / (1 - ServiceMargin);
+};
 
 export const calculateAdministrationCost = ({ Devices = [] }) => (
   Devices
@@ -84,6 +90,7 @@ export const calculateLicenseMonthlyPrice = ({
   
   return interest * licensesTotalCost / (1 - SoftwareMargin) / months
 };
+
 
 export const calculateHardwareMonthlyPrice = ({
   LicenceYears,
