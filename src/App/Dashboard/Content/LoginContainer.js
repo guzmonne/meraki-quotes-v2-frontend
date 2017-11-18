@@ -1,7 +1,10 @@
 import {connect} from 'react-redux';
 import get from 'lodash/get';
 import Login from './Login/';
-import {LOGIN_REQUEST} from '../../../store/actions.js';
+import {
+  LOGIN_REQUEST,
+  FORGOT_PASSWORD,
+} from '../../../store/actions.js';
 
 const mapStateToProps = (state) => ({
   submitting: state.flags.login,
@@ -9,7 +12,11 @@ const mapStateToProps = (state) => ({
 });
 
 const mapActionsToProps = {
-  onSubmit: (body) => ({
+  onForgotPassword: (body) => ({
+    type: FORGOT_PASSWORD,
+    payload: { body },
+  }),
+  onLogin: (body) => ({
     type: LOGIN_REQUEST,
     payload: { body },
   })

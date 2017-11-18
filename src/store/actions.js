@@ -7,6 +7,8 @@ export const UPDATE_FLAGS = 'UPDATE_FLAGS';
 export const UPDATE_LOCATION = 'UPDATE_LOCATION';
 export const UPDATE_UI = 'UPDATE_UI';
 
+export const FORGOT_PASSWORD = 'FORGOT_PASSWORD';
+
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';

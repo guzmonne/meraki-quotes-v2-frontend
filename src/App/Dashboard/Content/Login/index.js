@@ -1,10 +1,9 @@
 import './styles.css';
 import React from 'react';
 import T from 'prop-types';
-import get from 'lodash/get';
 import Card from '../Card/';
-import ControlInput from '../../../../common/ControlInput/';
-import Button from '../../../../common/Button/';
+import LoginForm from './LoginForm.js';
+import ForgotPasswordForm from './ForgotPasswordForm.js';
 
 class Login extends React.Component {
   constructor() {
@@ -12,6 +11,7 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
+      forgotPassword: false,
     };
   }
 
@@ -21,58 +21,63 @@ class Login extends React.Component {
     });
   }
 
-  onSubmit = (e) => {
+  onLogin = (e) => {
     e.preventDefault();
     const {email, password} = this.state;
-    this.props.onSubmit({email, password});
+    this.props.onLogin({email, password});
   }
 
+  onForgotPassword = (e) => {
+    e.preventDefault();
+    const {email} = this.state;
+    this.props.onForgotPassword({email});
+  }
+
+  toggleForgotPasswordForm = () => (
+    this.setState((state) => ({
+      forgotPassword: !state.forgotPassword,
+    }))
+  )
+
   render() {
-    const {error} = this.props;
+    const { submitting, error } = this.props;
+    const { email, password, forgotPassword } = this.state;
+    const { 
+      toggleForgotPasswordForm,
+      onLogin,
+      onForgotPassword,
+      onChange
+    } = this;
 
     return (
       <Card>
-
-        <form className="Login" onSubmit={this.onSubmit}>
-
-          <legend>
-            <strong>Iniciar sesión</strong>
-          </legend>
-        
-          <ControlInput 
-            value={this.state.email}
-            label="Email"
-            type="text"
-            error={
-              get(error, 'name') === 'UserDoesNotExists' ||
-              get(error, 'details.0.path.0') === 'email'
-            }
-            errorMessage='No existe una cuenta con este correo.'
-            onChange={this.onChange('email')}
-          />
-
-          <ControlInput
-            value={this.state.password}
-            label="Contraseña"
-            type="password"
-            error={get(error, 'details.0.path.0') === 'password'}
-            errorMessage='Contraseña incorrecta.'
-            onChange={this.onChange('password')}
-          />
-
-          <Button type="submit" loading={this.props.submitting}>
-            Aceptar
-          </Button>
-
-        </form>
-      
+    {!forgotPassword 
+      ? <LoginForm 
+          email={email}
+          password={password}
+          error={error}
+          submitting={submitting}
+          onChange={onChange}
+          onSubmit={onLogin}
+          toggleForgotPasswordForm={toggleForgotPasswordForm}
+        />
+      : <ForgotPasswordForm
+          email={email}
+          error={error}
+          submitting={submitting}
+          onChange={onChange}
+          onSubmit={onForgotPassword}
+          toggleForgotPasswordForm={toggleForgotPasswordForm}
+        />
+    }
       </Card>
     );
   }
 }
 
 Login.propTypes = {
-  onSubmit: T.func.isRequired,
+  onLogin: T.func.isRequired,
+  onForgotPassword: T.func.isRequired,
   submitting: T.bool,
   error: T.object,
 }
