@@ -10,7 +10,9 @@ import {
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
   LOGOUT_FAILURE,
-  FORGOT_PASSWORD,
+  FORGOT_PASSWORD_REQUEST,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_FAILURE,
   PUSH_NOTIFICATION
 } from '../store/actions';
 
@@ -28,19 +30,24 @@ const HEADERS = {
 
 export const forgotPassword$ = (action$) => (
   action$
-  .ofType(FORGOT_PASSWORD)
+  .ofType(FORGOT_PASSWORD_REQUEST)
   .switchMap(({ payload: {body} }) => (Observable.ajax.post(
     `${API_ROOT}/users/forgotPassword`,
     body,
     HEADERS
   )))
-  .map(() => ({
+  .switchMap(() => (Observable.from([{
     type: PUSH_NOTIFICATION,
     payload: {
+      type: 'info',
       message: 'Revise su correo para obtener el link para cambiar su contraseña',
     }
-  }))
+  }, {
+    type: FORGOT_PASSWORD_SUCCESS,
+  }])))
   .catch(error => (Observable.from([{
+    type: FORGOT_PASSWORD_FAILURE,
+  }, {
     type: ERROR,
     payload: error,
   }, {

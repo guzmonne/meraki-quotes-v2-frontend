@@ -1,20 +1,25 @@
 import {connect} from 'react-redux';
 import get from 'lodash/get';
+import _orderBy from 'lodash/orderBy';
 import {UPDATE_UI} from '../../../../store/actions.js';
 
 const mapStateToPropsConstructor = ({
   target,
+  orderBy,
 }) => (state) => {
   const offset = get(state, `ui.${target}.offset`);
   const page = get(state, `ui.${target}.page`);
 
-  const items = (
+  let items = (
     get(state, `ui.${target}.ids`, [])
     .slice(offset * page, offset * page + page)
     .map(id => (
       get(state, `entities.${target}.${id}`)
     ))
   );
+
+  if (orderBy)
+    items = _orderBy(items, (item) => item[orderBy]).reverse();
 
   return {
     items

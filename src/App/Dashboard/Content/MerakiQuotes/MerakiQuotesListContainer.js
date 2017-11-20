@@ -6,7 +6,7 @@ const MerakiQuotesListContainer = createListContainer({
   target: 'merakiQuotes',
   fetchingFlag: 'merakiquotesApiIndex',
   schema: merakiQuotes,
-  displayName:'MerakiQuotesListContainer'
+  displayName:'MerakiQuotesListContainer',
 })(MerakiQuotesList);
 
 export default MerakiQuotesListContainer;

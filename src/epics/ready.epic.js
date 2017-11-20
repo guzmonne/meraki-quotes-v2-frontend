@@ -3,7 +3,6 @@ import {
   VALIDATE_TOKEN,
   UPDATE_FLAGS,
   LOGIN_SUCCESS,
-  REDIRECT
 } from '../store/actions';
 
 const API_ROOT = process.env.REACT_APP_API_ROOT;
@@ -41,9 +40,6 @@ export default action$ => (
             ready: true,
             isAuthenticated: false,
           }
-        }, {
-          type: REDIRECT,
-          payload: '/'
         }])
       ))
     ))
