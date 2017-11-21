@@ -24,9 +24,12 @@ class RecoverPassword extends React.Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    const { password } = this.state,
-      { forgotPasswordCode } = queryString.parse(this.props.location.search);
-    this.props.onRecoverPassword({ password, forgotPasswordCode });
+    const { password } = this.state;
+    const { 
+      forgotPasswordCode,
+      email
+    } = queryString.parse(this.props.location.search);
+    this.props.onRecoverPassword({ password, forgotPasswordCode, email });
   }
 
   isInvalid = () => (

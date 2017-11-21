@@ -42,8 +42,8 @@ export const recoverPassword$ = (action$) => (
     .switchMap(() => (Observable.from([{
       type: PUSH_NOTIFICATION,
       payload: {
-        type: 'info',
-        message: 'Revise su correo para obtener el link para cambiar su contraseña',
+        type: 'success',
+        message: 'Su contraseña ha sido actualizada con exito.',
       }
     }, {
       type: RECOVER_PASSWORD_SUCCESS,
