@@ -13,6 +13,9 @@ import {
   FORGOT_PASSWORD_REQUEST,
   FORGOT_PASSWORD_SUCCESS,
   FORGOT_PASSWORD_FAILURE,
+  RECOVER_PASSWORD_REQUEST,
+  RECOVER_PASSWORD_SUCCESS,
+  RECOVER_PASSWORD_FAILURE,
   PUSH_NOTIFICATION
 } from '../store/actions';
 
@@ -27,6 +30,37 @@ const KNOWN_ERRORS = [
 const HEADERS = {
   'Content-Type': 'application/json'
 };
+
+export const recoverPassword$ = (action$) => (
+  action$
+    .ofType(RECOVER_PASSWORD_REQUEST)
+    .switchMap(({ payload: { body } }) => (Observable.ajax.post(
+      `${API_ROOT}/users/recoverPassword`,
+      body,
+      HEADERS
+    )))
+    .switchMap(() => (Observable.from([{
+      type: PUSH_NOTIFICATION,
+      payload: {
+        type: 'info',
+        message: 'Revise su correo para obtener el link para cambiar su contraseña',
+      }
+    }, {
+      type: RECOVER_PASSWORD_SUCCESS,
+    }])))
+    .catch(error => (Observable.from([{
+      type: RECOVER_PASSWORD_FAILURE,
+    }, {
+      type: ERROR,
+      payload: error,
+    }, {
+      type: PUSH_NOTIFICATION,
+      payload: {
+        message: 'Se ha producido un error inesperado.',
+        type: 'danger',
+      }
+    }])))
+);
 
 export const forgotPassword$ = (action$) => (
   action$

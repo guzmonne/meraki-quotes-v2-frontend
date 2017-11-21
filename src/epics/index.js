@@ -19,6 +19,7 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/merge';
 import 'rxjs/add/operator/delay';
 import {
+  recoverPassword$,
   forgotPassword$,
   loginRequest$,
   logoutRequest$,
@@ -30,6 +31,7 @@ import multipleEpic from './multiple.epic.js';
 export default combineEpics(
   apiEpic,
   readyEpic,
+  recoverPassword$,
   forgotPassword$,
   loginRequest$,
   logoutRequest$,

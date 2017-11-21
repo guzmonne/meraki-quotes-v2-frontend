@@ -1,29 +1,24 @@
 import {connect} from 'react-redux';
-import get from 'lodash/get';
-import Login from './Login/';
+import RecoverPassword from './RecoverPassword/';
 import {
-  LOGIN_REQUEST,
-  FORGOT_PASSWORD_REQUEST,
+  RECOVER_PASSWORD_REQUEST,
 } from '../../../store/actions.js';
 
 const mapStateToProps = (state) => ({
-  submitting: state.flags.login || state.flags.forgotPassword,
-  error: get(state, 'ui.login.error'),
+  submitting: state.flags.recoverPassword,
 });
 
 const mapActionsToProps = {
-  onForgotPassword: (body) => ({
-    type: FORGOT_PASSWORD_REQUEST,
-    payload: { body },
-  }),
-  onLogin: (body) => ({
-    type: LOGIN_REQUEST,
-    payload: { body },
+  onRecoverPassword: (body, forgotPasswordCode) => ({
+    type: RECOVER_PASSWORD_REQUEST,
+    payload: { body, forgotPasswordCode },
   })
 };
 
-const LoginContainer = connect(mapStateToProps, mapActionsToProps)(Login);
+const RecoverPasswordContainer = (
+  connect(mapStateToProps, mapActionsToProps)(RecoverPassword)
+);
 
-LoginContainer.displayName = 'LoginContainer';
+RecoverPasswordContainer.displayName = 'RecoverPasswordContainer';
 
-export default LoginContainer;
+export default RecoverPasswordContainer;

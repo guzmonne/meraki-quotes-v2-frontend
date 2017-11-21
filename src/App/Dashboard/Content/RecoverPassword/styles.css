@@ -1,0 +1,12 @@
+.RecoverPassword {
+  text-align: center;  
+  min-width: 300px;
+}
+
+.RecoverPassword .ControlInput:not(:last-child) {
+  margin-bottom: 2.5em;
+}
+
+.RecoverPassword legend {
+  text-align: center;
+}
