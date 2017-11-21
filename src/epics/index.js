@@ -27,6 +27,7 @@ import {
 import readyEpic from './ready.epic.js';
 import apiEpic from './api.epic.js';
 import multipleEpic from './multiple.epic.js';
+import merakiQuoteAutoUpdate from './merakiQuoteAutoUpdate.epic.js';
 
 export default combineEpics(
   apiEpic,
@@ -36,4 +37,5 @@ export default combineEpics(
   loginRequest$,
   logoutRequest$,
   multipleEpic,
+  merakiQuoteAutoUpdate,
 );

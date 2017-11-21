@@ -3,8 +3,7 @@ import get from 'lodash/get';
 import omit from 'lodash/omit';
 import {
   API_SHOW,
-  API_UPDATE,
-  DISPATCH_MULTIPLE_ACTIONS,
+  MERAKI_QUOTE_AUTO_UPDATE,
   UPDATE_UI,
   API_CREATE,
 } from '../../../../store/actions.js';
@@ -48,17 +47,8 @@ const mapActionsToProps = {
       key,
     };
     return {
-      type: DISPATCH_MULTIPLE_ACTIONS,
-      payload: {
-        actions: [{
-          type: 'MERAKIQUOTES_API_UPDATE_REQUEST',
-          payload,
-        }, {
-          type: API_UPDATE,
-          payload,
-        }],
-        interval: 500 
-      },
+      type: MERAKI_QUOTE_AUTO_UPDATE,
+      payload
     };
   },
   clone: (merakiQuote) => {
